@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reset Password - PinPocket</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 16px;
+      width: 300px;
+    }
+    input {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+    }
+    button {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>🔐 Reset Password</h2>
+  <form id="reset-form">
+    <input type="text" id="reset-token" placeholder="Paste reset token" required />
+    <input type="password" id="new-password" placeholder="New password" required />
+    <button type="submit">Reset Password</button>
+  </form>
+
+  <!-- ✅ CSP-safe script -->
+  <script type="module" src="reset.js"></script>
+</body>
+</html>

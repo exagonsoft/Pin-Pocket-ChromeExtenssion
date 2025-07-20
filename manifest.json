@@ -1,0 +1,28 @@
+{
+    "manifest_version": 3,
+    "name": "PinPocket",
+    "version": "1.0",
+    "description": "Save and manage pinned pages.",
+    "permissions": [
+        "tabs",
+        "storage",
+        "contextMenus"
+    ],
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+    },
+    "action": {
+        "default_popup": "popup.html",
+        "default_icon": {
+            "16": "icons/icon.png",
+            "48": "icons/icon.png",
+            "64": "icons/icon.png"
+        }
+    },
+    "icons": {
+        "16": "icons/icon.png",
+        "48": "icons/icon.png",
+        "64": "icons/icon.png"
+    }
+}

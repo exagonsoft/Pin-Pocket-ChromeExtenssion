@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Manage Team</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f1f3f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 340px;
+            margin: 0 auto;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        }
+
+        h3 {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background: #007bff;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        button:hover {
+            background: #0069d9;
+        }
+
+        #deleteTeam {
+            background-color: #e53935;
+        }
+
+        #deleteTeam:hover {
+            background-color: #c62828;
+        }
+
+        .admin-controls {
+            margin-top: 12px;
+            border-top: 1px solid #ddd;
+            padding-top: 12px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 16px;
+        }
+
+        li {
+            background: #f8f9fa;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .remove {
+            background: none;
+            border: none;
+            color: #e53935;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .remove::before {
+            content: "\1F5D1"; /* 🗑 emoji */
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: bold;
+            margin: 16px 0 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <h3>🛡️ Manage Team</h3>
+
+        <div class="section-title">➕ Create New Team</div>
+        <input type="text" id="newTeamName" placeholder="Team name..." />
+        <button id="createTeam">Create Team</button>
+
+        <div class="section-title">📂 Select Team</div>
+        <select id="teamSelector">
+            <option value="">Select a team...</option>
+        </select>
+
+        <div class="admin-controls" id="ownerControls" style="display: none;">
+            <div class="section-title">🛠 Rename / Delete</div>
+            <input type="text" id="renameInput" placeholder="Rename team..." />
+            <button id="renameButton">📝 Rename Team</button>
+            <button id="deleteTeam">🗑️ Delete Team</button>
+        </div>
+
+        <form id="inviteForm">
+            <div class="section-title">📧 Invite Member</div>
+            <input type="email" id="inviteEmail" placeholder="Email to invite" required />
+            <button type="submit">📨 Invite</button>
+        </form>
+
+        <div class="section-title">👥 Members</div>
+        <ul id="memberList"></ul>
+    </div>
+    <script type="module" src="manageTeam.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PinPocket Settings</title>
+  <style>
+    body { font-family: sans-serif; padding: 16px; max-width: 400px; }
+    label { display: block; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h2>PinPocket Settings</h2>
+
+  <label>
+    <input type="checkbox" id="useSync"> Use Sync Storage
+  </label>
+
+  <label>
+    <input type="checkbox" id="useEncryption"> Encrypt Data
+  </label>
+
+  <button id="clear">Clear All Pinned Pages</button>
+
+  <script>
+    const useSync = document.getElementById('useSync');
+    const useEncryption = document.getElementById('useEncryption');
+    const clearBtn = document.getElementById('clear');
+
+    // Load settings
+    chrome.storage.local.get(['useSync', 'useEncryption'], (data) => {
+      useSync.checked = data.useSync || false;
+      useEncryption.checked = data.useEncryption || false;
+    });
+
+    // Save on change
+    useSync.onchange = () => {
+      chrome.storage.local.set({ useSync: useSync.checked });
+    };
+
+    useEncryption.onchange = () => {
+      chrome.storage.local.set({ useEncryption: useEncryption.checked });
+    };
+
+    clearBtn.onclick = () => {
+      chrome.storage.local.set({ pinnedPages: [] });
+      alert("All pinned pages cleared.");
+    };
+  </script>
+</body>
+</html>
