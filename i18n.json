@@ -1,0 +1,3802 @@
+{
+  "en-US": {
+    "settings": {
+      "title": "Settings",
+      "heading": "Settings",
+      "brandDescription": "Tune your extension preferences",
+      "description": "Tune your extension preferences",
+      "storagePreferences": "Storage preferences",
+      "storageDescription": "Decide where Pinity keeps your data.",
+      "storage": {
+        "title": "Storage preferences",
+        "desc": "Decide where Pinity keeps your data."
+      },
+      "useSync": {
+        "title": "Use sync storage",
+        "desc": "Sync pins across Chrome on every device."
+      },
+      "useEncryption": {
+        "title": "Encrypt data",
+        "desc": "Protect saved pins with client-side encryption."
+      },
+      "maintenance": {
+        "title": "Maintenance",
+        "desc": "Maintenance tasks for your saved pins and data."
+      },
+      "clear": "Clear all pinned pages",
+      "theme": {
+        "title": "Theme and appearance",
+        "desc": "Preview themes instantly across the extension experience.",
+        "system": "System default",
+        "light": "Light",
+        "dark": "Dark",
+        "contrast": "High contrast"
+      },
+      "reset": {
+        "title": "Reset Settings",
+        "desc": "Restore all settings to their default values.",
+        "action": "Reset"
+      },
+      "language": {
+        "title": "Language",
+        "desc": "Select a preferred language or follow the system default.",
+        "preferred": "Preferred language",
+        "options": {
+          "auto": "Auto (system)",
+          "en-US": "English (US)",
+          "en-GB": "English (UK)",
+          "es-ES": "Spanish (Spain)",
+          "es-MX": "Spanish (Mexico)",
+          "fr-FR": "French (France)",
+          "pt-BR": "Portuguese (Brazil)",
+          "de-DE": "German (Germany)",
+          "ja-JP": "Japanese (Japan)"
+        },
+        "detecting": "Detected system language: {lang}"
+      },
+      "compact": {
+        "title": "Compact mode",
+        "desc": "Reduce spacing for a denser list layout."
+      },
+      "save": "Save preferences",
+      "saveDesc": "Changes will be applied after saving.",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "Pinity",
+      "emptyListMessage": "No pinned pages yet.",
+      "loading": "Loading...",
+      "errorLoading": "Error loading pins.",
+      "brandDescription": "Collect your inspiration and jump back in instantly.",
+      "nav": {
+        "pins": "Pins",
+        "profile": "Profile",
+        "settings": "Settings"
+      },
+      "sectionTitle": "Your pinned pages",
+      "emailChecking": "Checking session...",
+      "pinCurrent": "Pin current tab",
+      "importPinned": "Import pinned tabs",
+      "manageTeam": "Manage team",
+      "savedLinksTitle": "Saved links",
+      "savedLinksDesc": "Newest pins appear first.",
+      "filterPlaceholder": "🔍 Filter pins by title or URL…",
+      "logout": "Log out",
+      "loaderText": "Loading…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Loading…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "Manage team",
+      "desc": "Invite and manage team members for shared boards.",
+      "create": {
+        "title": "Create a team",
+        "desc": "Create a new team to share pins and boards.",
+        "action": "Create"
+      },
+      "select": {
+        "title": "Select active team",
+        "desc": "Choose which team to act on behalf of."
+      },
+      "owner": "Owner",
+      "invite": {
+        "title": "Invite members",
+        "desc": "Send invitations to your teammates.",
+        "action": "Invite"
+      },
+      "chooseTeam": "Choose a team...",
+      "selectTeamLabel": "Active team",
+      "createTeamPlaceholder": "Design squad",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "you": "You",
+      "member": "Member",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Owner",
+      "youLabel": "You",
+      "memberLabel": "Member",
+      "removeButton": "Remove",
+      "selectTeamMessage": "Select a team to see members.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "Profile",
+      "heading": "Profile",
+      "brand": {
+        "logoAlt": "Pinity logo"
+      },
+      "brandDescription": "Manage your profile and subscription settings.",
+      "nav": {
+        "pins": "Pins",
+        "profile": "Profile",
+        "settings": "Settings"
+      },
+      "preferences": {
+        "title": "Profile details",
+        "desc": "Keep your public profile details up to date."
+      },
+      "description": "Manage your personal and billing preferences.",
+      "displayName": "Nickname",
+      "displayNamePlaceholder": "Add a friendly name",
+      "profileHandle": "Profile handle",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Status message",
+      "statusPlaceholder": "Let teammates know what you are collecting",
+      "allowInvites": "Allow teammate invites",
+      "allowInvitesDesc": "Let trusted collaborators add you to shared boards.",
+      "invites": {
+        "title": "Allow teammate invites",
+        "desc": "Let trusted collaborators add you to shared boards."
+      },
+      "subscriptionTitle": "Subscription and billing",
+      "subscriptionDesc": "Review your current plan and manage billing actions safely.",
+      "subscription": {
+        "title": "Subscription and billing",
+        "desc": "Review your current plan and manage billing actions safely."
+      },
+      "summary": {
+        "currentPlanLabel": "Current plan",
+        "statusLabel": "Subscription status",
+        "billingCycleLabel": "Billing cycle",
+        "nextBillingLabel": "Next billing date",
+        "currentBadge": "Current",
+        "planUnknown": "Unassigned",
+        "noDate": "Not available",
+        "notes": {
+          "free": "You are on the Starter plan. Upgrade anytime to unlock advanced collaboration.",
+          "activePortal": "Your subscription is active. Use billing actions below to manage plan changes.",
+          "activeNoPortal": "Subscription data is active, but billing portal access is not available right now.",
+          "canceled": "Your subscription is set to cancel. You keep access until the current billing period ends.",
+          "customPortal": "You are on a custom paid plan. Use the billing portal to manage changes.",
+          "customLimited": "You are on a custom plan, but billing management is currently unavailable.",
+          "inactivePro": "Your Pro plan is not currently active. Subscribe again to reactivate billing.",
+          "loading": "Loading billing details from the server..."
+        }
+      },
+      "status": {
+        "active": "Active",
+        "trialing": "Trialing",
+        "past_due": "Past due",
+        "paused": "Paused",
+        "canceled": "Canceled",
+        "inactive": "Inactive",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "billingCycle": {
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "unknown": "Not set"
+      },
+      "billingPeriodSelector": {
+        "label": "Checkout billing period",
+        "note": "Choose how often you want to be billed.",
+        "ariaLabel": "Checkout billing period options"
+      },
+      "planStarter": "Starter",
+      "planPro": "Pro",
+      "planStarterMeta": "For personal workflows and lightweight collaboration.",
+      "planProMeta": "For power users and small teams.",
+      "plan": {
+        "starter": {
+          "name": "Starter",
+          "price": "Free",
+          "meta": "For personal workflows and lightweight collaboration.",
+          "features": {
+            "singleWorkspace": "Single workspace",
+            "unlimitedDevices": "Unlimited devices",
+            "emailSupport": "Standard email support"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "$9 / month",
+          "meta": "For power users and small teams.",
+          "features": {
+            "unlimitedPins": "Unlimited pins",
+            "collaborationHub": "Team collaboration hub",
+            "prioritySupport": "Priority support"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Starter",
+          "free": "Free",
+          "basic": "Basic",
+          "pro": "Pro",
+          "team": "Team"
+        },
+        "meta": {
+          "default": "Plan details are managed by your workspace administrator.",
+          "features": "Includes {{count}} feature(s)",
+          "starter": "For personal workflows and lightweight collaboration.",
+          "free": "For personal workflows and lightweight collaboration.",
+          "pro": "For power users and growing teams.",
+          "team": "For teams that need shared workflows and controls."
+        },
+        "price": {
+          "free": "Free",
+          "monthly": "{{amount}} / month",
+          "yearly": "{{amount}} / year",
+          "custom": "Custom pricing"
+        }
+      },
+      "actions": {
+        "subscribe": "Subscribe",
+        "upgrade": "Upgrade",
+        "downgrade": "Downgrade",
+        "cancel": "Cancel plan",
+        "modifyPlan": "Modify plan"
+      },
+      "hints": {
+        "starter": "Starter users can subscribe or upgrade to Pro.",
+        "portal": "Downgrade and cancellation are managed through the billing portal.",
+        "cancelOnly": "You can schedule cancellation directly. Other billing changes require portal access.",
+        "portalUnavailable": "Billing management is temporarily unavailable.",
+        "serverUnavailable": "Live subscription details are unavailable. Showing saved local data.",
+        "inactive": "Your Pro plan is inactive. Subscribe to reactivate billing.",
+        "loadingData": "Loading live subscription data from the server...",
+        "selectPaidPlan": "Select a paid plan to continue with subscription checkout.",
+        "selectedBillingPeriodUnavailable": "The selected plan is not available for {{period}} billing.",
+        "selectAPlan": "Select a plan to get started."
+      },
+      "autoRenew": {
+        "title": "Auto-renew subscription",
+        "desc": "Keep your plan active automatically at renewal time."
+      },
+      "autoRenewDesc": "Keep your plan active automatically at renewal time.",
+      "savePreferences": "Save preferences",
+      "saveDesc": "Profile changes are saved to your account.",
+      "feedback": {
+        "saved": "Profile updated successfully.",
+        "savedLocal": "Profile saved locally.",
+        "failedLocal": "Could not save profile locally.",
+        "savedServerLocalFailed": "Saved on server, but local sync failed.",
+        "savedLocalFallback": "Server unavailable. Changes were saved locally.",
+        "failedServer": "Unable to save profile changes.",
+        "checkoutOpened": "Checkout opened in a new tab.",
+        "checkoutUnavailable": "Unable to start checkout right now.",
+        "portalOpened": "Billing portal opened in a new tab.",
+        "portalUnavailable": "Billing portal is unavailable right now.",
+        "cancelScheduled": "Cancellation has been scheduled.",
+        "cancelFailed": "Unable to cancel the subscription right now.",
+        "actionUnavailable": "This action is not available for your current plan state.",
+        "planUnavailable": "The selected plan is currently unavailable for checkout.",
+        "billingUnavailable": "Billing is temporarily unavailable. Please try again later."
+      },
+      "confirm": {
+        "title": "Confirm action",
+        "message": "Are you sure?",
+        "confirmButton": "Confirm",
+        "cancelButton": "Cancel",
+        "subscribe": {
+          "title": "Start subscription",
+          "message": "Open checkout to start the selected subscription plan?"
+        },
+        "upgrade": {
+          "title": "Upgrade plan",
+          "message": "Proceed with the upgrade action for your account?"
+        },
+        "downgrade": {
+          "title": "Downgrade plan",
+          "message": "Open billing management to downgrade your subscription?"
+        },
+        "cancel": {
+          "title": "Cancel subscription",
+          "message": "Do you want to schedule cancellation for your subscription?"
+        },
+        "portal": {
+          "title": "Open billing portal",
+          "message": "Continue to the billing portal to manage your subscription?"
+        }
+      },
+      "planState": {
+        "loading": "Loading available plans...",
+        "empty": "No plans are available right now.",
+        "unavailable": "Unable to load billing plans right now."
+      },
+      "features": {
+        "unknown": "Feature details will appear once available.",
+        "fallback": "{{feature}}",
+        "extension": "Browser extension access",
+        "unlimited-pins": "Unlimited pins",
+        "cloud-sync": "Cloud sync",
+        "basic-tagging": "Basic tagging",
+        "ai-search": "AI search",
+        "priority-support": "Priority support",
+        "team-collaboration": "Team collaboration",
+        "admin-panel": "Admin panel",
+        "role-permissions": "Role permissions"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Access Portal",
+      "brand": {
+        "logoAlt": "Pinity logo"
+      },
+      "brandDescription": "Clip faster, stay organized, and sync your workspace anywhere you browse.",
+      "tabs": {
+        "ariaLabel": "Authentication sections",
+        "login": "Login",
+        "register": "Register",
+        "forgot": "Forgot"
+      },
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "you@example.com",
+        "password": "********",
+        "confirmPassword": "Repeat password"
+      },
+      "login": {
+        "welcome": "Welcome back",
+        "instructions": "Authenticate with your email to access saved pins and collections.",
+        "submit": "Login",
+        "hint": "Use your workspace credentials"
+      },
+      "register": {
+        "title": "Create an account",
+        "desc": "Set up your Pinity account and invite inspiration into your workflow.",
+        "submit": "Create account",
+        "terms": "By creating an account you agree to the terms.",
+        "passwordMismatch": "Passwords do not match."
+      },
+      "forgot": {
+        "title": "Reset your password",
+        "desc": "Enter your email to receive password reset instructions.",
+        "submit": "Reset password",
+        "back": "Back to login",
+        "success": "Reset link sent. Check your inbox."
+      },
+      "continueWithGoogle": "Continue with Google",
+      "continueWithGoogleAria": "Continue with Google",
+      "or": "OR",
+      "language": {
+        "label": "Language",
+        "selectAria": "Language selector",
+        "auto": "Auto (system)",
+        "usingSystem": "Using system language: {{lang}}",
+        "preferred": "Preferred language set to: {{lang}}",
+        "languages": {
+          "en-US": "English (US)",
+          "en-GB": "English (UK)",
+          "es-ES": "Spanish (Spain)",
+          "es-MX": "Spanish (Mexico)",
+          "fr-FR": "French (France)",
+          "pt-BR": "Portuguese (Brazil)",
+          "de-DE": "German (Germany)",
+          "ja-JP": "Japanese (Japan)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Invalid login response.",
+        "saveSessionFailed": "Login succeeded but could not save session.",
+        "fillAllFields": "Please fill all fields.",
+        "loginFailed": "Login failed. Please check your credentials.",
+        "registerFailed": "Registration failed. Please try again.",
+        "network": "Network error. Please try again.",
+        "popupBlocked": "Popup blocked. Please allow popups.",
+        "saveLanguage": "Could not save language preference. Please try again.",
+        "enterEmail": "Please enter your email.",
+        "resetFailed": "Reset failed. Please try again.",
+        "passwordMinLength": "Use at least {{min}} characters."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Password updated successfully. Please log in.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Loading…",
+      "userAvatarAlt": "User avatar"
+    }
+  },
+  "en-GB": {
+    "settings": {
+      "title": "Settings",
+      "heading": "Settings",
+      "brandDescription": "Tune your extension preferences",
+      "description": "Tune your extension preferences",
+      "storagePreferences": "Storage preferences",
+      "storageDescription": "Decide where Pinity keeps your data.",
+      "storage": {
+        "title": "Storage preferences",
+        "desc": "Decide where Pinity keeps your data."
+      },
+      "useSync": {
+        "title": "Use sync storage",
+        "desc": "Sync pins across Chrome on every device."
+      },
+      "useEncryption": {
+        "title": "Encrypt data",
+        "desc": "Protect saved pins with client-side encryption."
+      },
+      "maintenance": {
+        "title": "Maintenance",
+        "desc": "Maintenance tasks for your saved pins and data."
+      },
+      "clear": "Clear all pinned pages",
+      "theme": {
+        "title": "Theme and appearance",
+        "desc": "Preview themes instantly across the extension experience.",
+        "system": "System default",
+        "light": "Light",
+        "dark": "Dark",
+        "contrast": "High contrast"
+      },
+      "reset": {
+        "title": "Reset Settings",
+        "desc": "Restore all settings to their default values.",
+        "action": "Reset"
+      },
+      "language": {
+        "title": "Language",
+        "desc": "Select a preferred language or follow the system default.",
+        "preferred": "Preferred language",
+        "options": {
+          "auto": "Auto (system)",
+          "en-US": "English (US)",
+          "en-GB": "English (UK)",
+          "es-ES": "Spanish (Spain)",
+          "es-MX": "Spanish (Mexico)",
+          "fr-FR": "French (France)",
+          "pt-BR": "Portuguese (Brazil)",
+          "de-DE": "German (Germany)",
+          "ja-JP": "Japanese (Japan)"
+        },
+        "detecting": "Detected system language: {lang}"
+      },
+      "compact": {
+        "title": "Compact mode",
+        "desc": "Reduce spacing for a denser list layout."
+      },
+      "save": "Save preferences",
+      "saveDesc": "Changes will be applied after saving.",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "Pinity",
+      "emptyListMessage": "No pinned pages yet.",
+      "loading": "Loading...",
+      "errorLoading": "Error loading pins.",
+      "brandDescription": "Collect your inspiration and jump back in instantly.",
+      "nav": {
+        "pins": "Pins",
+        "profile": "Profile",
+        "settings": "Settings"
+      },
+      "sectionTitle": "Your pinned pages",
+      "emailChecking": "Checking session...",
+      "pinCurrent": "Pin current tab",
+      "importPinned": "Import pinned tabs",
+      "manageTeam": "Manage team",
+      "savedLinksTitle": "Saved links",
+      "savedLinksDesc": "Newest pins appear first.",
+      "filterPlaceholder": "🔍 Filter pins by title or URL…",
+      "logout": "Log out",
+      "loaderText": "Loading…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Loading…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "Manage team",
+      "desc": "Invite and manage team members for shared boards.",
+      "create": {
+        "title": "Create a team",
+        "desc": "Create a new team to share pins and boards.",
+        "action": "Create"
+      },
+      "select": {
+        "title": "Select active team",
+        "desc": "Choose which team to act on behalf of."
+      },
+      "owner": "Owner",
+      "invite": {
+        "title": "Invite members",
+        "desc": "Send invitations to your teammates.",
+        "action": "Invite"
+      },
+      "chooseTeam": "Choose a team...",
+      "selectTeamLabel": "Active team",
+      "createTeamPlaceholder": "Design squad",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "you": "You",
+      "member": "Member",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Owner",
+      "youLabel": "You",
+      "memberLabel": "Member",
+      "removeButton": "Remove",
+      "selectTeamMessage": "Select a team to see members.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "Profile",
+      "heading": "Profile",
+      "brand": {
+        "logoAlt": "Pinity logo"
+      },
+      "brandDescription": "Manage your profile and subscription settings.",
+      "nav": {
+        "pins": "Pins",
+        "profile": "Profile",
+        "settings": "Settings"
+      },
+      "preferences": {
+        "title": "Profile details",
+        "desc": "Keep your public profile details up to date."
+      },
+      "description": "Manage your personal and billing preferences.",
+      "displayName": "Nickname",
+      "displayNamePlaceholder": "Add a friendly name",
+      "profileHandle": "Profile handle",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Status message",
+      "statusPlaceholder": "Let teammates know what you are collecting",
+      "allowInvites": "Allow teammate invites",
+      "allowInvitesDesc": "Let trusted collaborators add you to shared boards.",
+      "invites": {
+        "title": "Allow teammate invites",
+        "desc": "Let trusted collaborators add you to shared boards."
+      },
+      "subscriptionTitle": "Subscription and billing",
+      "subscriptionDesc": "Review your current plan and manage billing actions safely.",
+      "subscription": {
+        "title": "Subscription and billing",
+        "desc": "Review your current plan and manage billing actions safely."
+      },
+      "summary": {
+        "currentPlanLabel": "Current plan",
+        "statusLabel": "Subscription status",
+        "billingCycleLabel": "Billing cycle",
+        "nextBillingLabel": "Next billing date",
+        "currentBadge": "Current",
+        "planUnknown": "Unassigned",
+        "noDate": "Not available",
+        "notes": {
+          "free": "You are on the Starter plan. Upgrade anytime to unlock advanced collaboration.",
+          "activePortal": "Your subscription is active. Use billing actions below to manage plan changes.",
+          "activeNoPortal": "Subscription data is active, but billing portal access is not available right now.",
+          "canceled": "Your subscription is set to cancel. You keep access until the current billing period ends.",
+          "customPortal": "You are on a custom paid plan. Use the billing portal to manage changes.",
+          "customLimited": "You are on a custom plan, but billing management is currently unavailable.",
+          "inactivePro": "Your Pro plan is not currently active. Subscribe again to reactivate billing.",
+          "loading": "Loading billing details from the server..."
+        }
+      },
+      "status": {
+        "active": "Active",
+        "trialing": "Trialing",
+        "past_due": "Past due",
+        "paused": "Paused",
+        "canceled": "Canceled",
+        "inactive": "Inactive",
+        "expired": "Expired",
+        "unknown": "Unknown"
+      },
+      "billingCycle": {
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "unknown": "Not set"
+      },
+      "billingPeriodSelector": {
+        "label": "Checkout billing period",
+        "note": "Choose how often you want to be billed.",
+        "ariaLabel": "Checkout billing period options"
+      },
+      "planStarter": "Starter",
+      "planPro": "Pro",
+      "planStarterMeta": "For personal workflows and lightweight collaboration.",
+      "planProMeta": "For power users and small teams.",
+      "plan": {
+        "starter": {
+          "name": "Starter",
+          "price": "Free",
+          "meta": "For personal workflows and lightweight collaboration.",
+          "features": {
+            "singleWorkspace": "Single workspace",
+            "unlimitedDevices": "Unlimited devices",
+            "emailSupport": "Standard email support"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "$9 / month",
+          "meta": "For power users and small teams.",
+          "features": {
+            "unlimitedPins": "Unlimited pins",
+            "collaborationHub": "Team collaboration hub",
+            "prioritySupport": "Priority support"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Starter",
+          "free": "Free",
+          "basic": "Basic",
+          "pro": "Pro",
+          "team": "Team"
+        },
+        "meta": {
+          "default": "Plan details are managed by your workspace administrator.",
+          "features": "Includes {{count}} feature(s)",
+          "starter": "For personal workflows and lightweight collaboration.",
+          "free": "For personal workflows and lightweight collaboration.",
+          "pro": "For power users and growing teams.",
+          "team": "For teams that need shared workflows and controls."
+        },
+        "price": {
+          "free": "Free",
+          "monthly": "{{amount}} / month",
+          "yearly": "{{amount}} / year",
+          "custom": "Custom pricing"
+        }
+      },
+      "actions": {
+        "subscribe": "Subscribe",
+        "upgrade": "Upgrade",
+        "downgrade": "Downgrade",
+        "cancel": "Cancel plan",
+        "modifyPlan": "Modify plan"
+      },
+      "hints": {
+        "starter": "Starter users can subscribe or upgrade to Pro.",
+        "portal": "Downgrade and cancellation are managed through the billing portal.",
+        "cancelOnly": "You can schedule cancellation directly. Other billing changes require portal access.",
+        "portalUnavailable": "Billing management is temporarily unavailable.",
+        "serverUnavailable": "Live subscription details are unavailable. Showing saved local data.",
+        "inactive": "Your Pro plan is inactive. Subscribe to reactivate billing.",
+        "loadingData": "Loading live subscription data from the server...",
+        "selectPaidPlan": "Select a paid plan to continue with subscription checkout.",
+        "selectedBillingPeriodUnavailable": "The selected plan is not available for {{period}} billing.",
+        "selectAPlan": "Select a plan to get started."
+      },
+      "autoRenew": {
+        "title": "Auto-renew subscription",
+        "desc": "Keep your plan active automatically at renewal time."
+      },
+      "autoRenewDesc": "Keep your plan active automatically at renewal time.",
+      "savePreferences": "Save preferences",
+      "saveDesc": "Profile changes are saved to your account.",
+      "feedback": {
+        "saved": "Profile updated successfully.",
+        "savedLocal": "Profile saved locally.",
+        "failedLocal": "Could not save profile locally.",
+        "savedServerLocalFailed": "Saved on server, but local sync failed.",
+        "savedLocalFallback": "Server unavailable. Changes were saved locally.",
+        "failedServer": "Unable to save profile changes.",
+        "checkoutOpened": "Checkout opened in a new tab.",
+        "checkoutUnavailable": "Unable to start checkout right now.",
+        "portalOpened": "Billing portal opened in a new tab.",
+        "portalUnavailable": "Billing portal is unavailable right now.",
+        "cancelScheduled": "Cancellation has been scheduled.",
+        "cancelFailed": "Unable to cancel the subscription right now.",
+        "actionUnavailable": "This action is not available for your current plan state.",
+        "planUnavailable": "The selected plan is currently unavailable for checkout.",
+        "billingUnavailable": "Billing is temporarily unavailable. Please try again later."
+      },
+      "confirm": {
+        "title": "Confirm action",
+        "message": "Are you sure?",
+        "confirmButton": "Confirm",
+        "cancelButton": "Cancel",
+        "subscribe": {
+          "title": "Start subscription",
+          "message": "Open checkout to start the selected subscription plan?"
+        },
+        "upgrade": {
+          "title": "Upgrade plan",
+          "message": "Proceed with the upgrade action for your account?"
+        },
+        "downgrade": {
+          "title": "Downgrade plan",
+          "message": "Open billing management to downgrade your subscription?"
+        },
+        "cancel": {
+          "title": "Cancel subscription",
+          "message": "Do you want to schedule cancellation for your subscription?"
+        },
+        "portal": {
+          "title": "Open billing portal",
+          "message": "Continue to the billing portal to manage your subscription?"
+        }
+      },
+      "planState": {
+        "loading": "Loading available plans...",
+        "empty": "No plans are available right now.",
+        "unavailable": "Unable to load billing plans right now."
+      },
+      "features": {
+        "unknown": "Feature details will appear once available.",
+        "fallback": "{{feature}}",
+        "extension": "Browser extension access",
+        "unlimited-pins": "Unlimited pins",
+        "cloud-sync": "Cloud sync",
+        "basic-tagging": "Basic tagging",
+        "ai-search": "AI search",
+        "priority-support": "Priority support",
+        "team-collaboration": "Team collaboration",
+        "admin-panel": "Admin panel",
+        "role-permissions": "Role permissions"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Access Portal",
+      "brand": {
+        "logoAlt": "Pinity logo"
+      },
+      "brandDescription": "Clip faster, stay organized, and sync your workspace anywhere you browse.",
+      "tabs": {
+        "ariaLabel": "Authentication sections",
+        "login": "Login",
+        "register": "Register",
+        "forgot": "Forgot"
+      },
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password",
+        "confirmPassword": "Confirm password"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "you@example.com",
+        "password": "********",
+        "confirmPassword": "Repeat password"
+      },
+      "login": {
+        "welcome": "Welcome back",
+        "instructions": "Authenticate with your email to access saved pins and collections.",
+        "submit": "Login",
+        "hint": "Use your workspace credentials"
+      },
+      "register": {
+        "title": "Create an account",
+        "desc": "Set up your Pinity account and invite inspiration into your workflow.",
+        "submit": "Create account",
+        "terms": "By creating an account you agree to the terms.",
+        "passwordMismatch": "Passwords do not match."
+      },
+      "forgot": {
+        "title": "Reset your password",
+        "desc": "Enter your email to receive password reset instructions.",
+        "submit": "Reset password",
+        "back": "Back to login",
+        "success": "Reset link sent. Check your inbox."
+      },
+      "continueWithGoogle": "Continue with Google",
+      "continueWithGoogleAria": "Continue with Google",
+      "or": "OR",
+      "language": {
+        "label": "Language",
+        "selectAria": "Language selector",
+        "auto": "Auto (system)",
+        "usingSystem": "Using system language: {{lang}}",
+        "preferred": "Preferred language set to: {{lang}}",
+        "languages": {
+          "en-US": "English (US)",
+          "en-GB": "English (UK)",
+          "es-ES": "Spanish (Spain)",
+          "es-MX": "Spanish (Mexico)",
+          "fr-FR": "French (France)",
+          "pt-BR": "Portuguese (Brazil)",
+          "de-DE": "German (Germany)",
+          "ja-JP": "Japanese (Japan)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Invalid login response.",
+        "saveSessionFailed": "Login succeeded but could not save session.",
+        "fillAllFields": "Please fill all fields.",
+        "loginFailed": "Login failed. Please check your credentials.",
+        "registerFailed": "Registration failed. Please try again.",
+        "network": "Network error. Please try again.",
+        "popupBlocked": "Popup blocked. Please allow popups.",
+        "saveLanguage": "Could not save language preference. Please try again.",
+        "enterEmail": "Please enter your email.",
+        "resetFailed": "Reset failed. Please try again.",
+        "passwordMinLength": "Use at least {{min}} characters."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Password updated successfully. Please log in.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Loading…",
+      "userAvatarAlt": "User avatar"
+    }
+  },
+  "es-ES": {
+    "settings": {
+      "title": "Configuración",
+      "heading": "Configuración",
+      "brandDescription": "Ajusta las preferencias de tu extensión",
+      "description": "Ajusta las preferencias de tu extensión",
+      "storagePreferences": "Preferencias de almacenamiento",
+      "storageDescription": "Decide dónde guarda Pinity tus datos.",
+      "storage": {
+        "title": "Preferencias de almacenamiento",
+        "desc": "Decide dónde guarda Pinity tus datos."
+      },
+      "useSync": {
+        "title": "Usar almacenamiento sincronizado",
+        "desc": "Sincroniza los pines en Chrome en todos los dispositivos."
+      },
+      "useEncryption": {
+        "title": "Cifrar datos",
+        "desc": "Protege los pines guardados con cifrado del lado del cliente."
+      },
+      "maintenance": {
+        "title": "Mantenimiento",
+        "desc": "Tareas de mantenimiento para tus pines y datos guardados."
+      },
+      "clear": "Borrar todas las páginas guardadas",
+      "theme": {
+        "title": "Tema y apariencia",
+        "desc": "Previsualiza temas instantáneamente en toda la extensión.",
+        "system": "Predeterminado del sistema",
+        "light": "Claro",
+        "dark": "Oscuro",
+        "contrast": "Alto contraste"
+      },
+      "reset": {
+        "title": "Restablecer configuración",
+        "desc": "Restaura todos los ajustes a sus valores predeterminados.",
+        "action": "Restablecer"
+      },
+      "language": {
+        "title": "Idioma",
+        "desc": "Selecciona un idioma preferido o sigue el predeterminado del sistema.",
+        "preferred": "Idioma preferido",
+        "options": {
+          "auto": "Auto (sistema)",
+          "en-US": "Inglés (EE. UU.)",
+          "en-GB": "Inglés (Reino Unido)",
+          "es-ES": "Español (España)",
+          "es-MX": "Español (México)",
+          "fr-FR": "Francés (Francia)",
+          "pt-BR": "Portugués (Brasil)",
+          "de-DE": "Alemán (Alemania)",
+          "ja-JP": "Japonés (Japón)"
+        },
+        "detecting": "Idioma del sistema detectado: {lang}"
+      },
+      "compact": {
+        "title": "Modo compacto",
+        "desc": "Reduce los espacios para una lista más densa."
+      },
+      "save": "Guardar preferencias",
+      "saveDesc": "Los cambios se aplicarán después de guardar.",
+      "feedback": {
+        "syncUpdated": "Configuración de sincronización actualizada.",
+        "syncFailed": "Error al actualizar la sincronización.",
+        "encryptionUpdated": "Configuración de cifrado actualizada.",
+        "encryptionFailed": "Error al actualizar el cifrado.",
+        "resetDone": "Configuración restablecida.",
+        "resetFailed": "Error al restablecer la configuración.",
+        "cleared": "Todas las páginas ancladas eliminadas.",
+        "saved": "Configuración guardada.",
+        "saveFailed": "Error al guardar la configuración.",
+        "languageUpdated": "Idioma actualizado.",
+        "languageFailed": "Error al guardar el idioma."
+      }
+    },
+    "popup": {
+      "title": "Pinity",
+      "emptyListMessage": "Aún no hay páginas guardadas.",
+      "loading": "Cargando...",
+      "errorLoading": "Error cargando pines.",
+      "brandDescription": "Colecciona tu inspiración y vuelve rápidamente.",
+      "nav": {
+        "pins": "Pines",
+        "profile": "Perfil",
+        "settings": "Ajustes"
+      },
+      "sectionTitle": "Tus páginas guardadas",
+      "emailChecking": "Comprobando sesión...",
+      "pinCurrent": "Guardar pestaña actual",
+      "importPinned": "Importar pestañas guardadas",
+      "manageTeam": "Gestionar equipo",
+      "savedLinksTitle": "Enlaces guardados",
+      "savedLinksDesc": "Los pines más recientes aparecen primero.",
+      "filterPlaceholder": "🔍 Filtrar pines por título o URL…",
+      "logout": "Cerrar sesión",
+      "loaderText": "Cargando…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Error al cargar equipos.",
+        "loadPinsFailed": "Error al cargar pins. Inténtalo de nuevo.",
+        "alreadySaved": "Todos tus tabs anclados ya están guardados.",
+        "planLimitReached": "Has alcanzado el límite del plan gratuito (5 pins). Actualiza a Pro para agregar más.",
+        "planLimitPartial": "El plan gratuito permite {remaining} pin(s) más. Solo se importarán los primeros {remaining}.",
+        "imported": "{count} de {total} tab(s) importados.",
+        "importedWithFailures": "{count} de {total} tab(s) importados ({failed} fallidos).",
+        "importFailed": "Error al importar tabs anclados.",
+        "notLoggedIn": "No has iniciado sesión.",
+        "noActiveTab": "No hay tab activa.",
+        "pinFailed": "Error al guardar este tab.",
+        "pinError": "Algo salió mal al guardar el tab.",
+        "pinRemoved": "Pin eliminado.",
+        "deleteError": "Error al eliminar el pin.",
+        "loading": "Cargando…",
+        "loadingTeams": "Cargando equipos…",
+        "loadingPins": "Cargando pins…",
+        "importingTabs": "Importando tabs anclados…",
+        "pinningTab": "Anclando tab actual…",
+        "removingPin": "Eliminando pin…",
+        "noMatches": "No hay pins que coincidan."
+      }
+    },
+    "manageTeam": {
+      "heading": "Gestionar equipo",
+      "desc": "Invita y gestiona miembros del equipo para tableros compartidos.",
+      "create": {
+        "title": "Crear un equipo",
+        "desc": "Crea un nuevo equipo para compartir pines y tableros.",
+        "action": "Crear"
+      },
+      "select": {
+        "title": "Seleccionar equipo activo",
+        "desc": "Elige el equipo con el que actuar."
+      },
+      "owner": "Propietario",
+      "invite": {
+        "title": "Invitar miembros",
+        "desc": "Envía invitaciones a tus compañeros.",
+        "action": "Invitar"
+      },
+      "chooseTeam": "Elige un equipo...",
+      "selectTeamLabel": "Equipo activo",
+      "createTeamPlaceholder": "Equipo de diseño",
+      "inviteMember": "Invitar miembro",
+      "noMembers": "Aún no hay miembros.",
+      "you": "Tú",
+      "member": "Miembro",
+      "feedback": {
+        "removeFailed": "Error al eliminar miembro.",
+        "inviteSent": "Invitación enviada.",
+        "inviteFailed": "Error al enviar invitación.",
+        "renameDone": "Equipo renombrado.",
+        "renameFailed": "No se pudo renombrar el equipo.",
+        "deleteDone": "Equipo eliminado.",
+        "deleteFailed": "No se pudo eliminar el equipo.",
+        "createDone": "Equipo creado.",
+        "createFailed": "No se pudo crear el equipo.",
+        "loadFailed": "Error al cargar equipos."
+      },
+      "unknownUser": "Usuario desconocido",
+      "ownerLabel": "Propietario",
+      "youLabel": "Tú",
+      "memberLabel": "Miembro",
+      "removeButton": "Eliminar",
+      "selectTeamMessage": "Selecciona un equipo para ver miembros.",
+      "unableToLoad": "No se pueden cargar los equipos.",
+      "selectTeamFirst": "Selecciona primero un equipo.",
+      "enterValidEmail": "Por favor, introduce un email válido.",
+      "enterNewTeamName": "Introduce un nuevo nombre para el equipo.",
+      "enterTeamNameFirst": "Introduce primero el nombre del equipo.",
+      "deleteConfirm": "¿Estás seguro de que quieres eliminar este equipo y todos sus pins?"
+    },
+    "profile": {
+      "title": "Perfil",
+      "heading": "Perfil",
+      "brand": {
+        "logoAlt": "Logotipo de Pinity"
+      },
+      "brandDescription": "Gestiona tu perfil y la configuración de tu suscripción.",
+      "nav": {
+        "pins": "Pines",
+        "profile": "Perfil",
+        "settings": "Ajustes"
+      },
+      "preferences": {
+        "title": "Datos del perfil",
+        "desc": "Mantén actualizados tus datos públicos de perfil."
+      },
+      "description": "Gestiona tus preferencias personales y de facturación.",
+      "displayName": "Apodo",
+      "displayNamePlaceholder": "Añade un nombre amigable",
+      "profileHandle": "Handle de perfil",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Mensaje de estado",
+      "statusPlaceholder": "Haz saber a tus compañeros lo que coleccionas",
+      "allowInvites": "Permitir invitaciones",
+      "allowInvitesDesc": "Permite a colaboradores de confianza añadirte a tableros compartidos.",
+      "invites": {
+        "title": "Permitir invitaciones",
+        "desc": "Permite a colaboradores de confianza añadirte a tableros compartidos."
+      },
+      "subscriptionTitle": "Suscripción y facturación",
+      "subscriptionDesc": "Revisa tu plan actual y gestiona acciones de facturación de forma segura.",
+      "subscription": {
+        "title": "Suscripción y facturación",
+        "desc": "Revisa tu plan actual y gestiona acciones de facturación de forma segura."
+      },
+      "summary": {
+        "currentPlanLabel": "Plan actual",
+        "statusLabel": "Estado de suscripción",
+        "billingCycleLabel": "Ciclo de facturación",
+        "nextBillingLabel": "Próxima fecha de cobro",
+        "currentBadge": "Actual",
+        "planUnknown": "Sin asignar",
+        "noDate": "No disponible",
+        "notes": {
+          "free": "Estás en el plan Starter. Puedes mejorar cuando quieras para desbloquear colaboración avanzada.",
+          "activePortal": "Tu suscripción está activa. Usa las acciones de facturación para gestionar cambios de plan.",
+          "activeNoPortal": "La suscripción está activa, pero el acceso al portal de facturación no está disponible ahora.",
+          "canceled": "Tu suscripción está programada para cancelarse. Mantienes acceso hasta el final del período actual.",
+          "customPortal": "Estás en un plan de pago personalizado. Usa el portal de facturación para gestionar cambios.",
+          "customLimited": "Estás en un plan personalizado, pero la gestión de facturación no está disponible por ahora.",
+          "inactivePro": "Tu plan Pro no está activo en este momento. Suscríbete nuevamente para reactivar la facturación.",
+          "loading": "Cargando detalles de facturación desde el servidor..."
+        }
+      },
+      "status": {
+        "active": "Activa",
+        "trialing": "En prueba",
+        "past_due": "Pago atrasado",
+        "paused": "Pausada",
+        "canceled": "Cancelada",
+        "inactive": "Inactiva",
+        "expired": "Expirada",
+        "unknown": "Desconocido"
+      },
+      "billingCycle": {
+        "monthly": "Mensual",
+        "yearly": "Anual",
+        "unknown": "Sin definir"
+      },
+      "billingPeriodSelector": {
+        "label": "Periodo de facturación del checkout",
+        "note": "Elige cada cuánto quieres que se cobre.",
+        "ariaLabel": "Opciones de periodo de facturación del checkout"
+      },
+      "planStarter": "Starter",
+      "planPro": "Pro",
+      "planStarterMeta": "Para flujos personales y colaboración ligera.",
+      "planProMeta": "Para usuarios avanzados y equipos pequeños.",
+      "plan": {
+        "starter": {
+          "name": "Starter",
+          "price": "Gratis",
+          "meta": "Para flujos personales y colaboración ligera.",
+          "features": {
+            "singleWorkspace": "Un espacio de trabajo",
+            "unlimitedDevices": "Dispositivos ilimitados",
+            "emailSupport": "Soporte por correo estándar"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "US$9 / mes",
+          "meta": "Para usuarios avanzados y equipos pequeños.",
+          "features": {
+            "unlimitedPins": "Pines ilimitados",
+            "collaborationHub": "Hub de colaboración en equipo",
+            "prioritySupport": "Soporte prioritario"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Starter",
+          "free": "Gratis",
+          "basic": "Básico",
+          "pro": "Pro",
+          "team": "Equipo"
+        },
+        "meta": {
+          "default": "Los detalles del plan son gestionados por el administrador del espacio de trabajo.",
+          "features": "Incluye {{count}} funcionalidad(es)",
+          "starter": "Para flujos personales y colaboración ligera.",
+          "free": "Para flujos personales y colaboración ligera.",
+          "pro": "Para usuarios avanzados y equipos en crecimiento.",
+          "team": "Para equipos que requieren flujos compartidos y control."
+        },
+        "price": {
+          "free": "Gratis",
+          "monthly": "{{amount}} / mes",
+          "yearly": "{{amount}} / año",
+          "custom": "Precio personalizado"
+        }
+      },
+      "actions": {
+        "subscribe": "Suscribirse",
+        "upgrade": "Mejorar",
+        "downgrade": "Bajar plan",
+        "cancel": "Cancelar plan",
+        "modifyPlan": "Modificar plan"
+      },
+      "hints": {
+        "starter": "Los usuarios Starter pueden suscribirse o mejorar a Pro.",
+        "portal": "La reducción de plan y la cancelación se gestionan en el portal de facturación.",
+        "cancelOnly": "Puedes programar la cancelación directamente. Otros cambios requieren el portal.",
+        "portalUnavailable": "La gestión de facturación no está disponible temporalmente.",
+        "serverUnavailable": "No se pudieron cargar los datos en vivo de suscripción. Se muestran datos locales guardados.",
+        "inactive": "Tu plan Pro está inactivo. Suscríbete para reactivar la facturación.",
+        "loadingData": "Cargando datos de suscripción en vivo desde el servidor...",
+        "selectPaidPlan": "Selecciona un plan de pago para continuar con el checkout.",
+        "selectedBillingPeriodUnavailable": "El plan seleccionado no está disponible para facturación {{period}}.",
+        "selectAPlan": "Selecciona un plan para comenzar."
+      },
+      "autoRenew": {
+        "title": "Renovación automática",
+        "desc": "Mantén tu plan activo automáticamente al renovarse."
+      },
+      "autoRenewDesc": "Mantén tu plan activo automáticamente al renovarse.",
+      "savePreferences": "Guardar preferencias",
+      "saveDesc": "Los cambios del perfil se guardan en tu cuenta.",
+      "feedback": {
+        "saved": "Perfil actualizado correctamente.",
+        "savedLocal": "Perfil guardado localmente.",
+        "failedLocal": "No se pudo guardar el perfil localmente.",
+        "savedServerLocalFailed": "Se guardó en el servidor, pero falló la sincronización local.",
+        "savedLocalFallback": "Servidor no disponible. Los cambios se guardaron localmente.",
+        "failedServer": "No se pudieron guardar los cambios del perfil.",
+        "checkoutOpened": "El checkout se abrió en una nueva pestaña.",
+        "checkoutUnavailable": "No se puede iniciar el checkout en este momento.",
+        "portalOpened": "El portal de facturación se abrió en una nueva pestaña.",
+        "portalUnavailable": "El portal de facturación no está disponible por ahora.",
+        "cancelScheduled": "La cancelación fue programada.",
+        "cancelFailed": "No se pudo cancelar la suscripción en este momento.",
+        "actionUnavailable": "Esta acción no está disponible para tu estado de plan actual.",
+        "planUnavailable": "El plan seleccionado no está disponible para checkout en este momento.",
+        "billingUnavailable": "La facturación no está disponible temporalmente. Inténtalo más tarde."
+      },
+      "confirm": {
+        "title": "Confirmar acción",
+        "message": "¿Estás seguro?",
+        "confirmButton": "Confirmar",
+        "cancelButton": "Cancelar",
+        "subscribe": {
+          "title": "Iniciar suscripción",
+          "message": "¿Abrir checkout para iniciar el plan seleccionado?"
+        },
+        "upgrade": {
+          "title": "Mejorar plan",
+          "message": "¿Continuar con la mejora de plan para tu cuenta?"
+        },
+        "downgrade": {
+          "title": "Bajar plan",
+          "message": "¿Abrir la gestión de facturación para bajar tu suscripción?"
+        },
+        "cancel": {
+          "title": "Cancelar suscripción",
+          "message": "¿Quieres programar la cancelación de tu suscripción?"
+        },
+        "portal": {
+          "title": "Abrir portal de facturación",
+          "message": "¿Continuar al portal de facturación para gestionar tu suscripción?"
+        }
+      },
+      "planState": {
+        "loading": "Cargando planes disponibles...",
+        "empty": "No hay planes disponibles en este momento.",
+        "unavailable": "No se pudieron cargar los planes de facturación por ahora."
+      },
+      "features": {
+        "unknown": "Los detalles de funcionalidades aparecerán cuando estén disponibles.",
+        "fallback": "{{feature}}",
+        "extension": "Acceso desde la extensión",
+        "unlimited-pins": "Pines ilimitados",
+        "cloud-sync": "Sincronización en la nube",
+        "basic-tagging": "Etiquetado básico",
+        "ai-search": "Búsqueda con IA",
+        "priority-support": "Soporte prioritario",
+        "team-collaboration": "Colaboración en equipo",
+        "admin-panel": "Panel de administración",
+        "role-permissions": "Permisos por roles"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Portal de acceso",
+      "brand": {
+        "logoAlt": "Logotipo de Pinity"
+      },
+      "brandDescription": "Recorta más rápido, mantente organizado y sincroniza tu espacio de trabajo donde navegues.",
+      "tabs": {
+        "ariaLabel": "Secciones de autenticación",
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "forgot": "¿Olvidaste?"
+      },
+      "fields": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña"
+      },
+      "placeholders": {
+        "name": "Tu nombre completo",
+        "email": "tu@ejemplo.com",
+        "password": "********",
+        "confirmPassword": "Repite la contraseña"
+      },
+      "login": {
+        "welcome": "Bienvenido de nuevo",
+        "instructions": "Autentícate con tu correo para acceder a pines y colecciones.",
+        "submit": "Iniciar sesión",
+        "hint": "Usa tus credenciales"
+      },
+      "register": {
+        "title": "Crear una cuenta",
+        "desc": "Configura tu cuenta de Pinity e invita inspiración a tu flujo de trabajo.",
+        "submit": "Crear cuenta",
+        "terms": "Al crear una cuenta aceptas los términos.",
+        "passwordMismatch": "Las contraseñas no coinciden."
+      },
+      "forgot": {
+        "title": "Restablecer contraseña",
+        "desc": "Introduce tu correo para recibir instrucciones de restablecimiento.",
+        "submit": "Restablecer contraseña",
+        "back": "Volver al inicio de sesión",
+        "success": "Enlace de restablecimiento enviado. Revisa tu bandeja de entrada."
+      },
+      "continueWithGoogle": "Continuar con Google",
+      "continueWithGoogleAria": "Continuar con Google",
+      "or": "O",
+      "language": {
+        "label": "Idioma",
+        "selectAria": "Selector de idioma",
+        "auto": "Auto (sistema)",
+        "usingSystem": "Usando el idioma del sistema: {{lang}}",
+        "preferred": "Idioma preferido: {{lang}}",
+        "languages": {
+          "en-US": "Inglés (EE. UU.)",
+          "en-GB": "Inglés (Reino Unido)",
+          "es-ES": "Español (España)",
+          "es-MX": "Español (México)",
+          "fr-FR": "Francés (Francia)",
+          "pt-BR": "Portugués (Brasil)",
+          "de-DE": "Alemán (Alemania)",
+          "ja-JP": "Japonés (Japón)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Respuesta de inicio de sesión no válida.",
+        "saveSessionFailed": "Inicio de sesión correcto pero no se pudo guardar la sesión.",
+        "fillAllFields": "Por favor completa todos los campos.",
+        "loginFailed": "Error al iniciar sesión. Verifica tus credenciales.",
+        "registerFailed": "Error en el registro. Por favor intenta de nuevo.",
+        "network": "Error de red. Por favor intenta de nuevo.",
+        "popupBlocked": "Popup bloqueado. Permite ventanas emergentes.",
+        "saveLanguage": "No se pudo guardar la preferencia de idioma. Intenta de nuevo.",
+        "enterEmail": "Por favor ingresa tu correo.",
+        "resetFailed": "Error al restablecer. Por favor intenta de nuevo.",
+        "passwordMinLength": "Usa al menos {{min}} caracteres."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Por favor, introduce el token y la nueva contraseña.",
+        "success": "Contraseña actualizada. Por favor, inicia sesión.",
+        "failed": "Error al restablecer.",
+        "networkError": "Error de red. Inténtalo de nuevo."
+      }
+    },
+    "common": {
+      "loading": "Cargando…",
+      "userAvatarAlt": "Avatar del usuario"
+    }
+  },
+  "es-MX": {
+    "settings": {
+      "title": "Configuración",
+      "heading": "Configuración",
+      "brandDescription": "Ajusta las preferencias de tu extensión",
+      "description": "Ajusta las preferencias de tu extensión",
+      "storagePreferences": "Preferencias de almacenamiento",
+      "storageDescription": "Decide dónde guarda Pinity tus datos.",
+      "storage": {
+        "title": "Preferencias de almacenamiento",
+        "desc": "Decide dónde guarda Pinity tus datos."
+      },
+      "useSync": {
+        "title": "Usar almacenamiento sincronizado",
+        "desc": "Sincroniza los pines en Chrome en todos los dispositivos."
+      },
+      "useEncryption": {
+        "title": "Cifrar datos",
+        "desc": "Protege los pines guardados con cifrado del lado del cliente."
+      },
+      "maintenance": {
+        "title": "Mantenimiento",
+        "desc": "Tareas de mantenimiento para tus pines y datos guardados."
+      },
+      "clear": "Borrar todas las páginas guardadas",
+      "theme": {
+        "title": "Tema y apariencia",
+        "desc": "Previsualiza temas instantáneamente en toda la extensión.",
+        "system": "Predeterminado del sistema",
+        "light": "Claro",
+        "dark": "Oscuro",
+        "contrast": "Alto contraste"
+      },
+      "reset": {
+        "title": "Restablecer configuración",
+        "desc": "Restaura todos los ajustes a sus valores predeterminados.",
+        "action": "Restablecer"
+      },
+      "language": {
+        "title": "Idioma",
+        "desc": "Selecciona un idioma preferido o sigue el predeterminado del sistema.",
+        "preferred": "Idioma preferido",
+        "options": {
+          "auto": "Auto (sistema)",
+          "en-US": "Inglés (EE. UU.)",
+          "en-GB": "Inglés (Reino Unido)",
+          "es-ES": "Español (España)",
+          "es-MX": "Español (México)",
+          "fr-FR": "Francés (Francia)",
+          "pt-BR": "Portugués (Brasil)",
+          "de-DE": "Alemán (Alemania)",
+          "ja-JP": "Japonés (Japón)"
+        },
+        "detecting": "Idioma del sistema detectado: {lang}"
+      },
+      "compact": {
+        "title": "Modo compacto",
+        "desc": "Reduce los espacios para una lista más densa."
+      },
+      "save": "Guardar preferencias",
+      "saveDesc": "Los cambios se aplicarán después de guardar.",
+      "feedback": {
+        "syncUpdated": "Configuración de sincronización actualizada.",
+        "syncFailed": "Error al actualizar la sincronización.",
+        "encryptionUpdated": "Configuración de cifrado actualizada.",
+        "encryptionFailed": "Error al actualizar el cifrado.",
+        "resetDone": "Configuración restablecida.",
+        "resetFailed": "Error al restablecer la configuración.",
+        "cleared": "Todas las páginas ancladas eliminadas.",
+        "saved": "Configuración guardada.",
+        "saveFailed": "Error al guardar la configuración.",
+        "languageUpdated": "Idioma actualizado.",
+        "languageFailed": "Error al guardar el idioma."
+      }
+    },
+    "popup": {
+      "title": "Pinity",
+      "emptyListMessage": "Aún no hay páginas guardadas.",
+      "loading": "Cargando...",
+      "errorLoading": "Error cargando pines.",
+      "brandDescription": "Colecciona tu inspiración y vuelve rápidamente.",
+      "nav": {
+        "pins": "Pines",
+        "profile": "Perfil",
+        "settings": "Ajustes"
+      },
+      "sectionTitle": "Tus páginas guardadas",
+      "emailChecking": "Comprobando sesión...",
+      "pinCurrent": "Guardar pestaña actual",
+      "importPinned": "Importar pestañas guardadas",
+      "manageTeam": "Gestionar equipo",
+      "savedLinksTitle": "Enlaces guardados",
+      "savedLinksDesc": "Los pines más recientes aparecen primero.",
+      "filterPlaceholder": "🔍 Filtrar pines por título o URL…",
+      "logout": "Cerrar sesión",
+      "loaderText": "Cargando…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Error al cargar equipos.",
+        "loadPinsFailed": "Error al cargar pins. Inténtalo de nuevo.",
+        "alreadySaved": "Todos tus tabs anclados ya están guardados.",
+        "planLimitReached": "Has alcanzado el límite del plan gratuito (5 pins). Actualiza a Pro para agregar más.",
+        "planLimitPartial": "El plan gratuito permite {remaining} pin(s) más. Solo se importarán los primeros {remaining}.",
+        "imported": "{count} de {total} tab(s) importados.",
+        "importedWithFailures": "{count} de {total} tab(s) importados ({failed} fallidos).",
+        "importFailed": "Error al importar tabs anclados.",
+        "notLoggedIn": "No has iniciado sesión.",
+        "noActiveTab": "No hay tab activa.",
+        "pinFailed": "Error al guardar este tab.",
+        "pinError": "Algo salió mal al guardar el tab.",
+        "pinRemoved": "Pin eliminado.",
+        "deleteError": "Error al eliminar el pin.",
+        "loading": "Cargando…",
+        "loadingTeams": "Cargando equipos…",
+        "loadingPins": "Cargando pins…",
+        "importingTabs": "Importando tabs anclados…",
+        "pinningTab": "Anclando tab actual…",
+        "removingPin": "Eliminando pin…",
+        "noMatches": "No hay pins que coincidan."
+      }
+    },
+    "manageTeam": {
+      "heading": "Gestionar equipo",
+      "desc": "Invita y gestiona miembros del equipo para tableros compartidos.",
+      "create": {
+        "title": "Crear un equipo",
+        "desc": "Crea un nuevo equipo para compartir pines y tableros.",
+        "action": "Crear"
+      },
+      "select": {
+        "title": "Seleccionar equipo activo",
+        "desc": "Elige el equipo con el que actuar."
+      },
+      "owner": "Propietario",
+      "invite": {
+        "title": "Invitar miembros",
+        "desc": "Envía invitaciones a tus compañeros.",
+        "action": "Invitar"
+      },
+      "chooseTeam": "Elige un equipo...",
+      "selectTeamLabel": "Equipo activo",
+      "createTeamPlaceholder": "Equipo de diseño",
+      "inviteMember": "Invitar miembro",
+      "noMembers": "Aún no hay miembros.",
+      "you": "Tú",
+      "member": "Miembro",
+      "feedback": {
+        "removeFailed": "Error al eliminar miembro.",
+        "inviteSent": "Invitación enviada.",
+        "inviteFailed": "Error al enviar invitación.",
+        "renameDone": "Equipo renombrado.",
+        "renameFailed": "No se pudo renombrar el equipo.",
+        "deleteDone": "Equipo eliminado.",
+        "deleteFailed": "No se pudo eliminar el equipo.",
+        "createDone": "Equipo creado.",
+        "createFailed": "No se pudo crear el equipo.",
+        "loadFailed": "Error al cargar equipos."
+      },
+      "unknownUser": "Usuario desconocido",
+      "ownerLabel": "Propietario",
+      "youLabel": "Tú",
+      "memberLabel": "Miembro",
+      "removeButton": "Eliminar",
+      "selectTeamMessage": "Selecciona un equipo para ver miembros.",
+      "unableToLoad": "No se pueden cargar los equipos.",
+      "selectTeamFirst": "Selecciona primero un equipo.",
+      "enterValidEmail": "Por favor, introduce un email válido.",
+      "enterNewTeamName": "Introduce un nuevo nombre para el equipo.",
+      "enterTeamNameFirst": "Introduce primero el nombre del equipo.",
+      "deleteConfirm": "¿Estás seguro de que quieres eliminar este equipo y todos sus pins?"
+    },
+    "profile": {
+      "title": "Perfil",
+      "heading": "Perfil",
+      "brand": {
+        "logoAlt": "Logotipo de Pinity"
+      },
+      "brandDescription": "Gestiona tu perfil y la configuración de tu suscripción.",
+      "nav": {
+        "pins": "Pines",
+        "profile": "Perfil",
+        "settings": "Ajustes"
+      },
+      "preferences": {
+        "title": "Datos del perfil",
+        "desc": "Mantén actualizados tus datos públicos de perfil."
+      },
+      "description": "Gestiona tus preferencias personales y de facturación.",
+      "displayName": "Apodo",
+      "displayNamePlaceholder": "Añade un nombre amigable",
+      "profileHandle": "Handle de perfil",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Mensaje de estado",
+      "statusPlaceholder": "Haz saber a tus compañeros lo que coleccionas",
+      "allowInvites": "Permitir invitaciones",
+      "allowInvitesDesc": "Permite a colaboradores de confianza añadirte a tableros compartidos.",
+      "invites": {
+        "title": "Permitir invitaciones",
+        "desc": "Permite a colaboradores de confianza añadirte a tableros compartidos."
+      },
+      "subscriptionTitle": "Suscripción y facturación",
+      "subscriptionDesc": "Revisa tu plan actual y gestiona acciones de facturación de forma segura.",
+      "subscription": {
+        "title": "Suscripción y facturación",
+        "desc": "Revisa tu plan actual y gestiona acciones de facturación de forma segura."
+      },
+      "summary": {
+        "currentPlanLabel": "Plan actual",
+        "statusLabel": "Estado de suscripción",
+        "billingCycleLabel": "Ciclo de facturación",
+        "nextBillingLabel": "Próxima fecha de cobro",
+        "currentBadge": "Actual",
+        "planUnknown": "Sin asignar",
+        "noDate": "No disponible",
+        "notes": {
+          "free": "Estás en el plan Starter. Puedes mejorar cuando quieras para desbloquear colaboración avanzada.",
+          "activePortal": "Tu suscripción está activa. Usa las acciones de facturación para gestionar cambios de plan.",
+          "activeNoPortal": "La suscripción está activa, pero el acceso al portal de facturación no está disponible ahora.",
+          "canceled": "Tu suscripción está programada para cancelarse. Mantienes acceso hasta el final del período actual.",
+          "customPortal": "Estás en un plan de pago personalizado. Usa el portal de facturación para gestionar cambios.",
+          "customLimited": "Estás en un plan personalizado, pero la gestión de facturación no está disponible por ahora.",
+          "inactivePro": "Tu plan Pro no está activo en este momento. Suscríbete nuevamente para reactivar la facturación.",
+          "loading": "Cargando detalles de facturación desde el servidor..."
+        }
+      },
+      "status": {
+        "active": "Activa",
+        "trialing": "En prueba",
+        "past_due": "Pago atrasado",
+        "paused": "Pausada",
+        "canceled": "Cancelada",
+        "inactive": "Inactiva",
+        "expired": "Expirada",
+        "unknown": "Desconocido"
+      },
+      "billingCycle": {
+        "monthly": "Mensual",
+        "yearly": "Anual",
+        "unknown": "Sin definir"
+      },
+      "billingPeriodSelector": {
+        "label": "Periodo de facturación del checkout",
+        "note": "Elige cada cuánto quieres que se cobre.",
+        "ariaLabel": "Opciones de periodo de facturación del checkout"
+      },
+      "planStarter": "Starter",
+      "planPro": "Pro",
+      "planStarterMeta": "Para flujos personales y colaboración ligera.",
+      "planProMeta": "Para usuarios avanzados y equipos pequeños.",
+      "plan": {
+        "starter": {
+          "name": "Starter",
+          "price": "Gratis",
+          "meta": "Para flujos personales y colaboración ligera.",
+          "features": {
+            "singleWorkspace": "Un espacio de trabajo",
+            "unlimitedDevices": "Dispositivos ilimitados",
+            "emailSupport": "Soporte por correo estándar"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "US$9 / mes",
+          "meta": "Para usuarios avanzados y equipos pequeños.",
+          "features": {
+            "unlimitedPins": "Pines ilimitados",
+            "collaborationHub": "Hub de colaboración en equipo",
+            "prioritySupport": "Soporte prioritario"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Starter",
+          "free": "Gratis",
+          "basic": "Básico",
+          "pro": "Pro",
+          "team": "Equipo"
+        },
+        "meta": {
+          "default": "Los detalles del plan son gestionados por el administrador del espacio de trabajo.",
+          "features": "Incluye {{count}} funcionalidad(es)",
+          "starter": "Para flujos personales y colaboración ligera.",
+          "free": "Para flujos personales y colaboración ligera.",
+          "pro": "Para usuarios avanzados y equipos en crecimiento.",
+          "team": "Para equipos que requieren flujos compartidos y control."
+        },
+        "price": {
+          "free": "Gratis",
+          "monthly": "{{amount}} / mes",
+          "yearly": "{{amount}} / año",
+          "custom": "Precio personalizado"
+        }
+      },
+      "actions": {
+        "subscribe": "Suscribirse",
+        "upgrade": "Mejorar",
+        "downgrade": "Bajar plan",
+        "cancel": "Cancelar plan",
+        "modifyPlan": "Modificar plan"
+      },
+      "hints": {
+        "starter": "Los usuarios Starter pueden suscribirse o mejorar a Pro.",
+        "portal": "La reducción de plan y la cancelación se gestionan en el portal de facturación.",
+        "cancelOnly": "Puedes programar la cancelación directamente. Otros cambios requieren el portal.",
+        "portalUnavailable": "La gestión de facturación no está disponible temporalmente.",
+        "serverUnavailable": "No se pudieron cargar los datos en vivo de suscripción. Se muestran datos locales guardados.",
+        "inactive": "Tu plan Pro está inactivo. Suscríbete para reactivar la facturación.",
+        "loadingData": "Cargando datos de suscripción en vivo desde el servidor...",
+        "selectPaidPlan": "Selecciona un plan de pago para continuar con el checkout.",
+        "selectedBillingPeriodUnavailable": "El plan seleccionado no está disponible para facturación {{period}}.",
+        "selectAPlan": "Selecciona un plan para comenzar."
+      },
+      "autoRenew": {
+        "title": "Renovación automática",
+        "desc": "Mantén tu plan activo automáticamente al renovarse."
+      },
+      "autoRenewDesc": "Mantén tu plan activo automáticamente al renovarse.",
+      "savePreferences": "Guardar preferencias",
+      "saveDesc": "Los cambios del perfil se guardan en tu cuenta.",
+      "feedback": {
+        "saved": "Perfil actualizado correctamente.",
+        "savedLocal": "Perfil guardado localmente.",
+        "failedLocal": "No se pudo guardar el perfil localmente.",
+        "savedServerLocalFailed": "Se guardó en el servidor, pero falló la sincronización local.",
+        "savedLocalFallback": "Servidor no disponible. Los cambios se guardaron localmente.",
+        "failedServer": "No se pudieron guardar los cambios del perfil.",
+        "checkoutOpened": "El checkout se abrió en una nueva pestaña.",
+        "checkoutUnavailable": "No se puede iniciar el checkout en este momento.",
+        "portalOpened": "El portal de facturación se abrió en una nueva pestaña.",
+        "portalUnavailable": "El portal de facturación no está disponible por ahora.",
+        "cancelScheduled": "La cancelación fue programada.",
+        "cancelFailed": "No se pudo cancelar la suscripción en este momento.",
+        "actionUnavailable": "Esta acción no está disponible para tu estado de plan actual.",
+        "planUnavailable": "El plan seleccionado no está disponible para checkout en este momento.",
+        "billingUnavailable": "La facturación no está disponible temporalmente. Inténtalo más tarde."
+      },
+      "confirm": {
+        "title": "Confirmar acción",
+        "message": "¿Estás seguro?",
+        "confirmButton": "Confirmar",
+        "cancelButton": "Cancelar",
+        "subscribe": {
+          "title": "Iniciar suscripción",
+          "message": "¿Abrir checkout para iniciar el plan seleccionado?"
+        },
+        "upgrade": {
+          "title": "Mejorar plan",
+          "message": "¿Continuar con la mejora de plan para tu cuenta?"
+        },
+        "downgrade": {
+          "title": "Bajar plan",
+          "message": "¿Abrir la gestión de facturación para bajar tu suscripción?"
+        },
+        "cancel": {
+          "title": "Cancelar suscripción",
+          "message": "¿Quieres programar la cancelación de tu suscripción?"
+        },
+        "portal": {
+          "title": "Abrir portal de facturación",
+          "message": "¿Continuar al portal de facturación para gestionar tu suscripción?"
+        }
+      },
+      "planState": {
+        "loading": "Cargando planes disponibles...",
+        "empty": "No hay planes disponibles en este momento.",
+        "unavailable": "No se pudieron cargar los planes de facturación por ahora."
+      },
+      "features": {
+        "unknown": "Los detalles de funcionalidades aparecerán cuando estén disponibles.",
+        "fallback": "{{feature}}",
+        "extension": "Acceso desde la extensión",
+        "unlimited-pins": "Pines ilimitados",
+        "cloud-sync": "Sincronización en la nube",
+        "basic-tagging": "Etiquetado básico",
+        "ai-search": "Búsqueda con IA",
+        "priority-support": "Soporte prioritario",
+        "team-collaboration": "Colaboración en equipo",
+        "admin-panel": "Panel de administración",
+        "role-permissions": "Permisos por roles"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Portal de acceso",
+      "brand": {
+        "logoAlt": "Logotipo de Pinity"
+      },
+      "brandDescription": "Recorta más rápido, mantente organizado y sincroniza tu espacio de trabajo donde navegues.",
+      "tabs": {
+        "ariaLabel": "Secciones de autenticación",
+        "login": "Iniciar sesión",
+        "register": "Registrarse",
+        "forgot": "¿Olvidaste?"
+      },
+      "fields": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña",
+        "confirmPassword": "Confirmar contraseña"
+      },
+      "placeholders": {
+        "name": "Tu nombre completo",
+        "email": "tu@ejemplo.com",
+        "password": "********",
+        "confirmPassword": "Repite la contraseña"
+      },
+      "login": {
+        "welcome": "Bienvenido de nuevo",
+        "instructions": "Autentícate con tu correo para acceder a pines y colecciones.",
+        "submit": "Iniciar sesión",
+        "hint": "Usa tus credenciales"
+      },
+      "register": {
+        "title": "Crear una cuenta",
+        "desc": "Configura tu cuenta de Pinity e invita inspiración a tu flujo de trabajo.",
+        "submit": "Crear cuenta",
+        "terms": "Al crear una cuenta aceptas los términos.",
+        "passwordMismatch": "Las contraseñas no coinciden."
+      },
+      "forgot": {
+        "title": "Restablecer contraseña",
+        "desc": "Introduce tu correo para recibir instrucciones de restablecimiento.",
+        "submit": "Restablecer contraseña",
+        "back": "Volver al inicio de sesión",
+        "success": "Enlace de restablecimiento enviado. Revisa tu bandeja de entrada."
+      },
+      "continueWithGoogle": "Continuar con Google",
+      "continueWithGoogleAria": "Continuar con Google",
+      "or": "O",
+      "language": {
+        "label": "Idioma",
+        "selectAria": "Selector de idioma",
+        "auto": "Auto (sistema)",
+        "usingSystem": "Usando el idioma del sistema: {{lang}}",
+        "preferred": "Idioma preferido: {{lang}}",
+        "languages": {
+          "en-US": "Inglés (EE. UU.)",
+          "en-GB": "Inglés (Reino Unido)",
+          "es-ES": "Español (España)",
+          "es-MX": "Español (México)",
+          "fr-FR": "Francés (Francia)",
+          "pt-BR": "Portugués (Brasil)",
+          "de-DE": "Alemán (Alemania)",
+          "ja-JP": "Japonés (Japón)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Respuesta de inicio de sesión no válida.",
+        "saveSessionFailed": "Inicio de sesión correcto pero no se pudo guardar la sesión.",
+        "fillAllFields": "Por favor completa todos los campos.",
+        "loginFailed": "Error al iniciar sesión. Verifica tus credenciales.",
+        "registerFailed": "Error en el registro. Por favor intenta de nuevo.",
+        "network": "Error de red. Por favor intenta de nuevo.",
+        "popupBlocked": "Popup bloqueado. Permite ventanas emergentes.",
+        "saveLanguage": "No se pudo guardar la preferencia de idioma. Intenta de nuevo.",
+        "enterEmail": "Por favor ingresa tu correo.",
+        "resetFailed": "Error al restablecer. Por favor intenta de nuevo.",
+        "passwordMinLength": "Usa al menos {{min}} caracteres."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Por favor, introduce el token y la nueva contraseña.",
+        "success": "Contraseña actualizada. Por favor, inicia sesión.",
+        "failed": "Error al restablecer.",
+        "networkError": "Error de red. Inténtalo de nuevo."
+      }
+    },
+    "common": {
+      "loading": "Cargando…",
+      "userAvatarAlt": "Avatar del usuario"
+    }
+  },
+  "fr-FR": {
+    "settings": {
+      "title": "Paramètres",
+      "heading": "Paramètres",
+      "brandDescription": "Ajustez vos préférences d’extension",
+      "description": "Ajustez vos préférences d’extension",
+      "storagePreferences": "Préférences de stockage",
+      "storageDescription": "Décidez où Pinity conserve vos données.",
+      "storage": {
+        "title": "Préférences de stockage",
+        "desc": "Décidez où Pinity conserve vos données."
+      },
+      "useSync": {
+        "title": "Utiliser le stockage de synchronisation",
+        "desc": "Synchronisez les broches sur Chrome sur chaque appareil."
+      },
+      "useEncryption": {
+        "title": "Chiffrer les données",
+        "desc": "Protégez les broches enregistrées avec le cryptage côté client."
+      },
+      "maintenance": {
+        "title": "Entretien",
+        "desc": "Tâches de maintenance pour vos broches et données enregistrées."
+      },
+      "clear": "Effacer toutes les pages épinglées",
+      "theme": {
+        "title": "Thème et apparence",
+        "desc": "Prévisualisez instantanément les thèmes tout au long de l’expérience d’extension.",
+        "system": "Valeur par défaut du système",
+        "light": "Lumière",
+        "dark": "Sombre",
+        "contrast": "Contraste élevé"
+      },
+      "reset": {
+        "title": "Réinitialiser les paramètres",
+        "desc": "Restaurez tous les paramètres à leurs valeurs par défaut.",
+        "action": "Réinitialiser"
+      },
+      "language": {
+        "title": "Langue",
+        "desc": "Sélectionnez une langue préférée ou suivez les valeurs par défaut du système.",
+        "preferred": "Langue préférée",
+        "options": {
+          "auto": "Auto (système)",
+          "en-US": "Anglais (États-Unis)",
+          "en-GB": "Anglais (Royaume-Uni)",
+          "es-ES": "Espagnol (Espagne)",
+          "es-MX": "Espagnol (Mexique)",
+          "fr-FR": "Français (France)",
+          "pt-BR": "Portugais (Brésil)",
+          "de-DE": "Allemand (Allemagne)",
+          "ja-JP": "Japonais (Japon)"
+        },
+        "detecting": "Langue du système détectée : {lang}"
+      },
+      "compact": {
+        "title": "Mode compact",
+        "desc": "Réduisez l’espacement pour une présentation de liste plus dense."
+      },
+      "save": "Enregistrer les préférences",
+      "saveDesc": "Les modifications seront appliquées après l’enregistrement.",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "Pinité",
+      "emptyListMessage": "Aucune page épinglée pour l'instant.",
+      "loading": "Chargement...",
+      "errorLoading": "Erreur lors du chargement des broches.",
+      "brandDescription": "Récupérez votre inspiration et revenez instantanément.",
+      "nav": {
+        "pins": "Épingles",
+        "profile": "Profil",
+        "settings": "Paramètres"
+      },
+      "sectionTitle": "Vos pages épinglées",
+      "emailChecking": "Séance de vérification...",
+      "pinCurrent": "Épingler l'onglet actuel",
+      "importPinned": "Importer des onglets épinglés",
+      "manageTeam": "Gérer l'équipe",
+      "savedLinksTitle": "Liens enregistrés",
+      "savedLinksDesc": "Les épingles les plus récentes apparaissent en premier.",
+      "filterPlaceholder": "🔍 Filtrer les épingles par titre ou URL…",
+      "logout": "Se déconnecter",
+      "loaderText": "Chargement…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Chargement…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "Gérer l'équipe",
+      "desc": "Invitez et gérez les membres de l’équipe pour des tableaux partagés.",
+      "create": {
+        "title": "Créer une équipe",
+        "desc": "Créez une nouvelle équipe pour partager des épingles et des tableaux.",
+        "action": "Créer"
+      },
+      "select": {
+        "title": "Sélectionnez une équipe active",
+        "desc": "Choisissez pour quelle équipe agir."
+      },
+      "owner": "Propriétaire",
+      "invite": {
+        "title": "Inviter des membres",
+        "desc": "Envoyez des invitations à vos coéquipiers.",
+        "action": "Inviter"
+      },
+      "chooseTeam": "Choisissez une équipe...",
+      "selectTeamLabel": "Équipe active",
+      "createTeamPlaceholder": "Équipe de conception",
+      "inviteMember": "Inviter un membre",
+      "noMembers": "Aucun membre pour l'instant.",
+      "you": "Toi",
+      "member": "Membre",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Propriétaire",
+      "youLabel": "Vous",
+      "memberLabel": "Membre",
+      "removeButton": "Supprimer",
+      "selectTeamMessage": "Sélectionnez une équipe pour voir les membres.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "Profil",
+      "heading": "Profil",
+      "brand": {
+        "logoAlt": "Logo Pinity"
+      },
+      "brandDescription": "Gérez votre profil et vos paramètres d'abonnement.",
+      "nav": {
+        "pins": "Épingles",
+        "profile": "Profil",
+        "settings": "Paramètres"
+      },
+      "preferences": {
+        "title": "Détails du profil",
+        "desc": "Gardez les détails de votre profil public à jour."
+      },
+      "description": "Gérez vos préférences personnelles et de facturation.",
+      "displayName": "Surnom",
+      "displayNamePlaceholder": "Ajouter un nom convivial",
+      "profileHandle": "Poignée profilée",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Message d'état",
+      "statusPlaceholder": "Faites savoir à vos coéquipiers ce que vous collectionnez",
+      "allowInvites": "Autoriser les invitations de coéquipiers",
+      "allowInvitesDesc": "Laissez des collaborateurs de confiance vous ajouter aux tableaux partagés.",
+      "invites": {
+        "title": "Autoriser les invitations de coéquipiers",
+        "desc": "Laissez des collaborateurs de confiance vous ajouter aux tableaux partagés."
+      },
+      "subscriptionTitle": "Abonnement et facturation",
+      "subscriptionDesc": "Passez en revue votre forfait actuel et gérez les actions de facturation en toute sécurité.",
+      "subscription": {
+        "title": "Abonnement et facturation",
+        "desc": "Passez en revue votre forfait actuel et gérez les actions de facturation en toute sécurité."
+      },
+      "summary": {
+        "currentPlanLabel": "Forfait actuel",
+        "statusLabel": "Statut de l'abonnement",
+        "billingCycleLabel": "Cycle de facturation",
+        "nextBillingLabel": "Prochaine date de facturation",
+        "currentBadge": "Actuel",
+        "planUnknown": "Non attribué",
+        "noDate": "Pas disponible",
+        "notes": {
+          "free": "Vous êtes sur le plan Starter. Effectuez une mise à niveau à tout moment pour débloquer une collaboration avancée.",
+          "activePortal": "Votre abonnement est actif. Utilisez les actions de facturation ci-dessous pour gérer les modifications du forfait.",
+          "activeNoPortal": "Les données d'abonnement sont actives, mais l'accès au portail de facturation n'est pas disponible pour le moment.",
+          "canceled": "Votre abonnement est sur le point d’être annulé. Vous conservez l'accès jusqu'à la fin de la période de facturation en cours.",
+          "customPortal": "Vous bénéficiez d'un forfait payant personnalisé. Utilisez le portail de facturation pour gérer les modifications.",
+          "customLimited": "Vous disposez d'un forfait personnalisé, mais la gestion de la facturation n'est actuellement pas disponible.",
+          "inactivePro": "Votre forfait Pro n'est pas actif actuellement. Abonnez-vous à nouveau pour réactiver la facturation.",
+          "loading": "Chargement des détails de facturation depuis le serveur..."
+        }
+      },
+      "status": {
+        "active": "Actif",
+        "trialing": "Essai",
+        "past_due": "En souffrance",
+        "paused": "En pause",
+        "canceled": "Annulé",
+        "inactive": "Inactif",
+        "expired": "Expiré",
+        "unknown": "Inconnu"
+      },
+      "billingCycle": {
+        "monthly": "Mensuel",
+        "yearly": "Annuel",
+        "unknown": "Non défini"
+      },
+      "billingPeriodSelector": {
+        "label": "Période de facturation du paiement",
+        "note": "Choisissez la fréquence à laquelle vous souhaitez être facturé.",
+        "ariaLabel": "Options de période de facturation de paiement"
+      },
+      "planStarter": "Démarreur",
+      "planPro": "Pro",
+      "planStarterMeta": "Pour les flux de travail personnels et une collaboration légère.",
+      "planProMeta": "Pour les utilisateurs expérimentés et les petites équipes.",
+      "plan": {
+        "starter": {
+          "name": "Démarreur",
+          "price": "Gratuit",
+          "meta": "Pour les flux de travail personnels et une collaboration légère.",
+          "features": {
+            "singleWorkspace": "Espace de travail unique",
+            "unlimitedDevices": "Appareils illimités",
+            "emailSupport": "Assistance par courrier électronique standard"
+          }
+        },
+        "pro": {
+          "name": "Pro",
+          "price": "9$/mois",
+          "meta": "Pour les utilisateurs expérimentés et les petites équipes.",
+          "features": {
+            "unlimitedPins": "Épingles illimitées",
+            "collaborationHub": "Centre de collaboration d'équipe",
+            "prioritySupport": "Assistance prioritaire"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Démarreur",
+          "free": "Gratuit",
+          "basic": "Basique",
+          "pro": "Pro",
+          "team": "Équipe"
+        },
+        "meta": {
+          "default": "Les détails du plan sont gérés par votre administrateur d’espace de travail.",
+          "features": "Comprend {{count}} fonctionnalité(s)",
+          "starter": "Pour les flux de travail personnels et une collaboration légère.",
+          "free": "Pour les flux de travail personnels et une collaboration légère.",
+          "pro": "Pour les utilisateurs expérimentés et les équipes en pleine croissance.",
+          "team": "Pour les équipes qui ont besoin de flux de travail et de contrôles partagés."
+        },
+        "price": {
+          "free": "Gratuit",
+          "monthly": "{{amount}} / mois",
+          "yearly": "{{amount}} / an",
+          "custom": "Tarification personnalisée"
+        }
+      },
+      "actions": {
+        "subscribe": "S'abonner",
+        "upgrade": "Mise à niveau",
+        "downgrade": "Rétrograder",
+        "cancel": "Annuler le forfait",
+        "modifyPlan": "Modifier le plan"
+      },
+      "hints": {
+        "starter": "Les utilisateurs débutants peuvent s'abonner ou passer à Pro.",
+        "portal": "Le déclassement et l'annulation sont gérés via le portail de facturation.",
+        "cancelOnly": "Vous pouvez planifier l'annulation directement. D'autres modifications de facturation nécessitent un accès au portail.",
+        "portalUnavailable": "La gestion de la facturation est temporairement indisponible.",
+        "serverUnavailable": "Les détails de l'abonnement en direct ne sont pas disponibles. Affichage des données locales enregistrées.",
+        "inactive": "Votre forfait Pro est inactif. Abonnez-vous pour réactiver la facturation.",
+        "loadingData": "Chargement des données d'abonnement en direct depuis le serveur...",
+        "selectPaidPlan": "Sélectionnez un forfait payant pour continuer le paiement de l'abonnement.",
+        "selectedBillingPeriodUnavailable": "Le forfait sélectionné n'est pas disponible pour la facturation {{period}}.",
+        "selectAPlan": "Sélectionnez un plan pour commencer."
+      },
+      "autoRenew": {
+        "title": "Abonnement à renouvellement automatique",
+        "desc": "Gardez votre forfait actif automatiquement au moment du renouvellement."
+      },
+      "autoRenewDesc": "Gardez votre forfait actif automatiquement au moment du renouvellement.",
+      "savePreferences": "Enregistrer les préférences",
+      "saveDesc": "Les modifications de profil sont enregistrées sur votre compte.",
+      "feedback": {
+        "saved": "Profil mis à jour avec succès.",
+        "savedLocal": "Profil enregistré localement.",
+        "failedLocal": "Impossible d'enregistrer le profil localement.",
+        "savedServerLocalFailed": "Enregistré sur le serveur, mais la synchronisation locale a échoué.",
+        "savedLocalFallback": "Serveur indisponible. Les modifications ont été enregistrées localement.",
+        "failedServer": "Impossible d'enregistrer les modifications de profil.",
+        "checkoutOpened": "Paiement ouvert dans un nouvel onglet.",
+        "checkoutUnavailable": "Impossible de lancer le paiement pour le moment.",
+        "portalOpened": "Portail de facturation ouvert dans un nouvel onglet.",
+        "portalUnavailable": "Le portail de facturation n'est pas disponible pour le moment.",
+        "cancelScheduled": "L'annulation est programmée.",
+        "cancelFailed": "Impossible d'annuler l'abonnement pour le moment.",
+        "actionUnavailable": "Cette action n'est pas disponible pour l'état actuel de votre plan.",
+        "planUnavailable": "Le plan sélectionné n'est actuellement pas disponible à la caisse.",
+        "billingUnavailable": "La facturation est temporairement indisponible. Veuillez réessayer plus tard."
+      },
+      "confirm": {
+        "title": "Confirmer l'action",
+        "message": "Es-tu sûr?",
+        "confirmButton": "Confirmer",
+        "cancelButton": "Annuler",
+        "subscribe": {
+          "title": "Commencer l'abonnement",
+          "message": "Ouvrir la caisse pour démarrer le plan d'abonnement sélectionné ?"
+        },
+        "upgrade": {
+          "title": "Plan de mise à niveau",
+          "message": "Procéder à l'action de mise à niveau pour votre compte ?"
+        },
+        "downgrade": {
+          "title": "Plan de rétrogradation",
+          "message": "Ouvrir la gestion de la facturation pour rétrograder votre abonnement ?"
+        },
+        "cancel": {
+          "title": "Annuler l'abonnement",
+          "message": "Souhaitez-vous programmer la résiliation de votre abonnement ?"
+        },
+        "portal": {
+          "title": "Portail de facturation ouvert",
+          "message": "Continuer vers le portail de facturation pour gérer votre abonnement ?"
+        }
+      },
+      "planState": {
+        "loading": "Chargement des forfaits disponibles...",
+        "empty": "Aucun plan n'est disponible pour le moment.",
+        "unavailable": "Impossible de charger les plans de facturation pour le moment."
+      },
+      "features": {
+        "unknown": "Les détails des fonctionnalités apparaîtront une fois disponibles.",
+        "fallback": "{{feature}}",
+        "extension": "Accès aux extensions de navigateur",
+        "unlimited-pins": "Épingles illimitées",
+        "cloud-sync": "Synchronisation dans le cloud",
+        "basic-tagging": "Marquage de base",
+        "ai-search": "Recherche IA",
+        "priority-support": "Assistance prioritaire",
+        "team-collaboration": "Collaboration en équipe",
+        "admin-panel": "Panneau d'administration",
+        "role-permissions": "Autorisations de rôle"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Portail d'accès",
+      "brand": {
+        "logoAlt": "Logo Pinity"
+      },
+      "brandDescription": "Découpez plus rapidement, restez organisé et synchronisez votre espace de travail partout où vous naviguez.",
+      "tabs": {
+        "ariaLabel": "Rubriques d'authentification",
+        "login": "Se connecter",
+        "register": "Registre",
+        "forgot": "Oublié"
+      },
+      "fields": {
+        "name": "Nom",
+        "email": "E-mail",
+        "password": "Mot de passe",
+        "confirmPassword": "Confirmez le mot de passe"
+      },
+      "placeholders": {
+        "name": "Votre nom complet",
+        "email": "vous@exemple.com",
+        "password": "********",
+        "confirmPassword": "Répéter le mot de passe"
+      },
+      "login": {
+        "welcome": "Content de te revoir",
+        "instructions": "Authentifiez-vous avec votre e-mail pour accéder aux épingles et aux collections enregistrées.",
+        "submit": "Se connecter",
+        "hint": "Utilisez les identifiants de votre espace de travail"
+      },
+      "register": {
+        "title": "Créer un compte",
+        "desc": "Configurez votre compte Pinity et invitez l'inspiration dans votre flux de travail.",
+        "submit": "Créer un compte",
+        "terms": "En créant un compte, vous acceptez les conditions.",
+        "passwordMismatch": "Les mots de passe ne correspondent pas."
+      },
+      "forgot": {
+        "title": "Réinitialisez votre mot de passe",
+        "desc": "Entrez votre e-mail pour recevoir les instructions de réinitialisation du mot de passe.",
+        "submit": "Réinitialiser le mot de passe",
+        "back": "Retour à la connexion",
+        "success": "Lien de réinitialisation envoyé. Vérifiez votre boîte de réception."
+      },
+      "continueWithGoogle": "Continuer avec Google",
+      "continueWithGoogleAria": "Continuer avec Google",
+      "or": "OU",
+      "language": {
+        "label": "Langue",
+        "selectAria": "Sélecteur de langue",
+        "auto": "Auto (système)",
+        "usingSystem": "Utilisation de la langue du système : {{lang}}",
+        "preferred": "Langue préférée définie sur : {{lang}}",
+        "languages": {
+          "en-US": "Anglais (États-Unis)",
+          "en-GB": "Anglais (Royaume-Uni)",
+          "es-ES": "Espagnol (Espagne)",
+          "es-MX": "Espagnol (Mexique)",
+          "fr-FR": "Français (France)",
+          "pt-BR": "Portugais (Brésil)",
+          "de-DE": "Allemand (Allemagne)",
+          "ja-JP": "Japonais (Japon)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Réponse de connexion invalide.",
+        "saveSessionFailed": "La connexion a réussi mais n'a pas pu enregistrer la session.",
+        "fillAllFields": "Veuillez remplir tous les champs.",
+        "loginFailed": "La connexion a échoué. Veuillez vérifier vos informations d'identification.",
+        "registerFailed": "L'enregistrement a échoué. Veuillez réessayer.",
+        "network": "Erreur réseau. Veuillez réessayer.",
+        "popupBlocked": "Popup bloqué. Veuillez autoriser les popups.",
+        "saveLanguage": "Impossible d'enregistrer les préférences linguistiques. Veuillez réessayer.",
+        "enterEmail": "Veuillez entrer votre email.",
+        "resetFailed": "La réinitialisation a échoué. Veuillez réessayer.",
+        "passwordMinLength": "Utilisez au moins {{min}} caractères."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Mot de passe mis à jour. Veuillez vous connecter.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Chargement…",
+      "userAvatarAlt": "User avatar"
+    }
+  },
+  "pt-BR": {
+    "settings": {
+      "title": "Configurações",
+      "heading": "Configurações",
+      "brandDescription": "Ajuste suas preferências de extensão",
+      "description": "Ajuste suas preferências de extensão",
+      "storagePreferences": "Preferências de armazenamento",
+      "storageDescription": "Decida onde o Pinity mantém seus dados.",
+      "storage": {
+        "title": "Preferências de armazenamento",
+        "desc": "Decida onde o Pinity mantém seus dados."
+      },
+      "useSync": {
+        "title": "Usar armazenamento sincronizado",
+        "desc": "Sincronize pins no Chrome em todos os dispositivos."
+      },
+      "useEncryption": {
+        "title": "Criptografar dados",
+        "desc": "Proteja os pins salvos com criptografia do lado do cliente."
+      },
+      "maintenance": {
+        "title": "Manutenção",
+        "desc": "Tarefas de manutenção para seus pins e dados salvos."
+      },
+      "clear": "Limpar todas as páginas fixadas",
+      "theme": {
+        "title": "Tema e aparência",
+        "desc": "Visualize temas instantaneamente em toda a experiência de extensão.",
+        "system": "Padrão do sistema",
+        "light": "Luz",
+        "dark": "Escuro",
+        "contrast": "Alto contraste"
+      },
+      "reset": {
+        "title": "Redefinir configurações",
+        "desc": "Restaure todas as configurações para seus valores padrão.",
+        "action": "Reiniciar"
+      },
+      "language": {
+        "title": "Linguagem",
+        "desc": "Selecione um idioma preferido ou siga o padrão do sistema.",
+        "preferred": "Idioma preferido",
+        "options": {
+          "auto": "Automático (sistema)",
+          "en-US": "Inglês (EUA)",
+          "en-GB": "Inglês (Reino Unido)",
+          "es-ES": "Espanhol (Espanha)",
+          "es-MX": "Espanhol (México)",
+          "fr-FR": "Francês (França)",
+          "pt-BR": "Português (Brasil)",
+          "de-DE": "Alemão (Alemanha)",
+          "ja-JP": "Japonês (Japão)"
+        },
+        "detecting": "Idioma do sistema detectado: {lang}"
+      },
+      "compact": {
+        "title": "Modo compacto",
+        "desc": "Reduza o espaçamento para um layout de lista mais denso."
+      },
+      "save": "Salvar preferências",
+      "saveDesc": "As alterações serão aplicadas após salvar.",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "Pinidade",
+      "emptyListMessage": "Ainda não há páginas fixadas.",
+      "loading": "Carregando...",
+      "errorLoading": "Erro ao carregar pinos.",
+      "brandDescription": "Reúna sua inspiração e volte instantaneamente.",
+      "nav": {
+        "pins": "Alfinetes",
+        "profile": "Perfil",
+        "settings": "Configurações"
+      },
+      "sectionTitle": "Suas páginas fixadas",
+      "emailChecking": "Verificando sessão...",
+      "pinCurrent": "Fixar guia atual",
+      "importPinned": "Importar guias fixadas",
+      "manageTeam": "Gerenciar equipe",
+      "savedLinksTitle": "Links salvos",
+      "savedLinksDesc": "Os pins mais recentes aparecem primeiro.",
+      "filterPlaceholder": "🔍 Filtre os pins por título ou URL…",
+      "logout": "Sair",
+      "loaderText": "Carregando…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Carregando…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "Gerenciar equipe",
+      "desc": "Convide e gerencie membros da equipe para quadros compartilhados.",
+      "create": {
+        "title": "Crie uma equipe",
+        "desc": "Crie uma nova equipe para compartilhar pins e painéis.",
+        "action": "Criar"
+      },
+      "select": {
+        "title": "Selecione a equipe ativa",
+        "desc": "Escolha em qual equipe atuar em nome."
+      },
+      "owner": "Proprietário",
+      "invite": {
+        "title": "Convidar membros",
+        "desc": "Envie convites para seus colegas de equipe.",
+        "action": "Convidar"
+      },
+      "chooseTeam": "Escolha um time...",
+      "selectTeamLabel": "Equipe ativa",
+      "createTeamPlaceholder": "Esquadrão de design",
+      "inviteMember": "Convidar membro",
+      "noMembers": "Nenhum membro ainda.",
+      "you": "Você",
+      "member": "Membro",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Proprietário",
+      "youLabel": "Você",
+      "memberLabel": "Membro",
+      "removeButton": "Remover",
+      "selectTeamMessage": "Selecione uma equipe para ver os membros.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "Perfil",
+      "heading": "Perfil",
+      "brand": {
+        "logoAlt": "Logotipo Pinity"
+      },
+      "brandDescription": "Gerencie seu perfil e configurações de assinatura.",
+      "nav": {
+        "pins": "Alfinetes",
+        "profile": "Perfil",
+        "settings": "Configurações"
+      },
+      "preferences": {
+        "title": "Detalhes do perfil",
+        "desc": "Mantenha os detalhes do seu perfil público atualizados."
+      },
+      "description": "Gerencie suas preferências pessoais e de faturamento.",
+      "displayName": "Apelido",
+      "displayNamePlaceholder": "Adicione um nome amigável",
+      "profileHandle": "Alça de perfil",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Mensagem de status",
+      "statusPlaceholder": "Deixe os colegas de equipe saberem o que você está coletando",
+      "allowInvites": "Permitir convites de colegas de equipe",
+      "allowInvitesDesc": "Permita que colaboradores confiáveis ​​adicionem você a fóruns compartilhados.",
+      "invites": {
+        "title": "Permitir convites de colegas de equipe",
+        "desc": "Permita que colaboradores confiáveis ​​adicionem você a fóruns compartilhados."
+      },
+      "subscriptionTitle": "Assinatura e faturamento",
+      "subscriptionDesc": "Revise seu plano atual e gerencie as ações de cobrança com segurança.",
+      "subscription": {
+        "title": "Assinatura e faturamento",
+        "desc": "Revise seu plano atual e gerencie as ações de cobrança com segurança."
+      },
+      "summary": {
+        "currentPlanLabel": "Plano atual",
+        "statusLabel": "Status da assinatura",
+        "billingCycleLabel": "Ciclo de faturamento",
+        "nextBillingLabel": "Próxima data de faturamento",
+        "currentBadge": "Atual",
+        "planUnknown": "Não atribuído",
+        "noDate": "Não disponível",
+        "notes": {
+          "free": "Você está no plano Starter. Atualize a qualquer momento para desbloquear colaboração avançada.",
+          "activePortal": "Sua assinatura está ativa. Use as ações de faturamento abaixo para gerenciar alterações no plano.",
+          "activeNoPortal": "Os dados da assinatura estão ativos, mas o acesso ao portal de cobrança não está disponível no momento.",
+          "canceled": "Sua assinatura está definida para ser cancelada. Você mantém o acesso até o término do período de cobrança atual.",
+          "customPortal": "Você está em um plano pago personalizado. Use o portal de cobrança para gerenciar alterações.",
+          "customLimited": "Você está em um plano personalizado, mas o gerenciamento de cobrança não está disponível no momento.",
+          "inactivePro": "Seu plano Pro não está ativo no momento. Assine novamente para reativar o faturamento.",
+          "loading": "Carregando detalhes de cobrança do servidor..."
+        }
+      },
+      "status": {
+        "active": "Ativo",
+        "trialing": "Teste",
+        "past_due": "Vencido",
+        "paused": "Pausado",
+        "canceled": "Cancelado",
+        "inactive": "Inativo",
+        "expired": "Expirado",
+        "unknown": "Desconhecido"
+      },
+      "billingCycle": {
+        "monthly": "Mensal",
+        "yearly": "Anual",
+        "unknown": "Não definido"
+      },
+      "billingPeriodSelector": {
+        "label": "Período de faturamento do checkout",
+        "note": "Escolha com que frequência você deseja ser cobrado.",
+        "ariaLabel": "Opções de período de faturamento do Checkout"
+      },
+      "planStarter": "Iniciante",
+      "planPro": "Pró",
+      "planStarterMeta": "Para fluxos de trabalho pessoais e colaboração leve.",
+      "planProMeta": "Para usuários avançados e equipes pequenas.",
+      "plan": {
+        "starter": {
+          "name": "Iniciante",
+          "price": "Livre",
+          "meta": "Para fluxos de trabalho pessoais e colaboração leve.",
+          "features": {
+            "singleWorkspace": "Espaço de trabalho único",
+            "unlimitedDevices": "Dispositivos ilimitados",
+            "emailSupport": "Suporte por e-mail padrão"
+          }
+        },
+        "pro": {
+          "name": "Pró",
+          "price": "US$ 9/mês",
+          "meta": "Para usuários avançados e equipes pequenas.",
+          "features": {
+            "unlimitedPins": "Pinos ilimitados",
+            "collaborationHub": "Centro de colaboração em equipe",
+            "prioritySupport": "Suporte prioritário"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Iniciante",
+          "free": "Livre",
+          "basic": "Básico",
+          "pro": "Pró",
+          "team": "Equipe"
+        },
+        "meta": {
+          "default": "Os detalhes do plano são gerenciados pelo administrador do seu espaço de trabalho.",
+          "features": "Inclui recursos {{count}}",
+          "starter": "Para fluxos de trabalho pessoais e colaboração leve.",
+          "free": "Para fluxos de trabalho pessoais e colaboração leve.",
+          "pro": "Para usuários avançados e equipes em crescimento.",
+          "team": "Para equipes que precisam de fluxos de trabalho e controles compartilhados."
+        },
+        "price": {
+          "free": "Livre",
+          "monthly": "{{amount}}/mês",
+          "yearly": "{{amount}} / ano",
+          "custom": "Preços personalizados"
+        }
+      },
+      "actions": {
+        "subscribe": "Inscrever-se",
+        "upgrade": "Atualizar",
+        "downgrade": "Downgrade",
+        "cancel": "Cancelar plano",
+        "modifyPlan": "Modificar plano"
+      },
+      "hints": {
+        "starter": "Os usuários iniciantes podem assinar ou atualizar para o Pro.",
+        "portal": "O downgrade e o cancelamento são gerenciados através do portal de cobrança.",
+        "cancelOnly": "Você pode agendar o cancelamento diretamente. Outras alterações de faturamento exigem acesso ao portal.",
+        "portalUnavailable": "O gerenciamento de faturamento está temporariamente indisponível.",
+        "serverUnavailable": "Os detalhes da assinatura ao vivo não estão disponíveis. Mostrando dados locais salvos.",
+        "inactive": "Seu plano Pro está inativo. Assine para reativar o faturamento.",
+        "loadingData": "Carregando dados de assinatura em tempo real do servidor...",
+        "selectPaidPlan": "Selecione um plano pago para continuar com a finalização da assinatura.",
+        "selectedBillingPeriodUnavailable": "O plano selecionado não está disponível para cobrança de {{period}}.",
+        "selectAPlan": "Selecione um plano para começar."
+      },
+      "autoRenew": {
+        "title": "Renovação automática de assinatura",
+        "desc": "Mantenha seu plano ativo automaticamente no momento da renovação."
+      },
+      "autoRenewDesc": "Mantenha seu plano ativo automaticamente no momento da renovação.",
+      "savePreferences": "Salvar preferências",
+      "saveDesc": "As alterações de perfil são salvas em sua conta.",
+      "feedback": {
+        "saved": "Perfil atualizado com sucesso.",
+        "savedLocal": "Perfil salvo localmente.",
+        "failedLocal": "Não foi possível salvar o perfil localmente.",
+        "savedServerLocalFailed": "Salvo no servidor, mas a sincronização local falhou.",
+        "savedLocalFallback": "Servidor indisponível. As alterações foram salvas localmente.",
+        "failedServer": "Não foi possível salvar as alterações do perfil.",
+        "checkoutOpened": "Check-out aberto em uma nova guia.",
+        "checkoutUnavailable": "Não é possível iniciar a finalização da compra agora.",
+        "portalOpened": "Portal de faturamento aberto em uma nova guia.",
+        "portalUnavailable": "O portal de faturamento não está disponível no momento.",
+        "cancelScheduled": "O cancelamento foi agendado.",
+        "cancelFailed": "Não é possível cancelar a assinatura no momento.",
+        "actionUnavailable": "Esta ação não está disponível para o estado atual do seu plano.",
+        "planUnavailable": "O plano selecionado não está disponível para finalização de compra no momento.",
+        "billingUnavailable": "O faturamento está temporariamente indisponível. Por favor, tente novamente mais tarde."
+      },
+      "confirm": {
+        "title": "Confirmar ação",
+        "message": "Tem certeza?",
+        "confirmButton": "Confirmar",
+        "cancelButton": "Cancelar",
+        "subscribe": {
+          "title": "Iniciar assinatura",
+          "message": "Abrir checkout para iniciar o plano de assinatura selecionado?"
+        },
+        "upgrade": {
+          "title": "Plano de atualização",
+          "message": "Continuar com a ação de atualização da sua conta?"
+        },
+        "downgrade": {
+          "title": "Plano de downgrade",
+          "message": "Abrir o gerenciamento de faturamento para fazer downgrade da sua assinatura?"
+        },
+        "cancel": {
+          "title": "Cancelar assinatura",
+          "message": "Quer agendar o cancelamento da sua assinatura?"
+        },
+        "portal": {
+          "title": "Abra o portal de cobrança",
+          "message": "Continuar no portal de cobrança para gerenciar sua assinatura?"
+        }
+      },
+      "planState": {
+        "loading": "Carregando planos disponíveis...",
+        "empty": "Nenhum plano está disponível no momento.",
+        "unavailable": "Não é possível carregar os planos de faturamento no momento."
+      },
+      "features": {
+        "unknown": "Os detalhes dos recursos aparecerão assim que estiverem disponíveis.",
+        "fallback": "{{feature}}",
+        "extension": "Acesso à extensão do navegador",
+        "unlimited-pins": "Pinos ilimitados",
+        "cloud-sync": "Sincronização na nuvem",
+        "basic-tagging": "Marcação básica",
+        "ai-search": "Pesquisa de IA",
+        "priority-support": "Suporte prioritário",
+        "team-collaboration": "Colaboração em equipe",
+        "admin-panel": "Painel de administração",
+        "role-permissions": "Permissões de função"
+      }
+    },
+    "auth": {
+      "title": "Pinity - Portal de acesso",
+      "brand": {
+        "logoAlt": "Logotipo Pinity"
+      },
+      "brandDescription": "Grave com mais rapidez, mantenha-se organizado e sincronize seu espaço de trabalho em qualquer lugar que você navegar.",
+      "tabs": {
+        "ariaLabel": "Seções de autenticação",
+        "login": "Conecte-se",
+        "register": "Cadastre-se",
+        "forgot": "Esquecido"
+      },
+      "fields": {
+        "name": "Nome",
+        "email": "E-mail",
+        "password": "Senha",
+        "confirmPassword": "Confirme sua senha"
+      },
+      "placeholders": {
+        "name": "Seu nome completo",
+        "email": "você@exemplo.com",
+        "password": "********",
+        "confirmPassword": "Repetir senha"
+      },
+      "login": {
+        "welcome": "bem vindo de volta",
+        "instructions": "Autentique-se com seu e-mail para acessar pins e coleções salvas.",
+        "submit": "Conecte-se",
+        "hint": "Use as credenciais do seu espaço de trabalho"
+      },
+      "register": {
+        "title": "Crie uma conta",
+        "desc": "Configure sua conta Pinity e convide inspiração para seu fluxo de trabalho.",
+        "submit": "Criar uma conta",
+        "terms": "Ao criar uma conta você concorda com os termos.",
+        "passwordMismatch": "As senhas não coincidem."
+      },
+      "forgot": {
+        "title": "Redefinir sua senha",
+        "desc": "Digite seu e-mail para receber instruções de redefinição de senha.",
+        "submit": "Redefinir senha",
+        "back": "Voltar ao login",
+        "success": "Link de redefinição enviado. Verifique sua caixa de entrada."
+      },
+      "continueWithGoogle": "Continuar com o Google",
+      "continueWithGoogleAria": "Continuar com o Google",
+      "or": "OU",
+      "language": {
+        "label": "Linguagem",
+        "selectAria": "Seletor de idioma",
+        "auto": "Automático (sistema)",
+        "usingSystem": "Usando linguagem do sistema: {{lang}}",
+        "preferred": "Idioma preferencial definido como: {{lang}}",
+        "languages": {
+          "en-US": "Inglês (EUA)",
+          "en-GB": "Inglês (Reino Unido)",
+          "es-ES": "Espanhol (Espanha)",
+          "es-MX": "Espanhol (México)",
+          "fr-FR": "Francês (França)",
+          "pt-BR": "Português (Brasil)",
+          "de-DE": "Alemão (Alemanha)",
+          "ja-JP": "Japonês (Japão)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Resposta de login inválida.",
+        "saveSessionFailed": "O login foi bem-sucedido, mas não foi possível salvar a sessão.",
+        "fillAllFields": "Por favor preencha todos os campos.",
+        "loginFailed": "Falha no login. Por favor, verifique suas credenciais.",
+        "registerFailed": "Falha no registro. Por favor, tente novamente.",
+        "network": "Erro de rede. Por favor, tente novamente.",
+        "popupBlocked": "Pop-up bloqueado. Por favor, permita pop-ups.",
+        "saveLanguage": "Não foi possível salvar a preferência de idioma. Por favor, tente novamente.",
+        "enterEmail": "Por favor insira seu e-mail.",
+        "resetFailed": "Falha na reinicialização. Por favor, tente novamente.",
+        "passwordMinLength": "Use pelo menos {{min}} caracteres."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Senha atualizada. Faça login.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Carregando…",
+      "userAvatarAlt": "User avatar"
+    }
+  },
+  "de-DE": {
+    "settings": {
+      "title": "Einstellungen",
+      "heading": "Einstellungen",
+      "brandDescription": "Passen Sie Ihre Erweiterungseinstellungen an",
+      "description": "Passen Sie Ihre Erweiterungseinstellungen an",
+      "storagePreferences": "Speichereinstellungen",
+      "storageDescription": "Entscheiden Sie, wo Pinity Ihre Daten speichert.",
+      "storage": {
+        "title": "Speichereinstellungen",
+        "desc": "Entscheiden Sie, wo Pinity Ihre Daten speichert."
+      },
+      "useSync": {
+        "title": "Verwenden Sie den Synchronisierungsspeicher",
+        "desc": "Synchronisieren Sie Pins in Chrome auf jedem Gerät."
+      },
+      "useEncryption": {
+        "title": "Daten verschlüsseln",
+        "desc": "Schützen Sie gespeicherte Pins mit clientseitiger Verschlüsselung."
+      },
+      "maintenance": {
+        "title": "Wartung",
+        "desc": "Wartungsaufgaben für Ihre gespeicherten Pins und Daten."
+      },
+      "clear": "Alle angehefteten Seiten löschen",
+      "theme": {
+        "title": "Thema und Aussehen",
+        "desc": "Zeigen Sie Themes im gesamten Erweiterungserlebnis sofort in der Vorschau an.",
+        "system": "Systemstandard",
+        "light": "Licht",
+        "dark": "Dunkel",
+        "contrast": "Hoher Kontrast"
+      },
+      "reset": {
+        "title": "Einstellungen zurücksetzen",
+        "desc": "Setzen Sie alle Einstellungen auf ihre Standardwerte zurück.",
+        "action": "Zurücksetzen"
+      },
+      "language": {
+        "title": "Sprache",
+        "desc": "Wählen Sie eine bevorzugte Sprache aus oder befolgen Sie die Systemvorgaben.",
+        "preferred": "Bevorzugte Sprache",
+        "options": {
+          "auto": "Automatisch (System)",
+          "en-US": "Englisch (USA)",
+          "en-GB": "Englisch (Vereinigtes Königreich)",
+          "es-ES": "Spanisch (Spanien)",
+          "es-MX": "Spanisch (Mexiko)",
+          "fr-FR": "Französisch (Frankreich)",
+          "pt-BR": "Portugiesisch (Brasilien)",
+          "de-DE": "Deutsch (Deutschland)",
+          "ja-JP": "Japanisch (Japan)"
+        },
+        "detecting": "Erkannte Systemsprache: {lang}"
+      },
+      "compact": {
+        "title": "Kompaktmodus",
+        "desc": "Reduzieren Sie den Abstand für ein dichteres Listenlayout."
+      },
+      "save": "Einstellungen speichern",
+      "saveDesc": "Änderungen werden nach dem Speichern übernommen.",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "Pinity",
+      "emptyListMessage": "Noch keine angepinnten Seiten.",
+      "loading": "Laden...",
+      "errorLoading": "Fehler beim Laden der Pins.",
+      "brandDescription": "Sammeln Sie Ihre Inspiration und springen Sie sofort wieder ein.",
+      "nav": {
+        "pins": "Stifte",
+        "profile": "Profil",
+        "settings": "Einstellungen"
+      },
+      "sectionTitle": "Ihre angehefteten Seiten",
+      "emailChecking": "Sitzung wird überprüft...",
+      "pinCurrent": "Aktuellen Tab anpinnen",
+      "importPinned": "Angeheftete Tabs importieren",
+      "manageTeam": "Team verwalten",
+      "savedLinksTitle": "Gespeicherte Links",
+      "savedLinksDesc": "Die neuesten Pins werden zuerst angezeigt.",
+      "filterPlaceholder": "🔍Pins nach Titel oder URL filtern…",
+      "logout": "Abmelden",
+      "loaderText": "Laden…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Laden…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "Team verwalten",
+      "desc": "Laden Sie Teammitglieder zu gemeinsamen Boards ein und verwalten Sie diese.",
+      "create": {
+        "title": "Bilden Sie ein Team",
+        "desc": "Erstellen Sie ein neues Team, um Pins und Boards zu teilen.",
+        "action": "Erstellen"
+      },
+      "select": {
+        "title": "Aktives Team auswählen",
+        "desc": "Wählen Sie aus, in welchem ​​Namen Sie handeln möchten."
+      },
+      "owner": "Eigentümer",
+      "invite": {
+        "title": "Mitglieder einladen",
+        "desc": "Senden Sie Einladungen an Ihre Teamkollegen.",
+        "action": "Einladen"
+      },
+      "chooseTeam": "Wählen Sie ein Team...",
+      "selectTeamLabel": "Aktives Team",
+      "createTeamPlaceholder": "Design-Trupp",
+      "inviteMember": "Mitglied einladen",
+      "noMembers": "Noch keine Mitglieder.",
+      "you": "Du",
+      "member": "Mitglied",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Eigentümer",
+      "youLabel": "Du",
+      "memberLabel": "Mitglied",
+      "removeButton": "Entfernen",
+      "selectTeamMessage": "Wähle ein Team, um die Mitglieder zu sehen.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "Profil",
+      "heading": "Profil",
+      "brand": {
+        "logoAlt": "Pinity-Logo"
+      },
+      "brandDescription": "Verwalten Sie Ihre Profil- und Abonnementeinstellungen.",
+      "nav": {
+        "pins": "Stifte",
+        "profile": "Profil",
+        "settings": "Einstellungen"
+      },
+      "preferences": {
+        "title": "Profildetails",
+        "desc": "Halten Sie die Details Ihres öffentlichen Profils auf dem neuesten Stand."
+      },
+      "description": "Verwalten Sie Ihre persönlichen und Rechnungseinstellungen.",
+      "displayName": "Spitzname",
+      "displayNamePlaceholder": "Fügen Sie einen benutzerfreundlichen Namen hinzu",
+      "profileHandle": "Profilgriff",
+      "profileHandlePlaceholder": "@Pinity-pro",
+      "statusMessage": "Statusmeldung",
+      "statusPlaceholder": "Teilen Sie Ihren Teamkollegen mit, was Sie sammeln",
+      "allowInvites": "Einladungen von Teamkollegen zulassen",
+      "allowInvitesDesc": "Lassen Sie sich von vertrauenswürdigen Mitarbeitern zu freigegebenen Foren hinzufügen.",
+      "invites": {
+        "title": "Einladungen von Teamkollegen zulassen",
+        "desc": "Lassen Sie sich von vertrauenswürdigen Mitarbeitern zu freigegebenen Foren hinzufügen."
+      },
+      "subscriptionTitle": "Abonnement und Abrechnung",
+      "subscriptionDesc": "Überprüfen Sie Ihren aktuellen Plan und verwalten Sie Abrechnungsvorgänge sicher.",
+      "subscription": {
+        "title": "Abonnement und Abrechnung",
+        "desc": "Überprüfen Sie Ihren aktuellen Plan und verwalten Sie Abrechnungsvorgänge sicher."
+      },
+      "summary": {
+        "currentPlanLabel": "Aktueller Plan",
+        "statusLabel": "Abonnementstatus",
+        "billingCycleLabel": "Abrechnungszyklus",
+        "nextBillingLabel": "Nächstes Rechnungsdatum",
+        "currentBadge": "Aktuell",
+        "planUnknown": "Nicht zugewiesen",
+        "noDate": "Nicht verfügbar",
+        "notes": {
+          "free": "Sie nutzen den Starter-Plan. Upgraden Sie jederzeit, um erweiterte Zusammenarbeit freizuschalten.",
+          "activePortal": "Ihr Abonnement ist aktiv. Verwenden Sie die folgenden Abrechnungsaktionen, um Planänderungen zu verwalten.",
+          "activeNoPortal": "Die Abonnementdaten sind aktiv, aber der Zugriff auf das Abrechnungsportal ist derzeit nicht verfügbar.",
+          "canceled": "Ihr Abonnement wird gekündigt. Sie behalten den Zugriff bis zum Ende des aktuellen Abrechnungszeitraums.",
+          "customPortal": "Sie nutzen einen individuell bezahlten Plan. Nutzen Sie das Abrechnungsportal, um Änderungen zu verwalten.",
+          "customLimited": "Sie nutzen einen benutzerdefinierten Plan, aber die Abrechnungsverwaltung ist derzeit nicht verfügbar.",
+          "inactivePro": "Ihr Pro-Plan ist derzeit nicht aktiv. Abonnieren Sie erneut, um die Abrechnung wieder zu aktivieren.",
+          "loading": "Rechnungsdetails werden vom Server geladen..."
+        }
+      },
+      "status": {
+        "active": "Aktiv",
+        "trialing": "Versuch",
+        "past_due": "Überfällig",
+        "paused": "Angehalten",
+        "canceled": "Abgesagt",
+        "inactive": "Inaktiv",
+        "expired": "Abgelaufen",
+        "unknown": "Unbekannt"
+      },
+      "billingCycle": {
+        "monthly": "Monatlich",
+        "yearly": "Jährlich",
+        "unknown": "Nicht festgelegt"
+      },
+      "billingPeriodSelector": {
+        "label": "Abrechnungszeitraum an der Kasse",
+        "note": "Wählen Sie aus, wie oft Sie eine Rechnung erhalten möchten.",
+        "ariaLabel": "Optionen für den Abrechnungszeitraum an der Kasse"
+      },
+      "planStarter": "Anlasser",
+      "planPro": "Profi",
+      "planStarterMeta": "Für persönliche Arbeitsabläufe und unkomplizierte Zusammenarbeit.",
+      "planProMeta": "Für Power-User und kleine Teams.",
+      "plan": {
+        "starter": {
+          "name": "Anlasser",
+          "price": "Frei",
+          "meta": "Für persönliche Arbeitsabläufe und unkomplizierte Zusammenarbeit.",
+          "features": {
+            "singleWorkspace": "Einzelner Arbeitsbereich",
+            "unlimitedDevices": "Unbegrenzte Anzahl an Geräten",
+            "emailSupport": "Standard-E-Mail-Support"
+          }
+        },
+        "pro": {
+          "name": "Profi",
+          "price": "9 $/Monat",
+          "meta": "Für Power-User und kleine Teams.",
+          "features": {
+            "unlimitedPins": "Unbegrenzte Pins",
+            "collaborationHub": "Hub für Teamzusammenarbeit",
+            "prioritySupport": "Vorrangiger Support"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "Anlasser",
+          "free": "Frei",
+          "basic": "Basic",
+          "pro": "Profi",
+          "team": "Team"
+        },
+        "meta": {
+          "default": "Die Plandetails werden von Ihrem Workspace-Administrator verwaltet.",
+          "features": "Enthält {{count}} Funktion(en)",
+          "starter": "Für persönliche Arbeitsabläufe und unkomplizierte Zusammenarbeit.",
+          "free": "Für persönliche Arbeitsabläufe und unkomplizierte Zusammenarbeit.",
+          "pro": "Für Power-User und wachsende Teams.",
+          "team": "Für Teams, die gemeinsame Arbeitsabläufe und Kontrollen benötigen."
+        },
+        "price": {
+          "free": "Frei",
+          "monthly": "{{amount}} / Monat",
+          "yearly": "{{amount}} / Jahr",
+          "custom": "Individuelle Preise"
+        }
+      },
+      "actions": {
+        "subscribe": "Abonnieren",
+        "upgrade": "Upgrade",
+        "downgrade": "Downgrade",
+        "cancel": "Plan kündigen",
+        "modifyPlan": "Plan ändern"
+      },
+      "hints": {
+        "starter": "Starter-Benutzer können ein Abonnement oder ein Upgrade auf Pro abschließen.",
+        "portal": "Downgrade und Stornierung werden über das Abrechnungsportal verwaltet.",
+        "cancelOnly": "Sie können die Stornierung direkt vereinbaren. Für andere Abrechnungsänderungen ist ein Portalzugang erforderlich.",
+        "portalUnavailable": "Die Abrechnungsverwaltung ist vorübergehend nicht verfügbar.",
+        "serverUnavailable": "Details zum Live-Abonnement sind nicht verfügbar. Gespeicherte lokale Daten werden angezeigt.",
+        "inactive": "Ihr Pro-Plan ist inaktiv. Abonnieren Sie, um die Abrechnung wieder zu aktivieren.",
+        "loadingData": "Live-Abonnementdaten werden vom Server geladen...",
+        "selectPaidPlan": "Wählen Sie einen kostenpflichtigen Plan aus, um mit dem Bezahlen des Abonnements fortzufahren.",
+        "selectedBillingPeriodUnavailable": "Der ausgewählte Plan ist für die {{period}}-Abrechnung nicht verfügbar.",
+        "selectAPlan": "Wähle einen Plan aus, um zu starten."
+      },
+      "autoRenew": {
+        "title": "Abonnement automatisch verlängern",
+        "desc": "Halten Sie Ihren Plan zum Zeitpunkt der Verlängerung automatisch aktiv."
+      },
+      "autoRenewDesc": "Halten Sie Ihren Plan zum Zeitpunkt der Verlängerung automatisch aktiv.",
+      "savePreferences": "Einstellungen speichern",
+      "saveDesc": "Profiländerungen werden in Ihrem Konto gespeichert.",
+      "feedback": {
+        "saved": "Profil erfolgreich aktualisiert.",
+        "savedLocal": "Profil lokal gespeichert.",
+        "failedLocal": "Profil konnte nicht lokal gespeichert werden.",
+        "savedServerLocalFailed": "Auf dem Server gespeichert, aber die lokale Synchronisierung ist fehlgeschlagen.",
+        "savedLocalFallback": "Server nicht verfügbar. Änderungen wurden lokal gespeichert.",
+        "failedServer": "Profiländerungen können nicht gespeichert werden.",
+        "checkoutOpened": "Der Checkout wurde in einem neuen Tab geöffnet.",
+        "checkoutUnavailable": "Der Checkout kann derzeit nicht gestartet werden.",
+        "portalOpened": "Das Abrechnungsportal wurde in einem neuen Tab geöffnet.",
+        "portalUnavailable": "Das Abrechnungsportal ist derzeit nicht verfügbar.",
+        "cancelScheduled": "Die Stornierung ist geplant.",
+        "cancelFailed": "Das Abonnement kann derzeit nicht gekündigt werden.",
+        "actionUnavailable": "Diese Aktion ist für Ihren aktuellen Planstatus nicht verfügbar.",
+        "planUnavailable": "Der ausgewählte Plan ist derzeit nicht zum Auschecken verfügbar.",
+        "billingUnavailable": "Die Abrechnung ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später noch einmal."
+      },
+      "confirm": {
+        "title": "Aktion bestätigen",
+        "message": "Bist du sicher?",
+        "confirmButton": "Bestätigen",
+        "cancelButton": "Stornieren",
+        "subscribe": {
+          "title": "Abonnement starten",
+          "message": "Zur Kasse gehen, um das ausgewählte Abonnement zu starten?"
+        },
+        "upgrade": {
+          "title": "Upgrade-Plan",
+          "message": "Mit der Upgrade-Aktion für Ihr Konto fortfahren?"
+        },
+        "downgrade": {
+          "title": "Downgrade-Plan",
+          "message": "Öffnen Sie die Rechnungsverwaltung, um Ihr Abonnement herunterzustufen?"
+        },
+        "cancel": {
+          "title": "Abo kündigen",
+          "message": "Möchten Sie die Kündigung Ihres Abonnements vereinbaren?"
+        },
+        "portal": {
+          "title": "Abrechnungsportal öffnen",
+          "message": "Mit dem Abrechnungsportal fortfahren, um Ihr Abonnement zu verwalten?"
+        }
+      },
+      "planState": {
+        "loading": "Verfügbare Pläne werden geladen...",
+        "empty": "Derzeit sind keine Pläne verfügbar.",
+        "unavailable": "Die Abrechnungspläne können derzeit nicht geladen werden."
+      },
+      "features": {
+        "unknown": "Funktionsdetails werden angezeigt, sobald sie verfügbar sind.",
+        "fallback": "{{feature}}",
+        "extension": "Zugriff auf Browsererweiterungen",
+        "unlimited-pins": "Unbegrenzte Pins",
+        "cloud-sync": "Cloud-Synchronisierung",
+        "basic-tagging": "Grundlegendes Tagging",
+        "ai-search": "KI-Suche",
+        "priority-support": "Vorrangiger Support",
+        "team-collaboration": "Teamzusammenarbeit",
+        "admin-panel": "Admin-Panel",
+        "role-permissions": "Rollenberechtigungen"
+      }
+    },
+    "auth": {
+      "title": "Pinity – Zugangsportal",
+      "brand": {
+        "logoAlt": "Pinity-Logo"
+      },
+      "brandDescription": "Schneiden Sie schneller, bleiben Sie organisiert und synchronisieren Sie Ihren Arbeitsbereich überall dort, wo Sie surfen.",
+      "tabs": {
+        "ariaLabel": "Abschnitte zur Authentifizierung",
+        "login": "Login",
+        "register": "Registrieren",
+        "forgot": "Vergessen"
+      },
+      "fields": {
+        "name": "Name",
+        "email": "E-Mail",
+        "password": "Passwort",
+        "confirmPassword": "Passwort bestätigen"
+      },
+      "placeholders": {
+        "name": "Ihr vollständiger Name",
+        "email": "you@example.com",
+        "password": "********",
+        "confirmPassword": "Passwort wiederholen"
+      },
+      "login": {
+        "welcome": "Willkommen zurück",
+        "instructions": "Authentifizieren Sie sich mit Ihrer E-Mail-Adresse, um auf gespeicherte Pins und Sammlungen zuzugreifen.",
+        "submit": "Login",
+        "hint": "Verwenden Sie Ihre Workspace-Anmeldeinformationen"
+      },
+      "register": {
+        "title": "Ein Konto erstellen",
+        "desc": "Richten Sie Ihr Pinity-Konto ein und lassen Sie sich in Ihren Arbeitsablauf inspirieren.",
+        "submit": "Benutzerkonto erstellen",
+        "terms": "Durch die Erstellung eines Kontos stimmen Sie den Bedingungen zu.",
+        "passwordMismatch": "Passwörter stimmen nicht überein."
+      },
+      "forgot": {
+        "title": "Setzen Sie Ihr Passwort zurück",
+        "desc": "Geben Sie Ihre E-Mail-Adresse ein, um Anweisungen zum Zurücksetzen des Passworts zu erhalten.",
+        "submit": "Passwort zurücksetzen",
+        "back": "Zurück zum Login",
+        "success": "Link zum Zurücksetzen gesendet. Überprüfen Sie Ihren Posteingang."
+      },
+      "continueWithGoogle": "Weiter mit Google",
+      "continueWithGoogleAria": "Weiter mit Google",
+      "or": "ODER",
+      "language": {
+        "label": "Sprache",
+        "selectAria": "Sprachauswahl",
+        "auto": "Automatisch (System)",
+        "usingSystem": "Systemsprache verwenden: {{lang}}",
+        "preferred": "Bevorzugte Sprache eingestellt auf: {{lang}}",
+        "languages": {
+          "en-US": "Englisch (USA)",
+          "en-GB": "Englisch (Vereinigtes Königreich)",
+          "es-ES": "Spanisch (Spanien)",
+          "es-MX": "Spanisch (Mexiko)",
+          "fr-FR": "Französisch (Frankreich)",
+          "pt-BR": "Portugiesisch (Brasilien)",
+          "de-DE": "Deutsch (Deutschland)",
+          "ja-JP": "Japanisch (Japan)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "Ungültige Anmeldeantwort.",
+        "saveSessionFailed": "Die Anmeldung war erfolgreich, die Sitzung konnte jedoch nicht gespeichert werden.",
+        "fillAllFields": "Bitte füllen Sie alle Felder aus.",
+        "loginFailed": "Fehler bei der Anmeldung. Bitte überprüfen Sie Ihre Anmeldedaten.",
+        "registerFailed": "Die Registrierung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        "network": "Netzwerkfehler. Bitte versuchen Sie es erneut.",
+        "popupBlocked": "Popup blockiert. Bitte erlauben Sie Popups.",
+        "saveLanguage": "Die Spracheinstellung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+        "enterEmail": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
+        "resetFailed": "Zurücksetzen fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        "passwordMinLength": "Verwenden Sie mindestens {{min}} Zeichen."
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Passwort aktualisiert. Bitte einloggen.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Laden…",
+      "userAvatarAlt": "User avatar"
+    }
+  },
+  "ja-JP": {
+    "settings": {
+      "title": "設定",
+      "heading": "設定",
+      "brandDescription": "拡張機能の設定を調整する",
+      "description": "拡張機能の設定を調整する",
+      "storagePreferences": "ストレージ設定",
+      "storageDescription": "Pinity がデータを保管する場所を決定します。",
+      "storage": {
+        "title": "ストレージ設定",
+        "desc": "Pinity がデータを保管する場所を決定します。"
+      },
+      "useSync": {
+        "title": "同期ストレージを使用する",
+        "desc": "すべてのデバイスの Chrome 全体でピンを同期します。"
+      },
+      "useEncryption": {
+        "title": "データの暗号化",
+        "desc": "保存されたピンをクライアント側の暗号化で保護します。"
+      },
+      "maintenance": {
+        "title": "メンテナンス",
+        "desc": "保存したピンとデータのメンテナンス タスク。"
+      },
+      "clear": "固定されたページをすべてクリアする",
+      "theme": {
+        "title": "テーマと外観",
+        "desc": "拡張機能エクスペリエンス全体でテーマを瞬時にプレビューします。",
+        "system": "システムのデフォルト",
+        "light": "ライト",
+        "dark": "暗い",
+        "contrast": "ハイコントラスト"
+      },
+      "reset": {
+        "title": "設定をリセットする",
+        "desc": "すべての設定をデフォルト値に戻します。",
+        "action": "リセット"
+      },
+      "language": {
+        "title": "言語",
+        "desc": "優先言語を選択するか、システムのデフォルトに従います。",
+        "preferred": "優先言語",
+        "options": {
+          "auto": "自動 (システム)",
+          "en-US": "英語 (米国)",
+          "en-GB": "英語 (英国)",
+          "es-ES": "スペイン語 (スペイン)",
+          "es-MX": "スペイン語 (メキシコ)",
+          "fr-FR": "フランス語 (フランス)",
+          "pt-BR": "ポルトガル語 (ブラジル)",
+          "de-DE": "ドイツ語 (ドイツ)",
+          "ja-JP": "日本語 (日本)"
+        },
+        "detecting": "検出されたシステム言語: {lang}"
+      },
+      "compact": {
+        "title": "コンパクトモード",
+        "desc": "リストのレイアウトを密にするために間隔を狭めます。"
+      },
+      "save": "設定を保存する",
+      "saveDesc": "変更は保存後に適用されます。",
+      "feedback": {
+        "syncUpdated": "Sync setting updated.",
+        "syncFailed": "Failed to update sync setting.",
+        "encryptionUpdated": "Encryption setting updated.",
+        "encryptionFailed": "Failed to update encryption setting.",
+        "resetDone": "Settings reset to default.",
+        "resetFailed": "Failed to reset settings.",
+        "cleared": "All pinned pages cleared.",
+        "saved": "Settings saved and applied.",
+        "saveFailed": "Failed to save settings.",
+        "languageUpdated": "Language updated.",
+        "languageFailed": "Failed to save language setting."
+      }
+    },
+    "popup": {
+      "title": "ピニティ",
+      "emptyListMessage": "まだ固定されたページはありません。",
+      "loading": "読み込み中...",
+      "errorLoading": "ピンのロード中にエラーが発生しました。",
+      "brandDescription": "インスピレーションを集めて、すぐに元に戻りましょう。",
+      "nav": {
+        "pins": "ピン",
+        "profile": "プロフィール",
+        "settings": "設定"
+      },
+      "sectionTitle": "固定したページ",
+      "emailChecking": "セッションを確認中...",
+      "pinCurrent": "現在のタブを固定する",
+      "importPinned": "固定されたタブをインポートする",
+      "manageTeam": "チームの管理",
+      "savedLinksTitle": "保存されたリンク",
+      "savedLinksDesc": "最新のピンが最初に表示されます。",
+      "filterPlaceholder": "🔍 タイトルまたは URL でピンをフィルタリング…",
+      "logout": "ログアウト",
+      "loaderText": "読み込み中…",
+      "remove": "Remove",
+      "loggedInAs": "Logged in as: {email}",
+      "unknownSource": "Unknown source",
+      "offlineMode": "⚡ Offline mode — showing cached pins.",
+      "feedback": {
+        "loadTeamsFailed": "Failed to load teams.",
+        "loadPinsFailed": "Failed to load pins. Try again.",
+        "alreadySaved": "All your pinned tabs are already saved.",
+        "planLimitReached": "You've reached the free plan limit (5 pins). Upgrade to Pro to add more.",
+        "planLimitPartial": "Free plan allows {remaining} more pin(s). Only the first {remaining} will be imported.",
+        "imported": "Imported {count} of {total} tab(s).",
+        "importedWithFailures": "Imported {count} of {total} tab(s) ({failed} failed).",
+        "importFailed": "Failed to import pinned tabs.",
+        "notLoggedIn": "You are not logged in.",
+        "noActiveTab": "No active tab found.",
+        "pinFailed": "Failed to save this tab.",
+        "pinError": "Something went wrong saving the tab.",
+        "pinRemoved": "Pin removed.",
+        "deleteError": "Failed to delete pin.",
+        "loading": "Loading…",
+        "loadingTeams": "Loading teams…",
+        "loadingPins": "Loading pins…",
+        "importingTabs": "Importing pinned tabs…",
+        "pinningTab": "Pinning current tab…",
+        "removingPin": "Removing pin…",
+        "noMatches": "No matching pins."
+      }
+    },
+    "manageTeam": {
+      "heading": "チームの管理",
+      "desc": "共有ボードにチームメンバーを招待して管理します。",
+      "create": {
+        "title": "チームを作成する",
+        "desc": "新しいチームを作成してピンとボードを共有します。",
+        "action": "作成する"
+      },
+      "select": {
+        "title": "アクティブなチームを選択してください",
+        "desc": "どのチームを代表して行動するかを選択します。"
+      },
+      "owner": "所有者",
+      "invite": {
+        "title": "メンバーを招待する",
+        "desc": "チームメイトに招待状を送信します。",
+        "action": "招待する"
+      },
+      "chooseTeam": "チームを選択してください...",
+      "selectTeamLabel": "アクティブなチーム",
+      "createTeamPlaceholder": "デザインチーム",
+      "inviteMember": "メンバーを招待する",
+      "noMembers": "まだメンバーがいません。",
+      "you": "あなた",
+      "member": "メンバー",
+      "feedback": {
+        "removeFailed": "Failed to remove member.",
+        "inviteSent": "Invite sent.",
+        "inviteFailed": "Failed to send invite.",
+        "renameDone": "Team renamed.",
+        "renameFailed": "Could not rename the team.",
+        "deleteDone": "Team deleted.",
+        "deleteFailed": "Could not delete the team.",
+        "createDone": "Team created.",
+        "createFailed": "Could not create the team.",
+        "loadFailed": "Failed to load teams."
+      },
+      "unknownUser": "Unknown user",
+      "ownerLabel": "Owner",
+      "youLabel": "You",
+      "memberLabel": "Member",
+      "removeButton": "Remove",
+      "selectTeamMessage": "Select a team to see members.",
+      "unableToLoad": "Unable to load teams.",
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins?"
+    },
+    "profile": {
+      "title": "プロフィール",
+      "heading": "プロフィール",
+      "brand": {
+        "logoAlt": "ピニティのロゴ"
+      },
+      "brandDescription": "プロフィールとサブスクリプション設定を管理します。",
+      "nav": {
+        "pins": "ピン",
+        "profile": "プロフィール",
+        "settings": "設定"
+      },
+      "preferences": {
+        "title": "プロフィールの詳細",
+        "desc": "公開プロフィールの詳細を最新の状態に保ちます。"
+      },
+      "description": "個人設定と請求設定を管理します。",
+      "displayName": "ニックネーム",
+      "displayNamePlaceholder": "わかりやすい名前を追加する",
+      "profileHandle": "プロファイルハンドル",
+      "profileHandlePlaceholder": "@ピニティプロ",
+      "statusMessage": "ステータスメッセージ",
+      "statusPlaceholder": "何を収集しているのかをチームメイトに知らせる",
+      "allowInvites": "チームメイトの招待を許可する",
+      "allowInvitesDesc": "信頼できるコラボレーターにあなたを共有ボードに追加してもらいましょう。",
+      "invites": {
+        "title": "チームメイトの招待を許可する",
+        "desc": "信頼できるコラボレーターにあなたを共有ボードに追加してもらいましょう。"
+      },
+      "subscriptionTitle": "サブスクリプションと請求",
+      "subscriptionDesc": "現在のプランを確認し、請求アクションを安全に管理してください。",
+      "subscription": {
+        "title": "サブスクリプションと請求",
+        "desc": "現在のプランを確認し、請求アクションを安全に管理してください。"
+      },
+      "summary": {
+        "currentPlanLabel": "現在の計画",
+        "statusLabel": "購読ステータス",
+        "billingCycleLabel": "請求サイクル",
+        "nextBillingLabel": "次回の請求日",
+        "currentBadge": "現在",
+        "planUnknown": "未割り当て",
+        "noDate": "利用不可",
+        "notes": {
+          "free": "あなたはスターター プランを利用しています。いつでもアップグレードして、高度なコラボレーションを実現しましょう。",
+          "activePortal": "サブスクリプションは有効です。プランの変更を管理するには、以下の請求アクションを使用します。",
+          "activeNoPortal": "サブスクリプション データはアクティブですが、現在、請求ポータルへのアクセスは利用できません。",
+          "canceled": "サブスクリプションはキャンセルされるように設定されています。現在の請求期間が終了するまでアクセスし続けます。",
+          "customPortal": "カスタム有料プランをご利用中です。変更を管理するには、請求ポータルを使用します。",
+          "customLimited": "カスタム プランを利用していますが、現在請求管理は利用できません。",
+          "inactivePro": "Pro プランは現在アクティブではありません。請求を再開するには、再度購読してください。",
+          "loading": "サーバーから請求の詳細をロードしています..."
+        }
+      },
+      "status": {
+        "active": "アクティブ",
+        "trialing": "トライアル中",
+        "past_due": "期限を過ぎた",
+        "paused": "一時停止中",
+        "canceled": "キャンセル",
+        "inactive": "非アクティブ",
+        "expired": "期限切れ",
+        "unknown": "未知"
+      },
+      "billingCycle": {
+        "monthly": "毎月",
+        "yearly": "毎年",
+        "unknown": "未設定"
+      },
+      "billingPeriodSelector": {
+        "label": "チェックアウトの請求期間",
+        "note": "請求される頻度を選択します。",
+        "ariaLabel": "チェックアウトの請求期間オプション"
+      },
+      "planStarter": "スターター",
+      "planPro": "プロ",
+      "planStarterMeta": "個人的なワークフローと軽量のコラボレーション向け。",
+      "planProMeta": "パワー ユーザーおよび小規模チーム向け。",
+      "plan": {
+        "starter": {
+          "name": "スターター",
+          "price": "無料",
+          "meta": "個人的なワークフローと軽量のコラボレーション向け。",
+          "features": {
+            "singleWorkspace": "単一のワークスペース",
+            "unlimitedDevices": "無制限のデバイス",
+            "emailSupport": "標準メールサポート"
+          }
+        },
+        "pro": {
+          "name": "プロ",
+          "price": "9ドル/月",
+          "meta": "パワー ユーザーおよび小規模チーム向け。",
+          "features": {
+            "unlimitedPins": "無制限のピン",
+            "collaborationHub": "チームコラボレーションハブ",
+            "prioritySupport": "優先サポート"
+          }
+        },
+        "labels": {
+          "dynamic": "{{name}}",
+          "starter": "スターター",
+          "free": "無料",
+          "basic": "基本",
+          "pro": "プロ",
+          "team": "チーム"
+        },
+        "meta": {
+          "default": "プランの詳細は、ワークスペース管理者によって管理されます。",
+          "features": "{{count}} 機能が含まれています",
+          "starter": "個人的なワークフローと軽量のコラボレーション向け。",
+          "free": "個人的なワークフローと軽量のコラボレーション向け。",
+          "pro": "パワーユーザーと成長中のチーム向け。",
+          "team": "共有ワークフローとコントロールが必要なチーム向け。"
+        },
+        "price": {
+          "free": "無料",
+          "monthly": "{{amount}} / 月",
+          "yearly": "{{amount}} / 年",
+          "custom": "カスタム価格設定"
+        }
+      },
+      "actions": {
+        "subscribe": "購読する",
+        "upgrade": "アップグレード",
+        "downgrade": "ダウングレード",
+        "cancel": "プランをキャンセルする",
+        "modifyPlan": "プランを変更"
+      },
+      "hints": {
+        "starter": "スターター ユーザーはサブスクライブするか、Pro にアップグレードできます。",
+        "portal": "ダウングレードとキャンセルは、請求ポータルを通じて管理されます。",
+        "cancelOnly": "キャンセルを直接スケジュールできます。その他の請求変更にはポータルへのアクセスが必要です。",
+        "portalUnavailable": "請求管理は一時的に利用できなくなります。",
+        "serverUnavailable": "ライブ サブスクリプションの詳細は利用できません。保存されたローカル データを表示します。",
+        "inactive": "Pro プランは非アクティブです。請求を再開するには購読してください。",
+        "loadingData": "ライブ サブスクリプション データをサーバーからロードしています...",
+        "selectPaidPlan": "有料プランを選択してサブスクリプションのチェックアウトを続行します。",
+        "selectedBillingPeriodUnavailable": "選択したプランは {{period}} の請求では利用できません。",
+        "selectAPlan": "プランを選択してください。"
+      },
+      "autoRenew": {
+        "title": "自動更新サブスクリプション",
+        "desc": "更新時にプランを自動的にアクティブな状態に保ちます。"
+      },
+      "autoRenewDesc": "更新時にプランを自動的にアクティブな状態に保ちます。",
+      "savePreferences": "設定を保存する",
+      "saveDesc": "プロフィールの変更はアカウントに保存されます。",
+      "feedback": {
+        "saved": "プロファイルが正常に更新されました。",
+        "savedLocal": "プロファイルはローカルに保存されました。",
+        "failedLocal": "プロファイルをローカルに保存できませんでした。",
+        "savedServerLocalFailed": "サーバーに保存されましたが、ローカル同期に失敗しました。",
+        "savedLocalFallback": "サーバーが利用できません。変更はローカルに保存されました。",
+        "failedServer": "プロファイルの変更を保存できません。",
+        "checkoutOpened": "新しいタブでチェックアウトが開きました。",
+        "checkoutUnavailable": "現在チェックアウトを開始できません。",
+        "portalOpened": "新しいタブで請求ポータルが開きました。",
+        "portalUnavailable": "現在、請求ポータルは利用できません。",
+        "cancelScheduled": "キャンセルが予定されております。",
+        "cancelFailed": "現在サブスクリプションをキャンセルできません。",
+        "actionUnavailable": "このアクションは、現在のプラン状態では使用できません。",
+        "planUnavailable": "選択したプランは現在チェックアウトできません。",
+        "billingUnavailable": "課金は一時的に利用できません。後でもう一度試してください。"
+      },
+      "confirm": {
+        "title": "アクションの確認",
+        "message": "本気ですか？",
+        "confirmButton": "確認する",
+        "cancelButton": "キャンセル",
+        "subscribe": {
+          "title": "サブスクリプションを開始する",
+          "message": "チェックアウトを開いて、選択したサブスクリプション プランを開始しますか?"
+        },
+        "upgrade": {
+          "title": "アップグレードプラン",
+          "message": "アカウントのアップグレード操作を続行しますか?"
+        },
+        "downgrade": {
+          "title": "ダウングレードプラン",
+          "message": "請求管理を開いてサブスクリプションをダウングレードしますか?"
+        },
+        "cancel": {
+          "title": "サブスクリプションをキャンセルする",
+          "message": "サブスクリプションのキャンセルをスケジュールしますか?"
+        },
+        "portal": {
+          "title": "請求ポータルを開く",
+          "message": "引き続き請求ポータルにアクセスしてサブスクリプションを管理しますか?"
+        }
+      },
+      "planState": {
+        "loading": "利用可能なプランを読み込んでいます...",
+        "empty": "現在ご利用いただけるプランはありません。",
+        "unavailable": "現在、料金プランを読み込むことができません。"
+      },
+      "features": {
+        "unknown": "機能の詳細は利用可能になり次第表示されます。",
+        "fallback": "{{feature}}",
+        "extension": "ブラウザ拡張機能へのアクセス",
+        "unlimited-pins": "無制限のピン",
+        "cloud-sync": "クラウド同期",
+        "basic-tagging": "基本的なタグ付け",
+        "ai-search": "AI検索",
+        "priority-support": "優先サポート",
+        "team-collaboration": "チームのコラボレーション",
+        "admin-panel": "管理者パネル",
+        "role-permissions": "役割の権限"
+      }
+    },
+    "auth": {
+      "title": "Pinity - ポータルへのアクセス",
+      "brand": {
+        "logoAlt": "ピニティのロゴ"
+      },
+      "brandDescription": "より速くクリップし、整理整頓し、どこを閲覧してもワークスペースを同期します。",
+      "tabs": {
+        "ariaLabel": "認証セクション",
+        "login": "ログイン",
+        "register": "登録する",
+        "forgot": "忘れた"
+      },
+      "fields": {
+        "name": "名前",
+        "email": "電子メール",
+        "password": "パスワード",
+        "confirmPassword": "パスワードを認証する"
+      },
+      "placeholders": {
+        "name": "あなたのフルネーム",
+        "email": "you@example.com",
+        "password": "********",
+        "confirmPassword": "パスワードを再度入力してください。"
+      },
+      "login": {
+        "welcome": "おかえり",
+        "instructions": "保存されたピンとコレクションにアクセスするには、電子メールで認証します。",
+        "submit": "ログイン",
+        "hint": "ワークスペースの認証情報を使用する"
+      },
+      "register": {
+        "title": "アカウントを作成する",
+        "desc": "Pinity アカウントを設定して、ワークフローにインスピレーションを取り入れます。",
+        "submit": "アカウントを作成する",
+        "terms": "アカウントを作成すると、規約に同意したことになります。",
+        "passwordMismatch": "パスワードが一致しません。"
+      },
+      "forgot": {
+        "title": "パスワードをリセットする",
+        "desc": "パスワードのリセット手順を受信するには、電子メールを入力してください。",
+        "submit": "パスワードをリセットする",
+        "back": "ログインに戻る",
+        "success": "リセットリンクが送信されました。受信箱を確認してください。"
+      },
+      "continueWithGoogle": "Google を続ける",
+      "continueWithGoogleAria": "Google を続ける",
+      "or": "または",
+      "language": {
+        "label": "言語",
+        "selectAria": "言語セレクター",
+        "auto": "自動 (システム)",
+        "usingSystem": "システム言語の使用: {{lang}}",
+        "preferred": "優先言語の設定: {{lang}}",
+        "languages": {
+          "en-US": "英語 (米国)",
+          "en-GB": "英語 (英国)",
+          "es-ES": "スペイン語 (スペイン)",
+          "es-MX": "スペイン語 (メキシコ)",
+          "fr-FR": "フランス語 (フランス)",
+          "pt-BR": "ポルトガル語 (ブラジル)",
+          "de-DE": "ドイツ語 (ドイツ)",
+          "ja-JP": "日本語 (日本)"
+        }
+      },
+      "errors": {
+        "invalidLoginResponse": "無効なログイン応答です。",
+        "saveSessionFailed": "ログインは成功しましたが、セッションを保存できませんでした。",
+        "fillAllFields": "すべてのフィールドに入力してください。",
+        "loginFailed": "ログインに失敗しました。資格情報を確認してください。",
+        "registerFailed": "登録に失敗しました。もう一度試してください。",
+        "network": "ネットワークエラー。もう一度試してください。",
+        "popupBlocked": "ポップアップがブロックされました。ポップアップを許可してください。",
+        "saveLanguage": "言語設定を保存できませんでした。もう一度試してください。",
+        "enterEmail": "メールアドレスを入力してください。",
+        "resetFailed": "リセットに失敗しました。もう一度試してください。",
+        "passwordMinLength": "少なくとも {{min}} 文字を使用してください。"
+      }
+    },
+    "reset": {
+      "feedback": {
+        "enterBoth": "Please enter both token and new password.",
+        "success": "Password updated successfully. Please log in.",
+        "failed": "Reset failed.",
+        "networkError": "Network error. Please try again."
+      }
+    },
+    "common": {
+      "loading": "Loading…",
+      "userAvatarAlt": "User avatar"
+    }
+  }
+}
