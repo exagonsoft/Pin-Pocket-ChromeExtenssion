@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="settings.title"></title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="page page--stacked">
+  <div class="app-shell app-shell--narrow">
+    <header class="brand-banner">
+      <div id="user-icon" class="user-icon"></div>
+      <div class="brand-header">
+        <img src="./icons/branding_logo.png" alt="Pinity Logo" class="brand-logo" />
+        <h1 data-i18n="settings.heading"></h1>
+      </div>
+      <p data-i18n="settings.brandDescription"></p>
+      <div class="nav-menu">
+        <ul class="">
+          <li id="nav-menu-pins" class="nav-menu-item" data-i18n="popup.nav.pins">Pins</li>
+          <li id="nav-menu-profile" class="nav-menu-item" data-i18n="popup.nav.profile">Profile</li>
+          <li id="nav-menu-settings" class="nav-menu-item-selected" data-i18n="popup.nav.settings">Settings</li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="settings-section">
+        <header>
+          <h4 data-i18n="settings.storage.title"></h4>
+          <p data-i18n="settings.storage.desc"></p>
+        </header>
+
+        <div class="toggle-row">
+          <div class="toggle-copy">
+            <span class="toggle-title" data-i18n="settings.useSync.title"></span>
+            <small data-i18n="settings.useSync.desc"></small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="useSync" />
+            <span class="slider"></span>
+          </label>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-copy">
+            <span class="toggle-title" data-i18n="settings.useEncryption.title"></span>
+            <small data-i18n="settings.useEncryption.desc"></small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="useEncryption" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <header>
+          <h4 data-i18n="settings.maintenance.title"></h4>
+          <p data-i18n="settings.maintenance.desc"></p>
+        </header>
+        <button id="clear" class="button-danger" data-i18n="settings.clear"></button>
+      </section>
+
+      <section class="settings-section">
+        <header>
+          <h4 data-i18n="settings.reset.title"></h4>
+          <p data-i18n="settings.reset.desc"></p>
+        </header>
+        <button id="reset-settings" class="button-secondary" data-i18n="settings.reset.action"></button>
+      </section>
+
+      <section class="settings-section">
+        <header>
+          <h4 data-i18n="settings.theme.title"></h4>
+          <p data-i18n="settings.theme.desc"></p>
+        </header>
+
+        <div class="theme-options">
+          <label class="chip">
+            <input type="radio" name="theme-choice" value="system" checked />
+            <span data-i18n="settings.theme.system"></span>
+          </label>
+          <label class="chip">
+            <input type="radio" name="theme-choice" value="light" />
+            <span data-i18n="settings.theme.light"></span>
+          </label>
+          <label class="chip">
+            <input type="radio" name="theme-choice" value="dark" />
+            <span data-i18n="settings.theme.dark"></span>
+          </label>
+          <!-- High contrast option removed to simplify theme choices -->
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-copy">
+            <span class="toggle-title" data-i18n="settings.compact.title"></span>
+            <small data-i18n="settings.compact.desc"></small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="compact-mode" />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-section">
+        <header>
+          <h4 data-i18n="settings.language.title"></h4>
+          <p data-i18n="settings.language.desc"></p>
+        </header>
+
+        <label class="field" for="settings-language">
+          <span data-i18n="settings.language.preferred"></span>
+          <select id="settings-language">
+            <option value="auto" data-i18n="settings.language.options.auto"></option>
+            <option value="en-US" data-i18n="settings.language.options.en-US"></option>
+            <option value="en-GB" data-i18n="settings.language.options.en-GB"></option>
+            <option value="es-ES" data-i18n="settings.language.options.es-ES"></option>
+            <option value="es-MX" data-i18n="settings.language.options.es-MX"></option>
+            <option value="fr-FR" data-i18n="settings.language.options.fr-FR"></option>
+            <option value="pt-BR" data-i18n="settings.language.options.pt-BR"></option>
+            <option value="de-DE" data-i18n="settings.language.options.de-DE"></option>
+            <option value="ja-JP" data-i18n="settings.language.options.ja-JP"></option>
+          </select>
+        </label>
+
+        <p class="notice" id="language-detected-note" data-i18n="settings.language.detecting">Detecting your system language...</p>
+      </section>
+
+      <div class="settings-footer">
+        <button type="button" class="button-primary" id="settings-save" data-i18n="settings.save"></button>
+        <small data-i18n="settings.saveDesc"></small>
+      </div>
+    </main>
+  </div>
+  <div id="toast-root" class="toast-root"></div>
+  <script type="module" src="i18n.js"></script>
+  <script type="module" src="settings.js"></script>
+</body>
+
+</html>

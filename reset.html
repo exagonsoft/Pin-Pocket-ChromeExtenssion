@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Reset Password - PinPocket</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      padding: 16px;
-      width: 300px;
-    }
-    input {
-      display: block;
-      width: 100%;
-      margin: 10px 0;
-    }
-    button {
-      width: 100%;
-    }
-  </style>
-</head>
-<body>
-  <h2>🔐 Reset Password</h2>
-  <form id="reset-form">
-    <input type="text" id="reset-token" placeholder="Paste reset token" required />
-    <input type="password" id="new-password" placeholder="New password" required />
-    <button type="submit">Reset Password</button>
-  </form>
+<html lang="en">
 
-  <!-- ✅ CSP-safe script -->
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="reset.title"></title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <div class="app-shell app-shell--narrow">
+    <header class="brand-banner">
+      <h1 data-i18n="reset.heading"></h1>
+      <p data-i18n="reset.desc"></p>
+    </header>
+
+    <main class="app-main">
+      <form id="reset-form" class="form active stack">
+        <label class="field" for="reset-token">
+          <span data-i18n="reset.fields.token"></span>
+          <input type="text" id="reset-token" placeholder="" data-i18n-placeholder="reset.placeholders.token" required />
+        </label>
+
+        <label class="field" for="new-password">
+          <span data-i18n="reset.fields.newPassword"></span>
+          <input type="password" id="new-password" placeholder="" data-i18n-placeholder="reset.placeholders.newPassword" required />
+        </label>
+
+        <button type="submit" data-i18n="reset.action"></button>
+        <a href="auth.html" class="link-inline self-center" data-i18n="reset.back">Back to login</a>
+      </form>
+    </main>
+  </div>
+  <div id="toast-root" class="toast-root"></div>
+  <script type="module" src="i18n.js"></script>
   <script type="module" src="reset.js"></script>
 </body>
+
 </html>

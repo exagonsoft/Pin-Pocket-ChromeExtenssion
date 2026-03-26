@@ -1,199 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <title>PinPocket</title>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      width: 320px;
-      height: 480px;
-      padding: 12px;
-      background-color: #f9f9f9;
-      box-sizing: border-box;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    h3 {
-      margin: 0 0 8px;
-      font-size: 18px;
-    }
-
-    #email {
-      font-size: 12px;
-      color: #666;
-      margin-bottom: 12px;
-      text-align: center;
-    }
-
-    #pin-current {
-      background-color: #0077cc;
-      color: white;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: background-color 0.2s;
-      margin-bottom: 10px;
-    }
-
-    #pin-current:hover {
-      background-color: #005fa3;
-    }
-
-    #list-container {
-      flex-grow: 1;
-      overflow-y: auto;
-      margin-bottom: 12px;
-    }
-
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    li {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #fff;
-      border: 1px solid #ddd;
-      padding: 6px 8px;
-      margin-bottom: 8px;
-      border-radius: 4px;
-      transition: box-shadow 0.2s ease;
-    }
-
-    li:hover {
-      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
-    }
-
-    a {
-      flex-grow: 1;
-      text-decoration: none;
-      color: #0077cc;
-      font-size: 14px;
-      overflow: hidden;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      margin-right: 8px;
-    }
-
-    button.remove {
-      background-color: transparent;
-      border: none;
-      color: #d33;
-      cursor: pointer;
-      font-size: 16px;
-      padding: 0 6px;
-    }
-
-
-    #logout-button {
-      width: 100%;
-      background-color: #d33;
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      border-radius: 4px;
-      transition: background-color 0.2s;
-    }
-
-    #logout-button:hover {
-      background-color: #b22;
-    }
-
-    #reimport-button {
-      width: 100%;
-      background-color: #eee;
-      color: #333;
-      font-weight: 600;
-      border: none;
-      padding: 8px;
-      margin-bottom: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    #reimport-button:hover {
-      background-color: #ddd;
-    }
-
-    #toast {
-      font-size: 13px;
-      color: #444;
-      text-align: center;
-      background-color: #ffffcc;
-      padding: 6px 8px;
-      border: 1px solid #e0e0a0;
-      border-radius: 4px;
-      margin-bottom: 10px;
-    }
-
-    #reimport-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .loader {
-      width: 28px;
-      height: 28px;
-      border: 4px solid #ccc;
-      border-top: 4px solid #0077cc;
-      border-radius: 50%;
-      margin: auto;
-      animation: spin 0.8s linear infinite;
-    }
-
-    #teamSelect {
-      padding: 6px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title data-i18n="popup.title"></title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body>
-  <h3>📌 Your Pinned Pages</h3>
-  <div id="email">Checking session...</div>
-  <button id="pin-current">Pin Current Tab</button>
-  <button id="reimport-button">📥 Re-import Pinned Tabs</button>
-  <label for="teamSelect">Viewing:</label>
-  <select id="teamSelect" style="width: 100%; margin-bottom: 12px;">
-    <option value="__me">👤 My Pins</option>
-    <!-- Team options will be added dynamically -->
-  </select>
-  <div class="">
-    <a href="manageTeam.html" target="_blank"
-      style="display: block; font-size: 13px; text-align: right; margin-bottom: 10px; text-decoration: underline;">
-      Manage Teams
-    </a>
-  </div>
+<body class="page--popup">
+  <div class="app-shell app-shell--popup">
+    <header class="brand-banner">
+      <div id="user-icon" class="user-icon"></div>
+      <div class="brand-header">
+        <img src="./icons/branding_logo.png" alt="Pinity Logo" class="brand-logo" />
+      </div>
+      <p data-i18n="popup.brandDescription"></p>
+      <div class="nav-menu">
+        <ul class="">
+          <li id="nav-menu-pins" class="nav-menu-item-selected" data-i18n="popup.nav.pins">Pins</li>
+          <li id="nav-menu-profile" class="nav-menu-item" data-i18n="popup.nav.profile">Profile</li>
+          <li id="nav-menu-settings" class="nav-menu-item" data-i18n="popup.nav.settings">Settings</li>
+        </ul>
+      </div>
+    </header>
 
-  <div id="list-container">
-    <ul id="pageList"></ul>
-    <div id="import-spinner" style="display:none; text-align: center; margin-bottom: 10px;">
-      <div class="loader"></div>
+    <main class="app-main">
+      <div class="stack">
+        <div>
+          <h3 class="section-title" data-i18n="popup.sectionTitle">Your pinned pages</h3>
+          <p id="email" class="muted-text" data-i18n="popup.emailChecking">Checking session...</p>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar__row">
+            <button id="pin-current" class="button-primary" data-i18n="popup.pinCurrent">Pin current tab</button>
+            <button id="reimport-button" class="button-muted" data-i18n="popup.importPinned">Import pinned tabs</button>
+          </div>
+
+          <!-- Team management (ONLY for paying owner) -->
+          <div class="toolbar__row toolbar__row--end hidden" id="manage-team-section">
+            <a href="manageTeam.html" target="_blank" class="link-inline" data-i18n="popup.manageTeam">Manage team</a>
+          </div>
+        </div>
+
+        <div id="list-container" class="panel">
+          <header>
+            <h4 data-i18n="popup.savedLinksTitle">Saved links</h4>
+            <p data-i18n="popup.savedLinksDesc">Newest pins appear first.</p>
+            <!-- 🔍 Pin filter -->
+            <div class="" style="margin-top: 10px;">
+              <label class="field">
+                <input type="search" id="pin-filter" class="full-width" placeholder=""
+                  data-i18n-placeholder="popup.filterPlaceholder" autocomplete="off" />
+              </label>
+            </div>
+          </header>
+
+          <ul id="pageList" class="list"></ul>
+
+          <div id="import-spinner" class="hidden" aria-hidden="true">
+            <div class="loader"></div>
+          </div>
+        </div>
+
+        <button id="logout-button" class="button-danger" data-i18n="popup.logout">Log out</button>
+      </div>
+    </main>
+  </div>
+  <!-- Global Loader -->
+  <div id="global-loader" class="loader-backdrop hidden">
+    <div class="loader-modal">
+      <div class="loader-spinner"></div>
+      <p id="loader-text" data-i18n="popup.loaderText">Loading…</p>
     </div>
   </div>
+  <div class="pin-tooltip">
+    <div class="pin-tooltip__summary" data-i18n-html="popup.tooltipSummary">...</div>
+    <div class="pin-tooltip__tags" data-i18n-html="popup.tooltipTags"><span>#tag</span></div>
+  </div>
 
-  <button id="logout-button">Log Out</button>
 
+  <div id="toast-root" class="toast-root"></div>
+  <script type="module" src="i18n.js"></script>
   <script type="module" src="popup.js"></script>
 </body>
 

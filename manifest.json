@@ -1,12 +1,21 @@
 {
     "manifest_version": 3,
-    "name": "PinPocket",
+    "name": "PinitY",
     "version": "1.0",
     "description": "Save and manage pinned pages.",
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    },
+    "host_permissions": [
+        "https://your-backend-domain.com/*"
+    ],
     "permissions": [
         "tabs",
         "storage",
-        "contextMenus"
+        "contextMenus",
+        "identity",
+        "storage",
+        "activeTab"
     ],
     "background": {
         "service_worker": "background.js",
