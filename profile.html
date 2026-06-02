@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="profile.title"></title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="page page--stacked">
+  <div class="app-shell app-shell--narrow">
+    <header class="brand-banner">
+      <div id="user-icon" class="user-icon"></div>
+      <div class="brand-header">
+        <img src="./icons/branding_logo.png" data-i18n-alt="profile.brand.logoAlt" alt="" class="brand-logo" />
+        <h1 data-i18n="profile.heading"></h1>
+      </div>
+      <p data-i18n="profile.brandDescription"></p>
+      <div class="nav-menu">
+        <ul>
+          <li id="nav-menu-pins" class="nav-menu-item" data-i18n="profile.nav.pins"></li>
+          <li id="nav-menu-profile" class="nav-menu-item-selected" data-i18n="profile.nav.profile"></li>
+          <li id="nav-menu-settings" class="nav-menu-item" data-i18n="profile.nav.settings"></li>
+        </ul>
+      </div>
+    </header>
+
+    <main class="app-main">
+      <section class="settings-section profile-section profile-section--preferences">
+        <header>
+          <h4 data-i18n="profile.preferences.title"></h4>
+          <p data-i18n="profile.preferences.desc"></p>
+        </header>
+
+        <div class="field-inline profile-fields-grid">
+          <label class="field" for="profile-display-name">
+            <span data-i18n="profile.displayName"></span>
+            <input type="text" id="profile-display-name" placeholder="" data-i18n-placeholder="profile.displayNamePlaceholder" />
+          </label>
+
+          <label class="field" for="profile-handle">
+            <span data-i18n="profile.profileHandle"></span>
+            <input type="text" id="profile-handle" placeholder="" data-i18n-placeholder="profile.profileHandlePlaceholder" />
+          </label>
+        </div>
+
+        <div class="field">
+          <span data-i18n="profile.statusMessage"></span>
+          <input type="text" id="profile-status" placeholder="" data-i18n-placeholder="profile.statusPlaceholder" />
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-copy">
+            <span class="toggle-title" data-i18n="profile.invites.title"></span>
+            <small data-i18n="profile.invites.desc"></small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="profile-invites" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <section class="settings-section profile-section profile-section--subscription">
+        <header>
+          <h4 data-i18n="profile.subscription.title"></h4>
+          <p data-i18n="profile.subscription.desc"></p>
+        </header>
+
+        <div class="billing-summary" aria-live="polite">
+          <div class="billing-summary-row">
+            <span data-i18n="profile.summary.currentPlanLabel"></span>
+            <strong id="current-plan-badge" class="plan-pill" data-i18n="profile.summary.planUnknown"></strong>
+          </div>
+          <div class="billing-summary-row">
+            <span data-i18n="profile.summary.statusLabel"></span>
+            <strong id="subscription-status"></strong>
+          </div>
+          <div class="billing-summary-row">
+            <span data-i18n="profile.summary.billingCycleLabel"></span>
+            <strong id="subscription-billing-cycle"></strong>
+          </div>
+          <div class="billing-summary-row">
+            <span data-i18n="profile.summary.nextBillingLabel"></span>
+            <strong id="subscription-next-billing"></strong>
+          </div>
+          <p id="billing-note" class="billing-note"></p>
+        </div>
+
+        <div class="billing-period-selector">
+          <div class="billing-period-header">
+            <span data-i18n="profile.billingPeriodSelector.label"></span>
+            <small data-i18n="profile.billingPeriodSelector.note"></small>
+          </div>
+          <div class="billing-period-options" role="radiogroup" data-i18n-aria="profile.billingPeriodSelector.ariaLabel">
+            <label class="billing-period-option" for="billing-period-monthly">
+              <input type="radio" id="billing-period-monthly" name="checkout-billing-period" value="monthly" checked />
+              <span data-i18n="profile.billingCycle.monthly"></span>
+            </label>
+            <label class="billing-period-option" for="billing-period-yearly">
+              <input type="radio" id="billing-period-yearly" name="checkout-billing-period" value="yearly" />
+              <span data-i18n="profile.billingCycle.yearly"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="plan-grid profile-plan-grid" id="profile-plan-grid"></div>
+        <p id="profile-plan-loading" class="profile-plan-state" data-i18n="profile.planState.loading"></p>
+
+        <div class="plan-actions">
+          <button type="button" id="subscribe-btn" class="button-primary" data-i18n="profile.actions.subscribe" hidden></button>
+          <button type="button" id="modify-plan-btn" class="button-muted" data-i18n="profile.actions.modifyPlan" hidden></button>
+          <button type="button" id="cancel-btn" class="button-danger profile-cancel-btn" data-i18n="profile.actions.cancel" hidden></button>
+        </div>
+        <p id="plan-action-note" class="profile-action-note" hidden></p>
+
+
+        <div class="toggle-row">
+          <div class="toggle-copy">
+            <span class="toggle-title" data-i18n="profile.autoRenew.title"></span>
+            <small data-i18n="profile.autoRenew.desc"></small>
+          </div>
+          <label class="switch">
+            <input type="checkbox" id="auto-renew" checked />
+            <span class="slider"></span>
+          </label>
+        </div>
+      </section>
+
+      <div class="settings-footer">
+        <button type="button" class="button-primary" id="settings-save" data-i18n="profile.savePreferences"></button>
+        <small data-i18n="profile.saveDesc"></small>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast-root" class="toast-root"></div>
+
+  <div id="confirm-modal" class="modal" aria-hidden="true">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <h3 id="confirm-title" data-i18n="profile.confirm.title"></h3>
+      <p id="confirm-message" data-i18n="profile.confirm.message"></p>
+      <div class="modal-actions">
+        <button id="confirm-ok" class="button-primary" data-i18n="profile.confirm.confirmButton"></button>
+        <button id="confirm-cancel" class="button-muted" data-i18n="profile.confirm.cancelButton"></button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="i18n.js"></script>
+  <script type="module" src="profile.js"></script>
+</body>
+
+</html>

@@ -1,104 +1,134 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-  <title>PinPocket - Auth</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      padding: 20px;
-      width: 300px;
-      background-color: #f5f5f5;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 16px;
-    }
-
-    .tab-btns {
-      display: flex;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .tab-btns button {
-      flex: 1;
-      padding: 8px;
-      border: none;
-      background-color: #eee;
-      cursor: pointer;
-      font-weight: 500;
-      border-radius: 4px;
-    }
-
-    .tab-btns button.active {
-      background-color: #0077cc;
-      color: white;
-    }
-
-    .form {
-      display: none;
-    }
-
-    .form.active {
-      display: block;
-    }
-
-    input {
-      display: block;
-      width: 100%;
-      margin-bottom: 12px;
-      padding: 8px;
-      font-size: 14px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    button[type="submit"] {
-      width: 100%;
-      background-color: #0077cc;
-      color: white;
-      font-weight: 600;
-      border: none;
-      padding: 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background-color 0.2s;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #005fa3;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-i18n="auth.title"></title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
-  <h2>PinPocket</h2>
 
-  <div class="tab-btns">
-    <button id="tab-login" class="active">Login</button>
-    <button id="tab-register">Register</button>
-    <button id="tab-forgot">Forgot?</button>
+<body class="auth-page">
+  <div class="app-shell app-shell--narrow auth-card">
+    <header class="brand-banner auth-brand-banner">
+      <div class="brand-row">
+        <img src="./icons/branding_logo.png" data-i18n-alt="auth.brand.logoAlt" alt="" class="brand-logo" />
+        <div class="brand-meta">
+          <p data-i18n="auth.brandDescription"></p>
+        </div>
+      </div>
+    </header>
+
+    <main class="app-main auth-main">
+      <div class="tab-btns" role="tablist" data-i18n-aria="auth.tabs.ariaLabel">
+        <button id="tab-login" class="active" role="tab" aria-controls="login" aria-selected="true" data-target-form="login" data-i18n="auth.tabs.login"></button>
+        <button id="tab-register" role="tab" aria-controls="register" aria-selected="false" data-target-form="register" data-i18n="auth.tabs.register"></button>
+        <button id="tab-forgot" role="tab" aria-controls="forgot" aria-selected="false" data-target-form="forgot" data-i18n="auth.tabs.forgot"></button>
+      </div>
+
+      <section class="auth-language-panel">
+        <div class="auth-language-row">
+          <label for="settings-language" class="compact-lang-label" data-i18n="auth.language.label"></label>
+          <select id="settings-language" class="compact-language" data-i18n-aria="auth.language.selectAria">
+            <option value="auto" data-i18n="auth.language.auto"></option>
+            <option value="en-US" data-i18n="auth.language.languages.en-US"></option>
+            <option value="en-GB" data-i18n="auth.language.languages.en-GB"></option>
+            <option value="es-ES" data-i18n="auth.language.languages.es-ES"></option>
+            <option value="es-MX" data-i18n="auth.language.languages.es-MX"></option>
+            <option value="fr-FR" data-i18n="auth.language.languages.fr-FR"></option>
+            <option value="pt-BR" data-i18n="auth.language.languages.pt-BR"></option>
+            <option value="de-DE" data-i18n="auth.language.languages.de-DE"></option>
+            <option value="ja-JP" data-i18n="auth.language.languages.ja-JP"></option>
+          </select>
+        </div>
+        <small id="language-detected-note" class="language-note" aria-live="polite"></small>
+      </section>
+
+      <form id="login" class="form active" role="tabpanel" aria-labelledby="tab-login" aria-hidden="false">
+        <div class="form-header">
+          <h3 data-i18n="auth.login.welcome"></h3>
+          <p data-i18n="auth.login.instructions"></p>
+        </div>
+
+        <label class="field" for="login-email">
+          <span data-i18n="auth.fields.email"></span>
+          <input type="email" id="login-email" placeholder="" data-i18n-placeholder="auth.placeholders.email" autocomplete="email" required />
+        </label>
+
+        <label class="field" for="login-password">
+          <span data-i18n="auth.fields.password"></span>
+          <input type="password" id="login-password" placeholder="" data-i18n-placeholder="auth.placeholders.password"
+            autocomplete="current-password" required />
+        </label>
+
+        <button type="submit" class="button-primary" data-i18n="auth.login.submit"></button>
+        <p class="form-hint" data-i18n="auth.login.hint"></p>
+        <div class="divider-section">
+          <hr class="full-width" />
+          <span data-i18n="auth.or"></span>
+          <hr class="full-width" />
+        </div>
+        <button type="button" id="google-login" class="google-btn" data-i18n-aria="auth.continueWithGoogleAria">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="" />
+          <span class="btn-text" data-i18n="auth.continueWithGoogle"></span>
+        </button>
+
+      </form>
+
+      <form id="register" class="form" role="tabpanel" aria-labelledby="tab-register" aria-hidden="true">
+        <div class="form-header">
+          <h3 data-i18n="auth.register.title"></h3>
+          <p data-i18n="auth.register.desc"></p>
+        </div>
+
+        <label class="field" for="reg-name">
+          <span data-i18n="auth.fields.name"></span>
+          <input type="text" id="reg-name" placeholder="" data-i18n-placeholder="auth.placeholders.name" autocomplete="name" required />
+        </label>
+
+        <label class="field" for="reg-email">
+          <span data-i18n="auth.fields.email"></span>
+          <input type="email" id="reg-email" placeholder="" data-i18n-placeholder="auth.placeholders.email" autocomplete="email" required />
+        </label>
+
+        <label class="field" for="reg-password">
+          <span data-i18n="auth.fields.password"></span>
+          <input type="password" id="reg-password" placeholder="" data-i18n-placeholder="auth.placeholders.password"
+            autocomplete="new-password" required minlength="8" />
+        </label>
+
+        <label class="field" for="reg-password-confirm">
+          <span data-i18n="auth.fields.confirmPassword"></span>
+          <input type="password" id="reg-password-confirm" placeholder="" data-i18n-placeholder="auth.placeholders.confirmPassword"
+            autocomplete="new-password" required minlength="8" />
+        </label>
+
+        <p id="password-error" class="error-message" aria-live="polite" hidden></p>
+
+        <button type="submit" id="register-submit" class="button-primary" data-i18n="auth.register.submit"></button>
+        <p class="form-hint" data-i18n="auth.register.terms"></p>
+      </form>
+
+
+      <form id="forgot" class="form" role="tabpanel" aria-labelledby="tab-forgot" aria-hidden="true">
+        <div class="form-header">
+          <h3 data-i18n="auth.forgot.title"></h3>
+          <p data-i18n="auth.forgot.desc"></p>
+        </div>
+
+        <label class="field" for="forgot-email">
+          <span data-i18n="auth.fields.email"></span>
+          <input type="email" id="forgot-email" placeholder="" data-i18n-placeholder="auth.placeholders.email" autocomplete="email" required />
+        </label>
+
+        <button type="submit" data-i18n="auth.forgot.submit"></button>
+        <button type="button" class="button-muted" id="back-to-login" data-i18n="auth.forgot.back"></button>
+      </form>
+    </main>
   </div>
-
-  <form id="login" class="form active">
-    <input type="email" id="login-email" placeholder="Email" required />
-    <input type="password" id="login-password" placeholder="Password" required />
-    <button type="submit">Log In</button>
-  </form>
-
-  <form id="register" class="form">
-    <input type="text" id="reg-name" placeholder="Name" required />
-    <input type="email" id="reg-email" placeholder="Email" required />
-    <input type="password" id="reg-password" placeholder="Password" required />
-    <button type="submit">Register</button>
-  </form>
-
-  <form id="forgot" class="form">
-    <input type="email" id="forgot-email" placeholder="Your Email" required />
-    <button type="submit">Send Reset Link</button>
-  </form>
-
+  <div id="toast-root" class="toast-root"></div>
+  <script type="module" src="i18n.js"></script>
   <script type="module" src="auth.js"></script>
 </body>
+
 </html>
