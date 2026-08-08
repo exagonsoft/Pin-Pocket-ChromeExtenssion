@@ -1241,7 +1241,7 @@ body.auth-page {
   min-height: 100vh;
   height: auto;
   padding: 24px;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   background:
     radial-gradient(120% 120% at -10% -20%, rgba(37, 99, 235, 0.16), transparent 56%),
