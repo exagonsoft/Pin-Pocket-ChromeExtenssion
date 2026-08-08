@@ -87,7 +87,7 @@ filterInput?.addEventListener("input", () => {
 
 setListMessage("Loading...");
 
-(async () => {
+async function bootstrapPopup() {
   const { userId, email, planName, picture, language, languagePreference } = await Storage.get([
     "userId", "email", "planName", "picture", "language", "languagePreference",
   ]);
@@ -110,11 +110,15 @@ setListMessage("Loading...");
   loadUserData(picture);
 
   // Run team invites check and plan UI in parallel
-  await Promise.all([
-    loadIncomingInvites(),
-    applyPlanUI(currentPlanName, userId),
-  ]);
-})();
+  void loadIncomingInvites().catch(() => {});
+  void Promise.resolve(applyPlanUI(currentPlanName, userId)).catch(() => {});
+}
+
+window.requestAnimationFrame(() => {
+  void bootstrapPopup().catch((err) => {
+    console.error("Popup bootstrap failed", err);
+  });
+});
 
 //#region Incoming Invite Notifications
 async function loadIncomingInvites() {
@@ -276,7 +280,13 @@ async function loadTeams(userId) {
         .map((team) => team._id)
     );
 
-    teamSelect.innerHTML = `<option value="">${t("popup.teamSelect.personal", {}, "My pins")}</option>`;
+    if (teamSelect) {
+      teamSelect.replaceChildren();
+      const defaultOption = document.createElement("option");
+      defaultOption.value = "";
+      defaultOption.textContent = t("popup.teamSelect.personal", {}, "My pins");
+      teamSelect.appendChild(defaultOption);
+    }
 
     if (teams.length === 0) {
       // No teams yet — guide the user to create one

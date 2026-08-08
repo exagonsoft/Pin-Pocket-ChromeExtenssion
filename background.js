@@ -22,10 +22,15 @@ function parseFragmentParams(callbackUrl) {
 }
 
 async function startGoogleAuthFlow() {
+  const identityApi = globalThis.browser?.identity || globalThis.chrome?.identity;
+  if (!identityApi?.launchWebAuthFlow || !identityApi?.getRedirectURL) {
+    return { ok: false, error: "Google sign-in is not supported in this browser." };
+  }
+
   const clientId = CONFIG.GOOGLE_OAUTH_CLIENT_ID;
   if (!clientId) return { ok: false, error: "Google sign-in is not configured." };
 
-  const redirectUri = chrome.identity.getRedirectURL();
+  const redirectUri = identityApi.getRedirectURL();
   const state = randomBase64Url(24);
 
   const oauthUrl = new URL("https://accounts.google.com/o/oauth2/v2/auth");
@@ -37,7 +42,7 @@ async function startGoogleAuthFlow() {
   oauthUrl.searchParams.set("state", state);
 
   const callbackUrl = await new Promise((resolve, reject) => {
-    chrome.identity.launchWebAuthFlow(
+    identityApi.launchWebAuthFlow(
       { url: oauthUrl.toString(), interactive: true },
       (url) => {
         if (chrome.runtime.lastError || !url) {
@@ -100,11 +105,13 @@ async function startGoogleAuthFlow() {
    CONTEXT MENU
 ========================================================= */
 chrome.runtime.onInstalled.addListener(() => {
-  chrome.contextMenus.create({
-    id: "pin-pocket-save",
-    title: "Save Page to Pinity",
-    contexts: ["page"],
-  });
+  if (chrome.contextMenus?.create) {
+    chrome.contextMenus.create({
+      id: "pin-pocket-save",
+      title: "Save Page to Pinity",
+      contexts: ["page"],
+    });
+  }
 });
 
 // Notify extension pages when storage keys change (useful as alternative to storage.onChanged)

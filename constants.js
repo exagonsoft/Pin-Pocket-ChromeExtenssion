@@ -1,5 +1,11 @@
 //#region Environment
-const isDev = !("update_url" in browser.runtime.getManifest());
+const manifest = browser.runtime.getManifest();
+const declaredGeckoId = manifest?.browser_specific_settings?.gecko?.id || "";
+const runtimeId = browser.runtime?.id || "";
+
+// Firefox temporary installs use a random runtime id, while signed production
+// builds use the declared gecko id from the manifest.
+const isDev = !declaredGeckoId || runtimeId !== declaredGeckoId;
 //#endregion
 
 //#region API Configuration

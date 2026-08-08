@@ -239,7 +239,11 @@ async function loadTeams(userId) {
 
     if (teamSelector) {
       const placeholder = t('manageTeam.chooseTeam', 'Choose a team…');
-      teamSelector.innerHTML = `<option value="">${placeholder}</option>`;
+      teamSelector.replaceChildren();
+      const placeholderOption = document.createElement('option');
+      placeholderOption.value = '';
+      placeholderOption.textContent = placeholder;
+      teamSelector.appendChild(placeholderOption);
 
       cachedTeams.forEach((team) => {
         const option = document.createElement('option');

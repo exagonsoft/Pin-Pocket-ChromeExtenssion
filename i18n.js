@@ -1,3 +1,5 @@
+import translationsBundle from "./i18n-data.js";
+
 //#region I18N Module
 // Shared i18n loader: finds elements with data-i18n attributes and applies translations.
 const I18N = (function () {
@@ -7,19 +9,7 @@ const I18N = (function () {
     return path.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), obj);
   }
 
-  let translationsCachePromise = null;
-
-  function getI18nJsonUrl() {
-    try {
-      const runtime = (globalThis.chrome && chrome.runtime) || (globalThis.browser && browser.runtime);
-      if (runtime && typeof runtime.getURL === 'function') {
-        return runtime.getURL('i18n.json');
-      }
-    } catch (_) {
-      // ignore
-    }
-    return 'i18n.json';
-  }
+  let translationsCachePromise = Promise.resolve(translationsBundle);
 
   function normalizeLocale(locale) {
     if (!locale || typeof locale !== 'string') return '';
@@ -60,14 +50,6 @@ const I18N = (function () {
   }
 
   function getTranslations() {
-    if (!translationsCachePromise) {
-      translationsCachePromise = fetch(getI18nJsonUrl())
-        .then((r) => r.json())
-        .catch((e) => {
-          translationsCachePromise = null;
-          throw e;
-        });
-    }
     return translationsCachePromise;
   }
 

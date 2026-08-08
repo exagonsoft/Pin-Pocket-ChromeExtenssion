@@ -244,11 +244,25 @@ function initRegisterValidation() {
   confirmPasswordEl.addEventListener("input", syncState);
 }
 
+function configureGoogleLoginUI() {
+  const googleButton = document.getElementById("google-login");
+  const divider = document.querySelector(".divider-section");
+  const identityApi = globalThis.browser?.identity || globalThis.chrome?.identity;
+  const supported = Boolean(identityApi?.launchWebAuthFlow && identityApi?.getRedirectURL);
+
+  if (!supported) {
+    if (googleButton) googleButton.hidden = true;
+    if (divider) divider.hidden = true;
+    console.info("Google login is unavailable in this browser; using email/password login only.");
+  }
+}
+
 async function init() {
   await resolveAuthState();
   showForm("login");
   await initLanguageControls();
   initRegisterValidation();
+  configureGoogleLoginUI();
 }
 
 init();
