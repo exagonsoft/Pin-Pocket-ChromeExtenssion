@@ -1,4 +1,4 @@
-// utils/auth.module.js
+// utils/auth.js
 
 //#region Imports
 import { get, clear } from "./storage.js";

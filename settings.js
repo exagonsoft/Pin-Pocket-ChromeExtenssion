@@ -4,18 +4,6 @@ import { setUpNav, loadUserData } from "./utils/nav.js";
 import I18N from "./i18n.js";
 //#endregion
 
-let _settingsStrings = null;
-
-function t(key, vars = {}) {
-  try {
-    const strings = _settingsStrings || window.__I18N_STRINGS || {};
-    let val = key.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), strings);
-    if (typeof val !== "string") return "";
-    Object.keys(vars).forEach((k) => { val = val.replace(new RegExp(`\\{${k}\\}`, "g"), String(vars[k])); });
-    return val;
-  } catch { return ""; }
-}
-
 //#region DOM References
 const useSync = document.getElementById("useSync");
 const useEncryption = document.getElementById("useEncryption");
@@ -31,7 +19,7 @@ const languageNote = document.getElementById("language-detected-note");
 //#endregion
 
 //#region Session And Initial Settings
-chrome.storage.sync.get(
+chrome.storage.local.get(
   ["userId", "email", "token", "plan", "picture", "useSync", "useEncryption"],
   (data) => {
     if (!data.userId) {
@@ -100,9 +88,9 @@ if (useSync) {
   useSync.onchange = () => {
     chrome.storage.local.set({ useSync: useSync.checked }, () => {
       if (chrome.runtime.lastError) {
-        toast.error(t("settings.feedback.syncFailed") || "Failed to update sync setting.");
+        toast.error("Failed to update sync setting.");
       } else {
-        toast.success(t("settings.feedback.syncUpdated") || "Sync setting updated.");
+        toast.success("Sync setting updated.");
       }
     });
   };
@@ -112,9 +100,9 @@ if (useEncryption) {
   useEncryption.onchange = () => {
     chrome.storage.local.set({ useEncryption: useEncryption.checked }, () => {
       if (chrome.runtime.lastError) {
-        toast.error(t("settings.feedback.encryptionFailed") || "Failed to update encryption setting.");
+        toast.error("Failed to update encryption setting.");
       } else {
-        toast.success(t("settings.feedback.encryptionUpdated") || "Encryption setting updated.");
+        toast.success("Encryption setting updated.");
       }
     });
   };
@@ -125,9 +113,9 @@ if (resetSettingsBtn) {
   resetSettingsBtn.onclick = () => {
     chrome.storage.local.clear(() => {
       if (chrome.runtime.lastError) {
-        toast.error(t("settings.feedback.resetFailed") || "Failed to reset settings.");
+        toast.error("Failed to reset settings.");
       } else {
-        toast.success(t("settings.feedback.resetDone") || "Settings reset to default.");
+        toast.success("Settings reset to default.");
         if (useSync) useSync.checked = false;
         if (useEncryption) useEncryption.checked = false;
       }
@@ -138,7 +126,7 @@ if (resetSettingsBtn) {
 if (clearBtn) {
   clearBtn.onclick = () => {
     chrome.storage.local.set({ pinnedPages: [] });
-    toast.success(t("settings.feedback.cleared") || "All pinned pages cleared.");
+    toast.success("All pinned pages cleared.");
   };
 }
 //#endregion
@@ -202,9 +190,9 @@ if (languageSelector) {
       { languagePreference: selectedLanguage, language: resolvedLanguage },
       () => {
         if (chrome.runtime.lastError) {
-          toast.error(t("settings.feedback.languageFailed") || "Failed to save language setting.");
+          toast.error("Failed to save language setting.");
         } else {
-          toast.success(t("settings.feedback.languageUpdated") || "Language updated.");
+          toast.success("Language updated to " + selectedLanguage);
           window.__I18N_VARS = Object.assign(window.__I18N_VARS || {}, { lang: resolvedLanguage });
           applyLanguage(resolvedLanguage);
         }
@@ -215,10 +203,9 @@ if (languageSelector) {
 
 function applyLanguage(language) {
   if (!language) return;
+  // language may be like 'en-US' or 'es-ES'
   try {
-    I18N.loadAndApplyForLang(language).then((strings) => {
-      if (strings && typeof strings === "object") _settingsStrings = strings;
-    });
+    I18N.loadAndApplyForLang(language);
   } catch (e) {
     console.error('Failed to apply language via I18N', e);
   }
@@ -251,7 +238,7 @@ if (saveBtn) {
 
     chrome.storage.local.set(payload, () => {
       if (chrome.runtime.lastError) {
-        toast.error(t("settings.feedback.saveFailed") || "Failed to save settings.");
+        toast.error("Failed to save settings.");
         return;
       }
 
@@ -261,7 +248,7 @@ if (saveBtn) {
       window.__I18N_VARS = Object.assign(window.__I18N_VARS || {}, { lang: resolvedLanguage });
       applyLanguage(resolvedLanguage);
 
-      toast.success(t("settings.feedback.saved") || "Settings saved and applied.");
+      toast.success("Settings saved and applied.");
     });
   });
 }

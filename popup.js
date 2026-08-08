@@ -4,111 +4,261 @@ import { toast } from "./utils/toast.js";
 import * as Storage from "./utils/storage.js";
 import { showLoader, hideLoader } from "./utils/loader.js";
 import { setUpNav, loadUserData } from "./utils/nav.js";
-import I18N from "./i18n.js";
 
-//#region UI ELEMENTS & STATE
+//#region Plan Constants
+const PLAN_PIN_LIMITS = { standard: 50, pro: Infinity, team: Infinity };
 
-const list = document.getElementById("pageList");
-const emailDisplay = document.getElementById("email");
-const logoutButton = document.getElementById("logout-button");
-const importSpinner = document.getElementById("import-spinner");
-const reimportButton = document.getElementById("reimport-button");
-const teamSelect = document.getElementById("teamSelect");
-const userIcon = document.getElementById("user-icon");
-const navMenuPins = document.getElementById("nav-menu-pins");
-const navMenuProfile = document.getElementById("nav-menu-profile");
-const navMenuSettings = document.getElementById("nav-menu-settings");
-
-let selectedTeamId = null;
-let allPins = [];
-let _popupStrings = null;
-
-function t(key, vars = {}) {
-  try {
-    const strings = _popupStrings || window.__I18N_STRINGS || {};
-    let val = key.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), strings);
-    if (typeof val !== "string") return "";
-    Object.keys(vars).forEach((k) => {
-      val = val.replace(new RegExp(`\\{${k}\\}`, "g"), String(vars[k]));
-    });
-    return val;
-  } catch { return ""; }
+function getPinLimit(planName) {
+  return PLAN_PIN_LIMITS[String(planName || "standard").toLowerCase()] ?? 50;
 }
 
+function isTeamPlan(planName) {
+  return String(planName || "").toLowerCase() === "team";
+}
 //#endregion
 
-setListMessage(t("popup.loading") || "Loading...");
+//#region Translation Helper
+function t(key, vars = {}, fallback = "") {
+  const strings = window.__I18N_STRINGS || {};
+  let val = key.split(".").reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), strings);
+  if (typeof val !== "string") return fallback;
+  Object.keys(vars).forEach((k) => { val = val.replace(`{${k}}`, vars[k]); });
+  return val;
+}
+//#endregion
+
+//#region UI Elements
+const list = document.getElementById("pageList");
+const logoutButton = document.getElementById("logout-button");
+const teamSelect = document.getElementById("teamSelect");
+const teamSelectorRow = document.getElementById("team-selector-row");
+const manageTeamSection = document.getElementById("manage-team-section");
+const pinActionsRow = document.getElementById("pin-actions-row");
+const readonlyBadgeRow = document.getElementById("readonly-badge-row");
+const incomingInvitesSection = document.getElementById("incoming-invites-section");
+const incomingInvitesList = document.getElementById("incoming-invites-list");
+
+// Single shared tooltip — reused on hover to prevent DOM accumulation
+const sharedTooltip = (function () {
+  const el = document.getElementById("pin-tooltip-shared") || document.createElement("div");
+  el.id = "pin-tooltip-shared";
+  el.className = "pin-tooltip";
+  el.setAttribute("aria-hidden", "true");
+  if (!el.parentElement) document.body.appendChild(el);
+  return el;
+})();
+//#endregion
+
+//#region State
+let selectedTeamId = null;
+let ownedTeamIds = new Set();   // teams where current user is owner
+let currentUserId = null;
+let allPins = [];
+let currentPlanName = "standard";
+let manageTeamUrl = "manageTeam.html";
+//#endregion
+
+//#region Language-Aware Links
+function resolveSelectedLanguage(languagePreference, language) {
+  return (languagePreference && languagePreference !== "auto")
+    ? languagePreference
+    : (language || "auto");
+}
+
+function updateManageTeamLinks(languagePreference, language) {
+  const lang = resolveSelectedLanguage(languagePreference, language);
+  manageTeamUrl = `manageTeam.html?lang=${encodeURIComponent(lang)}`;
+
+  const inlineLink = manageTeamSection?.querySelector('a[href^="manageTeam.html"]');
+  if (inlineLink) inlineLink.href = manageTeamUrl;
+}
+//#endregion
+
+//#region Filter (registered once)
+const filterInput = document.getElementById("pin-filter");
+filterInput?.addEventListener("input", () => {
+  const q = filterInput.value.trim().toLowerCase();
+  renderPins(q
+    ? allPins.filter((p) => p.title?.toLowerCase().includes(q) || p.url?.toLowerCase().includes(q))
+    : allPins
+  );
+});
+//#endregion
+
+setListMessage("Loading...");
 
 (async () => {
-  const { userId, email, token, plan, planName, picture } = await Storage.get([
-    "userId",
-    "email",
-    "token",
-    "plan",
-    "planName",
-    "picture",
+  const { userId, email, planName, picture, language, languagePreference } = await Storage.get([
+    "userId", "email", "planName", "picture", "language", "languagePreference",
   ]);
 
-  if (!userId || !token) {
+  if (!userId) {
     window.location.href = "auth.html";
     return;
   }
 
-  // 🔒 Validate token server-side; attempt silent refresh on 401
-  try {
-    const verifyRes = await authFetch(`${CONFIG.API_BASE}/auth/verifyCookies`);
-    if (!verifyRes.ok) {
-      await Storage.clear();
-      window.location.href = "auth.html";
-      return;
-    }
-  } catch {
-    // authFetch already handles redirect on auth failure — nothing more to do
-    return;
-  }
+  currentUserId = userId;
+  currentPlanName = planName || "standard";
+  updateManageTeamLinks(languagePreference, language);
 
-  if (emailDisplay) {
-    if (email) {
-      const tpl = t("popup.loggedInAs") || 'Logged in as: {email}';
-      emailDisplay.textContent = tpl.replace('{email}', email || '');
-    } else {
-      emailDisplay.textContent = "";
-    }
+  const emailDisplay = document.getElementById("email");
+  if (emailDisplay && email) {
+    emailDisplay.textContent = t("popup.loggedInAs", { email }, `Logged in as: ${email}`);
   }
 
   setUpNav();
-  applyPlanRestrictions(planName);
   loadUserData(picture);
-  loadTeams(userId);
-  loadPages(userId, selectedTeamId);
+
+  // Run team invites check and plan UI in parallel
+  await Promise.all([
+    loadIncomingInvites(),
+    applyPlanUI(currentPlanName, userId),
+  ]);
 })();
 
-// One-time filter setup — runs once on page load, not on every loadPages() call
-(function setupFilterListener() {
-  const filterInput = document.getElementById("pin-filter");
-  if (!filterInput) return;
-  filterInput.addEventListener("input", () => {
-    const q = filterInput.value.trim().toLowerCase();
-    if (!q) {
-      renderPins(allPins);
-      return;
+//#region Incoming Invite Notifications
+async function loadIncomingInvites() {
+  try {
+    const res = await authFetch(`${CONFIG.API_BASE}/teams/invites/my`);
+    if (!res.ok) return;
+
+    const { invites } = await res.json();
+    if (!invites || invites.length === 0) return;
+
+    incomingInvitesList.innerHTML = "";
+    invites.forEach((invite) => renderInviteCard(invite));
+    incomingInvitesSection?.classList.remove("hidden");
+  } catch (_) {
+    // Invites are non-critical — fail silently
+  }
+}
+
+function renderInviteCard(invite) {
+  const teamName = invite.team?.name || "a team";
+  const inviterName = invite.invitedBy?.name || invite.invitedBy?.email || "someone";
+
+  const li = document.createElement("li");
+  li.className = "list-item list-item--invite";
+  li.dataset.inviteId = invite._id;
+
+  const info = document.createElement("div");
+  info.className = "list-item__content";
+
+  const msg = document.createElement("span");
+  msg.className = "list-item__title";
+  msg.textContent = t("popup.invites.from", { team: teamName, inviter: inviterName },
+    `Invited to ${teamName} by ${inviterName}`);
+
+  info.appendChild(msg);
+  li.appendChild(info);
+
+  const actions = document.createElement("div");
+  actions.className = "list-item__actions";
+
+  const acceptBtn = document.createElement("button");
+  acceptBtn.className = "button-primary button--xs";
+  acceptBtn.textContent = t("popup.invites.accept", {}, "Accept");
+  acceptBtn.addEventListener("click", async () => {
+    try {
+      acceptBtn.disabled = true;
+      declineBtn.disabled = true;
+      const res = await authFetch(`${CONFIG.API_BASE}/teams/invites/${invite._id}/accept`, { method: "POST" });
+      if (!res.ok) throw new Error("accept failed");
+      toast.success(t("popup.invites.acceptSuccess", { team: teamName }, `You joined ${teamName}!`));
+      li.remove();
+      if (incomingInvitesList.children.length === 0) {
+        incomingInvitesSection?.classList.add("hidden");
+      }
+      // Refresh teams list and pins so newly joined team appears
+      if (isTeamPlan(currentPlanName)) {
+        await loadTeams(currentUserId);
+      }
+    } catch (_) {
+      toast.error(t("popup.invites.actionFailed", {}, "Action failed. Please try again."));
+      acceptBtn.disabled = false;
+      declineBtn.disabled = false;
     }
-    const filtered = allPins.filter(
-      (pin) =>
-        pin.title?.toLowerCase().includes(q) ||
-        pin.url?.toLowerCase().includes(q)
-    );
-    renderPins(filtered);
   });
-})();
+
+  const declineBtn = document.createElement("button");
+  declineBtn.className = "button-muted button--xs";
+  declineBtn.textContent = t("popup.invites.decline", {}, "Decline");
+  declineBtn.addEventListener("click", async () => {
+    try {
+      acceptBtn.disabled = true;
+      declineBtn.disabled = true;
+      const res = await authFetch(`${CONFIG.API_BASE}/teams/invites/${invite._id}/reject`, { method: "POST" });
+      if (!res.ok) throw new Error("decline failed");
+      toast.info(t("popup.invites.declineSuccess", {}, "Invite declined."));
+      li.remove();
+      if (incomingInvitesList.children.length === 0) {
+        incomingInvitesSection?.classList.add("hidden");
+      }
+    } catch (_) {
+      toast.error(t("popup.invites.actionFailed", {}, "Action failed. Please try again."));
+      acceptBtn.disabled = false;
+      declineBtn.disabled = false;
+    }
+  });
+
+  actions.appendChild(acceptBtn);
+  actions.appendChild(declineBtn);
+  li.appendChild(actions);
+  incomingInvitesList.appendChild(li);
+}
+//#endregion
+
+//#region Role-Aware UI
+function isOwnerOfTeam(teamId) {
+  if (!teamId) return true; // personal context → full access
+  return ownedTeamIds.has(teamId);
+}
+
+function applyTeamRoleUI(teamId) {
+  const isOwner = isOwnerOfTeam(teamId);
+
+  if (isOwner) {
+    pinActionsRow?.classList.remove("hidden");
+    readonlyBadgeRow?.classList.add("hidden");
+    // Show manage link only when viewing an owned team (not personal pins)
+    if (teamId) {
+      manageTeamSection?.classList.remove("hidden");
+    } else {
+      // Personal context: only show manage link if user owns at least one team
+      if (ownedTeamIds.size > 0) {
+        manageTeamSection?.classList.remove("hidden");
+      } else {
+        manageTeamSection?.classList.add("hidden");
+      }
+    }
+  } else {
+    // Member-only view: hide save actions, show read-only notice
+    pinActionsRow?.classList.add("hidden");
+    readonlyBadgeRow?.classList.remove("hidden");
+    manageTeamSection?.classList.add("hidden");
+  }
+}
+//#endregion
+
+//#region Plan UI
+async function applyPlanUI(planName, userId) {
+  if (isTeamPlan(planName)) {
+    teamSelectorRow?.classList.remove("hidden");
+    const { selectedTeamId: stored } = await Storage.get(["selectedTeamId"]);
+    selectedTeamId = stored || null;
+    await loadTeams(userId);
+  } else {
+    applyTeamRoleUI(null); // personal context, no team
+    await loadPages(userId, null);
+  }
+}
+//#endregion
 
 //#region Data Handlers
-
 async function loadTeams(userId) {
   try {
-    showLoader(t("popup.feedback.loadingTeams") || "Loading teams…");
+    showLoader("Loading teams…");
     const res = await authFetch(`${CONFIG.API_BASE}/extention/teams`);
-
     if (!res.ok) {
       hideLoader();
       throw new Error("Failed to fetch teams");
@@ -116,199 +266,172 @@ async function loadTeams(userId) {
 
     const teams = await res.json();
 
+    // Track which teams the current user owns
+    ownedTeamIds = new Set(
+      teams
+        .filter((team) => {
+          const ownerId = team.owner?._id || team.owner;
+          return String(ownerId) === String(userId);
+        })
+        .map((team) => team._id)
+    );
+
+    teamSelect.innerHTML = `<option value="">${t("popup.teamSelect.personal", {}, "My pins")}</option>`;
+
+    if (teams.length === 0) {
+      // No teams yet — guide the user to create one
+      hideLoader();
+      applyTeamRoleUI(null);
+      showNoTeamsState();
+      await loadPages(userId, null);
+      return;
+    }
+
     teams.forEach((team) => {
       const option = document.createElement("option");
       option.value = team._id;
-      option.textContent = team.name;
-      teamSelect?.appendChild(option);
+      const isOwner = ownedTeamIds.has(team._id);
+      option.textContent = isOwner ? team.name : `${team.name} (member)`;
+      teamSelect.appendChild(option);
     });
+
+    // Restore previously selected team if it still exists
+    if (selectedTeamId && teams.some((t) => t._id === selectedTeamId)) {
+      teamSelect.value = selectedTeamId;
+    } else {
+      selectedTeamId = null;
+      teamSelect.value = "";
+    }
+
     hideLoader();
+    applyTeamRoleUI(selectedTeamId);
+    await loadPages(userId, selectedTeamId);
   } catch (err) {
-    toast.error(t("popup.feedback.loadTeamsFailed"));
+    toast.error("Failed to load teams.");
     hideLoader();
+    applyTeamRoleUI(null);
+    await loadPages(userId, null);
   }
 }
 
 async function loadPages(userId, teamId = null) {
   try {
-    showLoader(t("popup.feedback.loadingPins") || "Loading pins…");
-
+    showLoader("Loading pins…");
     const query = teamId ? `?team=${teamId}` : "";
     const res = await authFetch(`${CONFIG.API_BASE}/pins${query}`);
 
     if (!res.ok) {
-      setListMessage(t("popup.errorLoading") || "Error loading pins.");
+      setListMessage("Error loading pins.");
       hideLoader();
       return;
     }
 
-    const result = await res.json();
-    const pins = result.data ?? result; // support both paginated and legacy flat responses
-    allPins = pins; // 🔥 cache for filtering
+    const pins = await res.json();
+    allPins = pins.data;
+    renderPins(pins.data);
 
-    // 💾 Persist to local storage for offline fallback
-    await Storage.setLocal({ cachedPins: pins, cachedPinsAt: Date.now() });
-
-    renderPins(pins);
-
-    if (!pins.length) {
-      setListMessage(t("popup.emptyListMessage") || "No pinned pages yet.");
-      hideLoader();
-      return;
-    }
-
+    if (!pins.data.length) setListMessage("No pinned pages yet.");
     hideLoader();
   } catch (err) {
-    // 📴 Network failure — try offline cache
-    try {
-      const { cachedPins } = await Storage.getLocal(["cachedPins"]);
-      if (cachedPins && cachedPins.length > 0) {
-        allPins = cachedPins;
-        renderPins(cachedPins);
-        setListMessage(t("popup.offlineMode") || "⚡ Offline mode — showing cached pins.");
-        hideLoader();
-        return;
-      }
-    } catch {
-      // Local storage unavailable — fall through to error message
-    }
-
-    toast.error(t("popup.feedback.loadPinsFailed"));
-    setListMessage(t("popup.feedback.loadPinsFailed") || "Failed to load pins.");
+    toast.error("Load error.");
+    setListMessage("Failed to load pins. Try again.");
     hideLoader();
   }
 }
 
 async function importPinnedTabs(userId) {
   try {
-    showLoader(t("popup.feedback.importingTabs") || "Importing pinned tabs…");
+    showLoader("Importing pinned tabs…");
 
-    // 1️⃣ User plan
     const { planName } = await Storage.get(["planName"]);
-    const isUnlimited = ["pro", "team"].includes(planName);
+    const limit = getPinLimit(planName);
 
-    // 2️⃣ Browser pinned tabs
-    const tabs = await new Promise((resolve) => {
-      chrome.tabs.query({ pinned: true }, resolve);
-    });
+    const tabs = await new Promise((resolve) => chrome.tabs.query({ pinned: true }, resolve));
 
-    // 3️⃣ Existing pins (already saved)
     const res = await authFetch(`${CONFIG.API_BASE}/pins`);
     if (!res.ok) throw new Error("Failed to fetch existing pins");
 
     const existingPins = await res.json();
-    const existingContexts = new Set(existingPins.map((pin) => pin.contextKey));
+    const existingContexts = new Set(existingPins.data.map((p) => p.contextKey));
+    const currentCount = existingPins.data.length;
 
-    // 4️⃣ Only NEW tabs (this is key)
-    let newTabs = tabs.filter((tab) => {
-      if (!tab.url) return false;
-
-      const contextKey = extractContextKey(tab.url);
-      return !existingContexts.has(contextKey);
-    });
+    let newTabs = tabs.filter((tab) => tab.url && !existingContexts.has(extractContextKey(tab.url)));
 
     if (newTabs.length === 0) {
-      toast.info(t("popup.feedback.alreadySaved"));
+      toast.info("All your pinned tabs are already saved.");
       return;
     }
 
-    const currentCount = existingPins.length;
-
-    // 5️⃣ Free plan enforcement
-    if (!isUnlimited) {
-      const MAX_PINS = 5;
-      const remainingSlots = MAX_PINS - currentCount;
-
-      if (remainingSlots <= 0) {
-        toast.warn(t("popup.feedback.planLimitReached") || "Free plan limit reached.");
+    if (limit !== Infinity) {
+      const remaining = limit - currentCount;
+      if (remaining <= 0) {
+        toast.warn(t("popup.pinLimitReached", {}, "You've reached your plan's pin limit. Upgrade to unlock more."));
         return;
       }
-
-      if (newTabs.length > remainingSlots) {
-        toast.info(
-          t("popup.feedback.planLimitPartial", { remaining: remainingSlots }) ||
-          `Only the first ${remainingSlots} will be imported.`
-        );
-
-        newTabs = newTabs.slice(0, remainingSlots);
+      if (newTabs.length > remaining) {
+        toast.info(`Your plan allows ${remaining} more pin${remaining > 1 ? "s" : ""}. Only the first ${remaining} will be imported.`);
+        newTabs = newTabs.slice(0, remaining);
       }
     }
 
-    // 6️⃣ Import only allowed NEW pins
-    const results = await Promise.allSettled(
-      newTabs.map((tab) =>
-        authFetch(`${CONFIG.API_BASE}/pins`, {
-          method: "POST",
-          body: JSON.stringify({
-            title: tab.title || tab.url,
-            url: normalizeUrl(tab.url),
-            contextKey: extractContextKey(tab.url),
-            time: new Date().toISOString(),
-            teamId: selectedTeamId || null,
-            favicon: tab.favIconUrl || null,
-          }),
-        })
-      )
-    );
+    await Promise.all(newTabs.map((tab) =>
+      authFetch(`${CONFIG.API_BASE}/pins`, {
+        method: "POST",
+        body: JSON.stringify({
+          title: tab.title || tab.url,
+          url: normalizeUrl(tab.url),
+          contextKey: extractContextKey(tab.url),
+          time: new Date().toISOString(),
+          teamId: selectedTeamId || null,
+          favicon: tab.favIconUrl || null,
+        }),
+      })
+    ));
 
-    const succeeded = results.filter((r) => r.status === "fulfilled").length;
-    const failed = results.length - succeeded;
-
-    if (succeeded > 0) {
-      toast.success(
-        failed > 0
-          ? t("popup.feedback.importedWithFailures", { count: succeeded, total: newTabs.length, failed }) || `Imported ${succeeded} of ${newTabs.length} (${failed} failed).`
-          : t("popup.feedback.imported", { count: succeeded, total: newTabs.length }) || `Imported ${succeeded} of ${newTabs.length} tab(s).`
-      );
-    } else {
-      toast.error(t("popup.feedback.importFailed"));
-    }
-
+    toast.success(`Imported ${newTabs.length} new pinned tab${newTabs.length > 1 ? "s" : ""}.`);
     loadPages(userId, selectedTeamId);
   } catch (err) {
-    toast.error(t("popup.feedback.importFailed"));
+    toast.error("Failed to import pinned tabs.");
   } finally {
     hideLoader();
   }
 }
-
 //#endregion
 
 //#region Event Listeners
-
-// `setUpNav` and `loadUserData` are provided by `utils/nav.js`.
-
 logoutButton?.addEventListener("click", async () => {
-  try {
-    await authFetch(`${CONFIG.API_BASE}/auth/logout`, { method: "POST" });
-  } catch {
-    // Ignore network errors — clear local state regardless
-  }
   await Storage.clear();
-  await Storage.removeLocal("importedOnce");
   window.location.href = "auth.html";
 });
 
-///
-/// Pin Current Tab
-///
 document.getElementById("pin-current")?.addEventListener("click", async () => {
-  const { userId } = await Storage.get(["userId"]);
+  const { userId, planName } = await Storage.get(["userId", "planName"]);
+  if (!userId) { toast.warn("You are not logged in."); return; }
 
-  if (!userId) {
-    toast.warn(t("popup.feedback.notLoggedIn"));
-    return;
-  }
-  showLoader(t("popup.feedback.pinningTab") || "Pinning current tab…");
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  showLoader("Pinning current tab…");
+  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
     const tab = tabs[0];
-    if (!tab || !tab.url) {
+    if (!tab?.url) {
       hideLoader();
-      toast.warn(t("popup.feedback.noActiveTab"));
+      toast.warn("No active tab found.");
       return;
     }
 
-    const favicon = tab.favIconUrl || null; // 🆕 use favicon instead
+    // Enforce pin limit for non-unlimited plans
+    const limit = getPinLimit(planName);
+    if (limit !== Infinity) {
+      try {
+        const check = await authFetch(`${CONFIG.API_BASE}/pins`);
+        if (check.ok) {
+          const existing = await check.json();
+          if (existing.data.length >= limit) {
+            hideLoader();
+            toast.warn(t("popup.pinLimitReached", {}, "You've reached your plan's pin limit. Upgrade to unlock more."));
+            return;
+          }
+        }
+      } catch (_) { /* proceed optimistically */ }
+    }
 
     authFetch(`${CONFIG.API_BASE}/pins`, {
       method: "POST",
@@ -318,62 +441,50 @@ document.getElementById("pin-current")?.addEventListener("click", async () => {
         contextKey: extractContextKey(tab.url),
         time: new Date().toISOString(),
         teamId: selectedTeamId || null,
-        favicon,
+        favicon: tab.favIconUrl || null,
       }),
     })
       .then(async (response) => {
         if (!response.ok) {
           const err = await response.json();
           hideLoader();
-          toast.error(t("popup.feedback.pinFailed"));
+          toast.error(`Failed to pin: ${err?.error || response.statusText}`);
         } else {
           loadPages(userId, selectedTeamId);
         }
       })
       .catch((error) => {
         hideLoader();
-        toast.error(t("popup.feedback.pinError"));
+        toast.error(`Something went wrong. ${error.message}`);
       });
   });
 });
 
 teamSelect?.addEventListener("change", async () => {
-  selectedTeamId = teamSelect.value === "__me" ? null : teamSelect.value;
-
+  selectedTeamId = teamSelect.value || null;
+  await Storage.set({ selectedTeamId: selectedTeamId || "" });
+  applyTeamRoleUI(selectedTeamId);
   const { userId } = await Storage.get(["userId"]);
-  if (userId) {
-    loadPages(userId, selectedTeamId);
-  }
+  if (userId) loadPages(userId, selectedTeamId);
 });
 
-reimportButton?.addEventListener("click", async () => {
-  if (reimportButton.disabled) return;
-  reimportButton.disabled = true;
-  try {
-    const { userId } = await Storage.get(["userId"]);
-    if (!userId) return;
-    await importPinnedTabs(userId);
-  } finally {
-    reimportButton.disabled = false;
-  }
+document.getElementById("reimport-button")?.addEventListener("click", async () => {
+  const { userId } = await Storage.get(["userId"]);
+  if (!userId) return;
+  await importPinnedTabs(userId);
 });
 
 window.addEventListener("unhandledrejection", () => {
   document.body.classList.remove("loading");
 });
-
 //#endregion
 
-//#region Private Functions
-
-// use shared implementation from utils/nav.js
-
+//#region Render
 function renderPins(pins) {
-  if (!list) return;
   list.innerHTML = "";
 
   if (!pins.length) {
-    setListMessage(t("popup.feedback.noMatches") || "No matching pins.");
+    setListMessage("No matching pins.");
     return;
   }
 
@@ -389,7 +500,8 @@ function renderPins(pins) {
     if (pin.favicon) {
       const img = document.createElement("img");
       img.src = pin.favicon;
-      img.alt = "Favicon";
+      img.alt = "";
+      img.setAttribute("aria-hidden", "true");
       img.className = "list-item__favicon";
       linkRow.appendChild(img);
     }
@@ -400,77 +512,107 @@ function renderPins(pins) {
     link.rel = "noopener noreferrer";
     link.className = "list-item__link";
     link.textContent = pin.title || pin.url;
-
     linkRow.appendChild(link);
 
     const meta = document.createElement("span");
     meta.className = "list-item__meta";
-    try {
-      meta.textContent = new URL(pin.url).hostname;
-    } catch {
-      if (meta) meta.textContent = t("popup.unknownSource") || 'Unknown source';
-    }
+    try { meta.textContent = new URL(pin.url).hostname; }
+    catch { meta.textContent = t("popup.unknownSource", {}, "Unknown source"); }
 
     content.appendChild(linkRow);
     content.appendChild(meta);
 
-    const removeBtn = document.createElement("button");
-    if (removeBtn) removeBtn.textContent = t("popup.remove") || 'Remove';
-    removeBtn.className = "icon-button";
-    removeBtn.onclick = async () => {
-      try {
-        showLoader(t("popup.feedback.removingPin") || "Removing pin…");
-        const res = await authFetch(`${CONFIG.API_BASE}/pins/${pin._id}`, {
-          method: "DELETE",
-        });
-        if (res.ok) {
+    // Only show remove button if user can manage this context
+    if (isOwnerOfTeam(selectedTeamId)) {
+      const removeBtn = document.createElement("button");
+      removeBtn.textContent = t("popup.remove", {}, "Remove");
+      removeBtn.setAttribute("aria-label", `Remove ${pin.title || pin.url}`);
+      removeBtn.className = "icon-button";
+      removeBtn.onclick = async () => {
+        try {
+          showLoader("Removing pin…");
+          const res = await authFetch(`${CONFIG.API_BASE}/pins/${pin._id}`, { method: "DELETE" });
+          if (res.ok) {
+            hideLoader();
+            toast.success("Pin removed.");
+            loadPages(null, selectedTeamId);
+          } else {
+            const err = await res.json();
+            hideLoader();
+            toast.error(err?.error || "Failed to remove pin.");
+          }
+        } catch (_) {
           hideLoader();
-          toast.success(t("popup.feedback.pinRemoved"));
-          loadPages(null, selectedTeamId);
-        } else {
-          const err = await res.json();
-          hideLoader();
-          toast.error(t("popup.feedback.deleteError"));
+          toast.error("Failed to remove pin.");
         }
-      } catch (err) {
-        hideLoader();
-        toast.error(t("popup.feedback.deleteError"));
-      }
-    };
+      };
+      li.appendChild(removeBtn);
+    }
 
-    const tooltip = createTooltip(pin);
-
-    if (tooltip) {
+    if (pin.summary || pin.tags?.length) {
       li.addEventListener("mouseenter", () => {
+        sharedTooltip.innerHTML = "";
+        if (pin.summary) {
+          const el = document.createElement("div");
+          el.className = "pin-tooltip__summary";
+          el.textContent = pin.summary;
+          sharedTooltip.appendChild(el);
+        }
+        if (pin.tags?.length) {
+          const el = document.createElement("div");
+          el.className = "pin-tooltip__tags";
+          pin.tags.forEach((tag) => {
+            const span = document.createElement("span");
+            span.textContent = `#${tag}`;
+            el.appendChild(span);
+          });
+          sharedTooltip.appendChild(el);
+        }
         const rect = li.getBoundingClientRect();
-        const tooltipRect = tooltip.getBoundingClientRect();
-
-        tooltip.style.top = `${
-          rect.top + window.scrollY - tooltipRect.height - 8
-        }px`;
-
-        tooltip.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
-
-        tooltip.style.transform = "translateX(-50%)";
-        tooltip.classList.add("visible");
+        sharedTooltip.style.top = `${rect.top + window.scrollY - 8}px`;
+        sharedTooltip.style.left = `${rect.left + window.scrollX + rect.width / 2}px`;
+        sharedTooltip.style.transform = "translateX(-50%) translateY(-100%)";
+        sharedTooltip.removeAttribute("aria-hidden");
+        sharedTooltip.classList.add("visible");
       });
-
       li.addEventListener("mouseleave", () => {
-        tooltip.classList.remove("visible");
+        sharedTooltip.classList.remove("visible");
+        sharedTooltip.setAttribute("aria-hidden", "true");
       });
     }
 
     li.appendChild(content);
-    li.appendChild(removeBtn);
     list.appendChild(li);
   });
 }
 
-function setListMessage(message) {
-  if (!list) {
-    return;
-  }
+function showNoTeamsState() {
+  if (!list) return;
+  list.innerHTML = "";
+  const li = document.createElement("li");
+  li.className = "list-item list-item--muted";
 
+  const msg = document.createElement("span");
+  msg.textContent = t("popup.noTeamsYet", {}, "You haven't created a team yet.");
+  li.appendChild(msg);
+
+  const ctaLink = document.createElement("a");
+  ctaLink.href = manageTeamUrl;
+  ctaLink.target = "_blank";
+  ctaLink.rel = "noopener noreferrer";
+  ctaLink.className = "link-inline";
+  ctaLink.style.marginLeft = "6px";
+  ctaLink.textContent = t("popup.createFirstTeam", {}, "Create your first team →");
+  li.appendChild(ctaLink);
+
+  list.appendChild(li);
+
+  // Ensure manage team link is visible so user knows where to go
+  manageTeamSection?.classList.remove("hidden");
+}
+
+function setListMessage(message) {
+  if (!list) return;
   list.innerHTML = "";
   const li = document.createElement("li");
   li.className = "list-item list-item--muted";
@@ -478,162 +620,24 @@ function setListMessage(message) {
   list.appendChild(li);
 }
 
-function applyPlanRestrictions(teamOwner) {
-  const teamSections = document.getElementById("manage-team-section");
-
-  const isTeamEnabled = teamOwner;
-
-  // Safety: reset selection if teams are disabled
-  if (!isTeamEnabled && teamSelect) {
-    teamSelect.value = "__me";
-    selectedTeamId = null;
-  }
-}
-normalizeUrl;
-
 function normalizeUrl(url) {
-  try {
-    const u = new URL(url);
-    u.hash = ""; // remove #anchors
-    return u.toString();
-  } catch {
-    return url;
-  }
+  try { const u = new URL(url); u.hash = ""; return u.toString(); }
+  catch { return url; }
 }
 
 function extractContextKey(url) {
   try {
     const u = new URL(url);
-
-    // ChatGPT
     if (u.hostname.includes("chat.openai.com")) {
       const parts = u.pathname.split("/").filter(Boolean);
-      if (parts[0] === "c" && parts.length >= 3) {
-        return `chatgpt:${parts[1]}:${parts[2]}`;
-      }
+      if (parts[0] === "c" && parts.length >= 3) return `chatgpt:${parts[1]}:${parts[2]}`;
     }
-
-    // GitHub issues
     if (u.hostname === "github.com") {
       const parts = u.pathname.split("/").filter(Boolean);
-      if (parts[2] === "issues" && parts[3]) {
-        return `github:${parts[0]}/${parts[1]}#${parts[3]}`;
-      }
+      if (parts[2] === "issues" && parts[3]) return `github:${parts[0]}/${parts[1]}#${parts[3]}`;
     }
-
-    // Jira (basic)
-    if (u.pathname.includes("/browse/")) {
-      const key = u.pathname.split("/browse/")[1];
-      return `jira:${key}`;
-    }
-
-    // Fallback
+    if (u.pathname.includes("/browse/")) return `jira:${u.pathname.split("/browse/")[1]}`;
     return `url:${normalizeUrl(url)}`;
-  } catch {
-    return `url:${url}`;
-  }
+  } catch { return `url:${url}`; }
 }
-
-function createTooltip(pin) {
-  if (!pin.summary && (!pin.tags || !pin.tags.length)) return null;
-
-  const tooltip = document.createElement("div");
-  tooltip.className = "pin-tooltip";
-
-  if (pin.summary) {
-    const summary = document.createElement("div");
-    summary.className = "pin-tooltip__summary";
-    summary.textContent = pin.summary;
-    tooltip.appendChild(summary);
-  }
-
-  if (pin.tags?.length) {
-    const tags = document.createElement("div");
-    tags.className = "pin-tooltip__tags";
-
-    pin.tags.forEach((tag) => {
-      const span = document.createElement("span");
-      span.textContent = `#${tag}`;
-      tags.appendChild(span);
-    });
-
-    tooltip.appendChild(tags);
-  }
-
-  document.body.appendChild(tooltip);
-  return tooltip;
-}
-
 //#endregion
-
-
-// Load popup strings (use existing `list` element)
-function loadPopupStrings(language) {
-  fetch("i18n.json")
-    .then((response) => response.json())
-    .then((translations) => {
-      const resolvedLanguage = I18N.resolveLocaleKey(translations, language);
-      const strings = translations[resolvedLanguage] || translations["en-US"];
-      window.__I18N_STRINGS = strings;
-      _popupStrings = strings;
-      try {
-        // Apply general UI translations
-        document.title = strings.settings?.title || document.title;
-        const brandP = document.querySelector('header.brand-banner p');
-        if (brandP) brandP.textContent = strings.popup.brandDescription;
-
-        const navPins = document.getElementById('nav-menu-pins');
-        const navProfile = document.getElementById('nav-menu-profile');
-        const navSettings = document.getElementById('nav-menu-settings');
-        if (navPins) navPins.textContent = strings.popup.nav.pins;
-        if (navProfile) navProfile.textContent = strings.popup.nav.profile;
-        if (navSettings) navSettings.textContent = strings.popup.nav.settings;
-
-        const sectionTitle = document.querySelector('.section-title');
-        if (sectionTitle) sectionTitle.textContent = strings.popup.sectionTitle;
-
-        const emailEl = document.getElementById('email');
-        if (emailEl) emailEl.textContent = strings.popup.emailChecking;
-
-        const pinCurrent = document.getElementById('pin-current');
-        const importBtn = document.getElementById('reimport-button');
-        if (pinCurrent) pinCurrent.textContent = strings.popup.pinCurrent;
-        if (importBtn) importBtn.textContent = strings.popup.importPinned;
-
-        const manageLink = document.querySelector('#manage-team-section a');
-        if (manageLink) manageLink.textContent = strings.popup.manageTeam;
-
-        const savedH4 = document.querySelector('#list-container header h4');
-        const savedP = document.querySelector('#list-container header p');
-        if (savedH4) savedH4.textContent = strings.popup.savedLinksTitle;
-        if (savedP) savedP.textContent = strings.popup.savedLinksDesc;
-
-        const filter = document.getElementById('pin-filter');
-        if (filter) filter.placeholder = strings.popup.filterPlaceholder;
-
-        const logout = document.getElementById('logout-button');
-        if (logout) logout.textContent = strings.popup.logout;
-
-        const loaderText = document.getElementById('loader-text');
-        if (loaderText) loaderText.textContent = strings.popup.loaderText;
-
-        // List-specific message
-        if (list) {
-          list.innerHTML = "";
-          const li = document.createElement('li');
-          li.className = 'list-item list-item--muted';
-          li.textContent = strings.popup.emptyListMessage;
-          list.appendChild(li);
-        }
-      } catch (e) {
-        console.error('Failed applying popup translations', e);
-      }
-    })
-    .catch((e) => console.error('Failed to load i18n.json', e));
-}
-
-// Load language dynamically
-chrome.storage.local.get(["language", "languagePreference"], (data) => {
-  const language = (data && data.languagePreference) || (data && data.language) || "auto";
-  loadPopupStrings(language);
-});

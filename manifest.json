@@ -1,14 +1,13 @@
 {
     "manifest_version": 3,
-    "name": "PinPocket — Smart Tab Manager",
-    "version": "1.1.0",
-    "description": "Save and organize browser tabs as personal pins, search your history, and access your pins anywhere.",
+    "name": "PinitY",
+    "version": "1.0",
+    "description": "Save and manage pinned pages.",
     "content_security_policy": {
-        "extension_pages": "script-src 'self'; style-src 'self' 'unsafe-inline'; object-src 'self'"
+        "extension_pages": "script-src 'self'; object-src 'self'"
     },
     "host_permissions": [
-        "https://pinity.uk/*",
-        "https://*.brs.devtunnels.ms/*"
+        "https://pinity.uk/*"
     ],
     "permissions": [
         "tabs",
@@ -17,22 +16,29 @@
         "identity",
         "activeTab"
     ],
+    "web_accessible_resources": [
+        {
+            "resources": ["icons/*.png", "icons/*.ico", "i18n.json"],
+            "matches": ["<all_urls>"]
+        }
+    ],
     "background": {
         "service_worker": "background.js",
         "type": "module"
     },
     "action": {
         "default_popup": "popup.html",
-        "default_title": "PinPocket",
         "default_icon": {
-            "16": "icons/icon16.png",
-            "48": "icons/icon48.png",
-            "128": "icons/icon128.png"
+            "16": "icons/icon.png",
+            "32": "icons/icon.png",
+            "48": "icons/icon.png",
+            "128": "icons/icon.png"
         }
     },
     "icons": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
+        "16": "icons/icon.png",
+        "32": "icons/icon.png",
+        "48": "icons/icon.png",
+        "128": "icons/icon.png"
     }
 }

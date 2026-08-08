@@ -5,12 +5,11 @@ const loaderText = document.getElementById("loader-text");
 //#endregion
 
 //#region Public API
-export function showLoader(text) {
+export function showLoader(text = "Loading…") {
   if (!loader) return;
 
-  const displayText = text || window.__I18N_STRINGS?.common?.loading || "Loading\u2026";
   if (loaderText) {
-    loaderText.textContent = displayText;
+    loaderText.textContent = text;
   }
 
   document.body.classList.add("loading");

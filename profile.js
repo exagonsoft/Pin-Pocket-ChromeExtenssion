@@ -62,8 +62,8 @@ const state = {
   subscriptionStatus: "inactive",
   billingPeriod: "",
   nextBillingDate: null,
-  paddleCustomerId: "",
-  paddleSubscriptionId: "",
+  paypalPayerId: "",
+  paypalSubscriptionId: "",
   userLoadedFromBackend: false,
   plansLoadedFromBackend: false,
 };
@@ -99,13 +99,13 @@ function t(key, vars = {}, fallback = "") {
 //#region Storage Helpers
 function getSyncStorage(keys) {
   return new Promise((resolve) => {
-    chrome.storage.sync.get(keys, (data) => resolve(data || {}));
+    chrome.storage.local.get(keys, (data) => resolve(data || {}));
   });
 }
 
 function setSyncStorage(values) {
   return new Promise((resolve, reject) => {
-    chrome.storage.sync.set(values, () => {
+    chrome.storage.local.set(values, () => {
       if (chrome.runtime.lastError) {
         reject(chrome.runtime.lastError);
         return;
@@ -144,15 +144,23 @@ function hasActiveSubscription() {
 function canOpenBillingPortal() {
   return Boolean(
     state.canManageBilling &&
-    state.paddleCustomerId &&
-    state.paddleSubscriptionId &&
+    state.paypalPayerId &&
+    state.paypalSubscriptionId &&
     state.hasSubscription,
   );
 }
 
 function canDirectCancel() {
   return Boolean(
-    state.paddleSubscriptionId &&
+    state.paypalSubscriptionId &&
+    state.hasSubscription &&
+    hasActiveSubscription(),
+  );
+}
+
+function canDirectPlanChange() {
+  return Boolean(
+    state.paypalSubscriptionId &&
     state.hasSubscription &&
     hasActiveSubscription(),
   );
@@ -179,6 +187,14 @@ function getPlanPriceForBillingPeriod(plan, billingPeriod) {
   const monthly = Number(plan.monthlyPrice || 0);
   const yearly = Number(plan.yearlyPrice || 0);
   return normalized === "yearly" ? yearly : monthly;
+}
+
+function getBillingPriceIdForPlan(plan, billingPeriod) {
+  if (!plan || typeof plan !== "object") return "";
+  const normalized = normalizeBillingPeriod(billingPeriod);
+  return String(
+    normalized === "yearly" ? plan.externalProductIdV2 : plan.externalProductId,
+  ).trim();
 }
 
 function hasPaidPriceForBillingPeriod(plan, billingPeriod) {
@@ -491,11 +507,6 @@ function updateActionButtons() {
   setButtonState(cancelBtn, canCancel);
 
   if (!hasRealActiveSubscription) {
-    if (!state.selectedPlanId) {
-      setActionNote("profile.hints.selectAPlan", "info");
-      return;
-    }
-
     if (!selectedIsPayable) {
       setActionNote("profile.hints.selectPaidPlan", "warn");
       return;
@@ -600,8 +611,8 @@ function resetBillingState() {
   state.subscriptionStatus = "inactive";
   state.billingPeriod = "";
   state.nextBillingDate = null;
-  state.paddleCustomerId = "";
-  state.paddleSubscriptionId = "";
+  state.paypalPayerId = "";
+  state.paypalSubscriptionId = "";
 }
 
 function applyBillingState(billing) {
@@ -638,13 +649,13 @@ function applyBillingState(billing) {
       ? incomingBillingPeriod
       : "";
   state.nextBillingDate = billing.nextBillingDate || null;
-  state.paddleCustomerId =
-    typeof billing.paddleCustomerId === "string"
-      ? billing.paddleCustomerId
+  state.paypalPayerId =
+    typeof billing.paypalPayerId === "string"
+      ? billing.paypalPayerId
       : "";
-  state.paddleSubscriptionId =
-    typeof billing.paddleSubscriptionId === "string"
-      ? billing.paddleSubscriptionId
+  state.paypalSubscriptionId =
+    typeof billing.paypalSubscriptionId === "string"
+      ? billing.paypalSubscriptionId
       : "";
   state.canManageBilling = Boolean(billing.canManageBilling);
 
@@ -686,9 +697,9 @@ function buildStoragePayload(source = {}) {
     selectedBillingPeriod:
       state.selectedBillingPeriod || source.selectedBillingPeriod || "monthly",
     nextBillingDate: state.nextBillingDate || source.nextBillingDate || null,
-    paddleCustomerId: state.paddleCustomerId || source.paddleCustomerId || "",
-    paddleSubscriptionId:
-      state.paddleSubscriptionId || source.paddleSubscriptionId || "",
+    paypalPayerId: state.paypalPayerId || source.paypalPayerId || "",
+    paypalSubscriptionId:
+      state.paypalSubscriptionId || source.paypalSubscriptionId || "",
   };
 }
 //#endregion
@@ -765,14 +776,11 @@ function renderPlans() {
 
   const currentPlan = getCurrentPlan();
   if (!state.selectedPlanId) {
-    if (currentPlan?._id) {
-      // User has an active plan — highlight it
-      state.selectedPlanId = String(currentPlan._id);
-    } else if (state.hasSubscription && getDefaultPaidPlan()?._id) {
-      // Has subscription but plan not resolved locally — pick default paid
-      state.selectedPlanId = String(getDefaultPaidPlan()._id);
-    }
-    // Otherwise leave empty — no card pre-selected for free/no-plan users
+    state.selectedPlanId = currentPlan?._id
+      ? String(currentPlan._id)
+      : getDefaultPaidPlan()?._id
+        ? String(getDefaultPaidPlan()._id)
+        : String(state.plans[0]._id);
   }
 
   state.plans.forEach((plan) => {
@@ -855,11 +863,12 @@ async function loadPlansFromServer() {
       const currentPlan = getCurrentPlan();
       if (currentPlan?._id) {
         state.selectedPlanId = String(currentPlan._id);
-      } else if (state.hasSubscription) {
+      } else {
         const fallbackPaid = getDefaultPaidPlan();
-        state.selectedPlanId = fallbackPaid?._id ? String(fallbackPaid._id) : "";
+        state.selectedPlanId = fallbackPaid?._id
+          ? String(fallbackPaid._id)
+          : "";
       }
-      // No subscription → leave empty (no card pre-selected)
     }
 
     renderPlans();
@@ -912,8 +921,8 @@ async function syncProfileFromServer() {
       billingPeriod: serverState.billing?.billingPeriod || "",
       selectedBillingPeriod: state.selectedBillingPeriod || "monthly",
       nextBillingDate: serverState.billing?.nextBillingDate || null,
-      paddleCustomerId: serverState.billing?.paddleCustomerId || "",
-      paddleSubscriptionId: serverState.billing?.paddleSubscriptionId || "",
+      paypalPayerId: serverState.billing?.paypalPayerId || "",
+      paypalSubscriptionId: serverState.billing?.paypalSubscriptionId || "",
     });
     await setSyncStorage(payload);
 
@@ -987,21 +996,20 @@ function saveProfile() {
     profileHandle: handleEl ? handleEl.value : "",
     statusMessage: statusEl ? statusEl.value : "",
     allowInvites: invitesEl ? invitesEl.checked : false,
-    autoRenew: autoRenewEl ? autoRenewEl.checked : false,
   };
 
   updateServerProfile(payload);
 }
 
-async function openBillingPortal(action = "overview") {
+async function openBillingPortal(action = "overview", payload = {}) {
   try {
     const response = await authFetch(`${CONFIG.API_BASE}/subscription/portal`, {
       method: "POST",
-      body: JSON.stringify({ action }),
+      body: JSON.stringify({ action, ...payload }),
     });
 
     const body = await response.json().catch(() => ({}));
-    if (!response.ok || !body.url) {
+    if (!response.ok) {
       logBillingApiFailure("portal", {
         action,
         status: response.status,
@@ -1016,7 +1024,21 @@ async function openBillingPortal(action = "overview") {
         showToast("warn", "profile.feedback.actionUnavailable");
         return;
       }
+      if (body?.code === "missing_paypal_plan_id") {
+        showToast("error", "profile.feedback.planUnavailable");
+        return;
+      }
       throw new Error(body.error || "portal_unavailable");
+    }
+
+    if (action === "upgrade" || action === "downgrade") {
+      showToast("success", "profile.feedback.saved");
+      await syncProfileFromServer();
+      return;
+    }
+
+    if (!body.url) {
+      throw new Error("portal_unavailable");
     }
 
     openExternalUrl(body.url);
@@ -1036,10 +1058,7 @@ async function createSubscriptionSession(plan) {
   const selectedBillingPeriod = normalizeBillingPeriod(
     state.selectedBillingPeriod,
   );
-  const billingPriceId =
-    selectedBillingPeriod === "yearly"
-      ? plan.yearlyPriceId
-      : plan.monthlyPriceId;
+  const billingPriceId = getBillingPriceIdForPlan(plan, selectedBillingPeriod);
 
   if (!billingPriceId) {
     showToast("error", "profile.feedback.planUnavailable");
@@ -1269,6 +1288,52 @@ function wireActions() {
         "profile.confirm.portal.message",
       );
       if (!ok) return;
+
+      const selectedBillingPeriod = normalizeBillingPeriod(
+        state.selectedBillingPeriod,
+      );
+      const selectedBillingPriceId = getBillingPriceIdForPlan(
+        selectedPlan,
+        selectedBillingPeriod,
+      );
+
+      if (!selectedBillingPriceId) {
+        showToast("error", "profile.feedback.planUnavailable");
+        return;
+      }
+
+      const currentPlan = getCurrentPlan();
+      const currentPlanId = currentPlan?._id ? String(currentPlan._id) : "";
+      const selectedPlanId = selectedPlan?._id ? String(selectedPlan._id) : "";
+      const samePlan = Boolean(currentPlanId && selectedPlanId && currentPlanId === selectedPlanId);
+      const currentBillingPeriod = normalizeBillingPeriod(state.billingPeriod);
+      const sameBillingPeriod = selectedBillingPeriod === currentBillingPeriod;
+
+      // Active subscribers should revise existing PayPal subscription rather than creating a new one.
+      if (canOpenBillingPortal() || canDirectPlanChange()) {
+        if (!samePlan || !sameBillingPeriod) {
+          const currentPrice = getPlanPriceForBillingPeriod(
+            currentPlan,
+            selectedBillingPeriod,
+          );
+          const selectedPrice = getPlanPriceForBillingPeriod(
+            selectedPlan,
+            selectedBillingPeriod,
+          );
+          const action = selectedPrice < currentPrice ? "downgrade" : "upgrade";
+          await openBillingPortal(action, {
+            billingPriceId: selectedBillingPriceId,
+            billingPeriod: selectedBillingPeriod,
+            planId: selectedPlanId,
+          });
+          return;
+        }
+
+        await openBillingPortal("overview");
+        return;
+      }
+
+      // Fallback: start a new checkout session (e.g. no active billing subscription)
       await createSubscriptionSession(selectedPlan);
     });
   }
@@ -1305,9 +1370,6 @@ function wireActions() {
     input.addEventListener("change", () => {
       if (!input.checked) return;
       state.selectedBillingPeriod = normalizeBillingPeriod(input.value);
-      setSyncStorage({
-        selectedBillingPeriod: state.selectedBillingPeriod,
-      }).catch(() => {});
       renderPlans();
       renderBillingState();
     });
@@ -1335,8 +1397,8 @@ async function loadProfile() {
     "billingPeriod",
     "selectedBillingPeriod",
     "nextBillingDate",
-    "paddleCustomerId",
-    "paddleSubscriptionId",
+    "paypalPayerId",
+    "paypalSubscriptionId",
   ]);
 
   if (!stored || !stored.userId) {
@@ -1369,10 +1431,8 @@ async function loadProfile() {
 }
 
 chrome.storage.local.get(["language", "languagePreference"], (result) => {
-  const lang =
-    (result && result.languagePreference) ||
-    (result && result.language) ||
-    "auto";
+  const pref = result?.languagePreference;
+  const lang = (pref && pref !== "auto") ? pref : (result?.language || "auto");
   I18N.loadAndApplyForLang(lang)
     .then(() => {
       window.__I18N_VARS = Object.assign(window.__I18N_VARS || {}, {
