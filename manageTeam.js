@@ -3,13 +3,15 @@ import { CONFIG } from './constants.js';
 import { authFetch } from "./utils/api.js";
 import { toast } from "./utils/toast.js";
 import * as Storage from "./utils/storage.js";
+import I18N from "./i18n.js";
 //#endregion
 
 //#region DOM References
 const teamSelector = document.getElementById('teamSelector');
 const inviteForm = document.getElementById('inviteForm');
-const inviteEmail = document.getElementById('inviteEmail');
+const inviteEmailInput = document.getElementById('inviteEmail');
 const memberList = document.getElementById('memberList');
+const pendingList = document.getElementById('pendingList');
 const renameInput = document.getElementById('renameInput');
 const renameButton = document.getElementById('renameButton');
 const deleteTeamButton = document.getElementById('deleteTeam');
@@ -23,19 +25,25 @@ let currentTeamId = null;
 let currentUserId = null;
 let isOwner = false;
 let cachedTeams = [];
-let MEMBER_EMPTY_MESSAGE = 'No members yet.';
-let TRANSLATIONS = null;
 //#endregion
 
-//#region Rendering
-function renderMembers(members, ownerId, emptyMessage) {
-  const emptyMsg = typeof emptyMessage === 'string' ? emptyMessage : MEMBER_EMPTY_MESSAGE;
+//#region Translation Helper
+function t(key, fallback = '') {
+  const strings = window.__I18N_STRINGS || {};
+  const val = key.split('.').reduce((o, k) => (o && o[k] !== undefined ? o[k] : undefined), strings);
+  return typeof val === 'string' ? val : fallback;
+}
+//#endregion
+
+//#region Member Rendering
+function renderMembers(members, ownerId) {
+  if (!memberList) return;
   memberList.innerHTML = '';
 
   if (!Array.isArray(members) || members.length === 0) {
     const li = document.createElement('li');
     li.className = 'list-item list-item--muted';
-    li.textContent = emptyMsg;
+    li.textContent = t('manageTeam.noMembers', 'No members yet.');
     memberList.appendChild(li);
     return;
   }
@@ -57,13 +65,13 @@ function renderMembers(members, ownerId, emptyMessage) {
     const meta = document.createElement('span');
     meta.className = 'list-item__meta';
     if (memberId === ownerId) {
-      meta.textContent = TRANSLATIONS?.manageTeam?.ownerLabel || 'Owner';
+      meta.textContent = t('manageTeam.ownerLabel', 'Owner');
     } else if (memberId === currentUserId) {
-      meta.textContent = TRANSLATIONS?.manageTeam?.youLabel || 'You';
+      meta.textContent = t('manageTeam.youLabel', 'You');
     } else if (member?.role) {
       meta.textContent = member.role;
     } else {
-      meta.textContent = TRANSLATIONS?.manageTeam?.memberLabel || 'Member';
+      meta.textContent = t('manageTeam.memberLabel', 'Member');
     }
 
     content.appendChild(title);
@@ -73,59 +81,150 @@ function renderMembers(members, ownerId, emptyMessage) {
     if (isOwner && memberId !== ownerId) {
       const removeBtn = document.createElement('button');
       removeBtn.className = 'icon-button';
-      removeBtn.textContent = TRANSLATIONS?.manageTeam?.removeButton || 'Remove';
+      removeBtn.textContent = t('manageTeam.members.remove', 'Remove');
+      removeBtn.setAttribute('aria-label', `Remove ${email}`);
       removeBtn.addEventListener('click', async () => {
         try {
           const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}/remove`, {
             method: 'POST',
-            body: JSON.stringify({ userIdToRemove: memberId })
+            body: JSON.stringify({ userIdToRemove: memberId }),
           });
-
           if (!response.ok) {
-            toast.error('Failed to remove member.');
+            toast.error(t('manageTeam.members.removeFailed', 'Failed to remove member.'));
             return;
           }
-
-          await loadTeams(currentUserId);
-          teamSelector.value = currentTeamId ?? '';
-          applyTeamState(cachedTeams.find((team) => team._id === currentTeamId) || null);
-        } catch (error) {
-          console.error('Failed to remove member:', error);
+          toast.success(t('manageTeam.members.removeSuccess', 'Member removed.'));
+          await reloadCurrentTeam();
+        } catch (err) {
+          console.error('Failed to remove member:', err);
+          toast.error(t('manageTeam.members.removeFailed', 'Failed to remove member.'));
         }
       });
-
       li.appendChild(removeBtn);
     }
 
     memberList.appendChild(li);
   });
 }
+//#endregion
 
+//#region Pending Invites Rendering
+async function loadPendingInvites() {
+  if (!pendingList || !currentTeamId || !isOwner) return;
+
+  pendingList.innerHTML = '';
+
+  try {
+    const res = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}/invites`);
+    if (!res.ok) throw new Error('Failed to load invites');
+
+    const { invites } = await res.json();
+
+    if (!invites || invites.length === 0) {
+      const li = document.createElement('li');
+      li.className = 'list-item list-item--muted';
+      li.textContent = t('manageTeam.pendingInvites.none', 'No pending invites.');
+      pendingList.appendChild(li);
+      return;
+    }
+
+    invites.forEach((invite) => {
+      const li = document.createElement('li');
+      li.className = 'list-item';
+
+      const content = document.createElement('div');
+      content.className = 'list-item__content';
+
+      const email = document.createElement('span');
+      email.className = 'list-item__title';
+      email.textContent = invite.invitedEmail;
+
+      const meta = document.createElement('span');
+      meta.className = 'list-item__meta';
+      meta.textContent = invite.createdAt
+        ? new Intl.DateTimeFormat(undefined, { month: 'short', day: 'numeric' }).format(new Date(invite.createdAt))
+        : '';
+
+      content.appendChild(email);
+      content.appendChild(meta);
+      li.appendChild(content);
+
+      const revokeBtn = document.createElement('button');
+      revokeBtn.className = 'icon-button icon-button--danger';
+      revokeBtn.textContent = t('manageTeam.pendingInvites.revoke', 'Revoke');
+      revokeBtn.setAttribute('aria-label', `Revoke invite for ${invite.invitedEmail}`);
+      revokeBtn.addEventListener('click', async () => {
+        try {
+          const response = await authFetch(
+            `${CONFIG.API_BASE}/teams/${currentTeamId}/invites/${invite._id}`,
+            { method: 'DELETE' }
+          );
+          if (!response.ok) {
+            toast.error(t('manageTeam.pendingInvites.revokeFailed', 'Failed to revoke invite.'));
+            return;
+          }
+          toast.success(t('manageTeam.pendingInvites.revokeSuccess', 'Invite revoked.'));
+          await loadPendingInvites();
+        } catch (err) {
+          console.error('Revoke invite error:', err);
+          toast.error(t('manageTeam.pendingInvites.revokeFailed', 'Failed to revoke invite.'));
+        }
+      });
+
+      li.appendChild(revokeBtn);
+      pendingList.appendChild(li);
+    });
+  } catch (err) {
+    console.error('Failed to load pending invites:', err);
+    const li = document.createElement('li');
+    li.className = 'list-item list-item--muted';
+    li.textContent = t('manageTeam.pendingInvites.loadFailed', 'Could not load pending invites.');
+    pendingList.appendChild(li);
+  }
+}
+//#endregion
+
+//#region Team State
 function applyTeamState(team) {
   if (!team) {
     currentTeamId = null;
     isOwner = false;
     ownerControls?.classList.add('hidden');
-    if (renameInput) {
-      renameInput.value = '';
-    }
-    renderMembers(null, null, TRANSLATIONS?.manageTeam?.selectTeamMessage || 'Select a team to see members.');
+    if (renameInput) renameInput.value = '';
+    renderMembers([], null);
+    hidePendingInvites();
     return;
   }
 
   currentTeamId = team._id;
   const ownerId = team?.owner?._id || team?.owner;
-  isOwner = ownerId === currentUserId;
+  isOwner = String(ownerId) === String(currentUserId);
 
   if (ownerControls) {
     ownerControls.classList.toggle('hidden', !isOwner);
   }
 
-  if (renameInput) {
-    renameInput.value = team?.name || '';
-  }
+  if (renameInput) renameInput.value = team?.name || '';
 
   renderMembers(team?.members || [], ownerId);
+
+  if (isOwner) {
+    showPendingInvites();
+    loadPendingInvites();
+  } else {
+    hidePendingInvites();
+  }
+}
+
+function showPendingInvites() {
+  const section = document.getElementById('pending-invites-section');
+  if (section) section.classList.remove('hidden');
+}
+
+function hidePendingInvites() {
+  const section = document.getElementById('pending-invites-section');
+  if (section) section.classList.add('hidden');
+  if (pendingList) pendingList.innerHTML = '';
 }
 //#endregion
 
@@ -133,19 +232,15 @@ function applyTeamState(team) {
 async function loadTeams(userId) {
   try {
     const res = await authFetch(`${CONFIG.API_BASE}/teams`);
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch teams');
-    }
+    if (!res.ok) throw new Error('Failed to fetch teams');
 
     cachedTeams = await res.json();
     const previouslySelected = currentTeamId;
 
     if (teamSelector) {
-        if (teamSelector) {
-          const choose = window.__I18N_STRINGS?.manageTeam?.chooseTeam || 'Choose a team...';
-          teamSelector.innerHTML = `<option value="">${choose}</option>`;
-        }
+      const placeholder = t('manageTeam.chooseTeam', 'Choose a team…');
+      teamSelector.innerHTML = `<option value="">${placeholder}</option>`;
+
       cachedTeams.forEach((team) => {
         const option = document.createElement('option');
         option.value = team._id;
@@ -153,45 +248,32 @@ async function loadTeams(userId) {
         teamSelector.appendChild(option);
       });
 
-      if (previouslySelected && cachedTeams.some((team) => team._id === previouslySelected)) {
+      if (previouslySelected && cachedTeams.some((t) => t._id === previouslySelected)) {
         teamSelector.value = previouslySelected;
-        applyTeamState(cachedTeams.find((team) => team._id === previouslySelected) || null);
+        applyTeamState(cachedTeams.find((t) => t._id === previouslySelected) || null);
       } else {
         applyTeamState(null);
       }
     }
-  } catch (error) {
-    console.error('Failed to load teams:', error);
-    renderMembers(null, null, 'Unable to load teams.');
+  } catch (err) {
+    console.error('Failed to load teams:', err);
+    renderMembers([], null);
   }
 }
 
-async function init() {
-  try {
-    const stored = await Storage.get(["userId"]);
-    currentUserId = stored?.userId || null;
-  } catch (error) {
-    console.error('Unable to read user from storage:', error);
-  }
-
-  if (!currentUserId) {
-    window.location.href = 'auth.html';
-    return;
-  }
-
-  renderMembers(null, null, TRANSLATIONS?.manageTeam?.selectTeamMessage || 'Select a team to see members.');
+async function reloadCurrentTeam() {
   await loadTeams(currentUserId);
+  if (currentTeamId && teamSelector) {
+    teamSelector.value = currentTeamId;
+    applyTeamState(cachedTeams.find((t) => t._id === currentTeamId) || null);
+  }
 }
 //#endregion
 
 //#region Event Handlers
 teamSelector?.addEventListener('change', () => {
-  if (!teamSelector) {
-    return;
-  }
-
   const nextId = teamSelector.value || null;
-  const team = cachedTeams.find((entry) => entry._id === nextId) || null;
+  const team = cachedTeams.find((t) => t._id === nextId) || null;
   applyTeamState(team);
 });
 
@@ -199,100 +281,99 @@ inviteForm?.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   if (!currentTeamId) {
-    toast.warn(TRANSLATIONS?.manageTeam?.selectTeamFirst || 'Select a team first.');
+    toast.warn(t('manageTeam.selectTeamFirst', 'Select a team first.'));
     return;
   }
 
-  const email = inviteEmail?.value.trim();
+  const email = inviteEmailInput?.value.trim();
   if (!email) {
-    toast.warn(TRANSLATIONS?.manageTeam?.enterValidEmail || 'Please enter a valid email.');
+    toast.warn(t('manageTeam.enterValidEmail', 'Please enter a valid email address.'));
     return;
   }
 
   try {
-    const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}/invite`, {
+    const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}/invites`, {
       method: 'POST',
-      body: JSON.stringify({ emails: [email] })
+      body: JSON.stringify({ email }),
     });
 
+    const body = await response.json().catch(() => ({}));
+
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      toast.error(`Failed to send invite: ${error?.error || response.statusText}`);
+      if (response.status === 409) {
+        toast.warn(t('manageTeam.inviteAlreadyPending', 'An invite is already pending for this email.'));
+        return;
+      }
+      toast.error(body?.error || t('manageTeam.inviteFailed', 'Failed to send invite.'));
       return;
     }
 
-    if (inviteEmail) {
-      inviteEmail.value = '';
-    }
-
-    await loadTeams(currentUserId);
-    teamSelector.value = currentTeamId ?? '';
-    applyTeamState(cachedTeams.find((team) => team._id === currentTeamId) || null);
-  } catch (error) {
-    console.error('Invite error:', error);
-    toast.error('Failed to send invite. Please try again.');
+    if (inviteEmailInput) inviteEmailInput.value = '';
+    toast.success(t('manageTeam.inviteSuccess', 'Invitation sent.'));
+    await loadPendingInvites();
+  } catch (err) {
+    console.error('Invite error:', err);
+    toast.error(t('manageTeam.inviteFailed', 'Failed to send invite.'));
   }
 });
 
 renameButton?.addEventListener('click', async () => {
-    if (!currentTeamId) {
-    toast.warn(TRANSLATIONS?.manageTeam?.selectTeamFirst || 'Select a team first.');
+  if (!currentTeamId) {
+    toast.warn(t('manageTeam.selectTeamFirst', 'Select a team first.'));
     return;
   }
 
   const newName = renameInput?.value.trim();
   if (!newName) {
-    toast.warn(TRANSLATIONS?.manageTeam?.enterNewTeamName || 'Enter a new team name.');
+    toast.warn(t('manageTeam.enterNewTeamName', 'Enter a new team name.'));
     return;
   }
 
   try {
     const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}`, {
       method: 'PATCH',
-      body: JSON.stringify({ name: newName })
+      body: JSON.stringify({ name: newName }),
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      toast.error(`Failed to rename team: ${error?.error || response.statusText}`);
+      const body = await response.json().catch(() => ({}));
+      toast.error(body?.error || 'Failed to rename team.');
       return;
     }
 
-    await loadTeams(currentUserId);
-    teamSelector.value = currentTeamId ?? '';
-    applyTeamState(cachedTeams.find((team) => team._id === currentTeamId) || null);
+    await reloadCurrentTeam();
     toast.success('Team renamed.');
-  } catch (error) {
-    console.error('Rename error:', error);
+  } catch (err) {
+    console.error('Rename error:', err);
     toast.error('Could not rename the team. Please try again.');
   }
 });
 
 deleteTeamButton?.addEventListener('click', async () => {
   if (!currentTeamId) {
-    toast.warn(TRANSLATIONS?.manageTeam?.selectTeamFirst || 'Select a team first.');
+    toast.warn(t('manageTeam.selectTeamFirst', 'Select a team first.'));
     return;
   }
 
-  const confirmed = confirm(TRANSLATIONS?.manageTeam?.deleteConfirm || 'Are you sure you want to delete this team and all its pins?');
-  if (!confirmed) {
-    return;
-  }
+  const confirmed = confirm(t('manageTeam.deleteConfirm', 'Are you sure you want to delete this team and all its pins? This cannot be undone.'));
+  if (!confirmed) return;
 
   try {
-    const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}`);
+    const response = await authFetch(`${CONFIG.API_BASE}/teams/${currentTeamId}`, {
+      method: 'DELETE',
+    });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      toast.error(`Failed to delete team: ${error?.error || response.statusText}`);
+      const body = await response.json().catch(() => ({}));
+      toast.error(body?.error || 'Failed to delete team.');
       return;
     }
 
     currentTeamId = null;
     await loadTeams(currentUserId);
     toast.success('Team deleted.');
-  } catch (error) {
-    console.error('Delete error:', error);
+  } catch (err) {
+    console.error('Delete error:', err);
     toast.error('Could not delete the team. Please try again.');
   }
 });
@@ -300,161 +381,59 @@ deleteTeamButton?.addEventListener('click', async () => {
 createTeamButton?.addEventListener('click', async () => {
   const name = newTeamNameInput?.value.trim();
   if (!name) {
-    toast.warn(TRANSLATIONS?.manageTeam?.enterTeamNameFirst || 'Enter a team name first.');
+    toast.warn(t('manageTeam.enterTeamNameFirst', 'Enter a team name first.'));
     return;
   }
 
   try {
     const response = await authFetch(`${CONFIG.API_BASE}/teams`, {
       method: 'POST',
-      body: JSON.stringify({ name })
+      body: JSON.stringify({ name }),
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      toast.error(`Failed to create team: ${error?.error || response.statusText}`);
+      const body = await response.json().catch(() => ({}));
+      toast.error(body?.error || t('manageTeam.createFailed', 'Could not create the team. Please try again.'));
       return;
     }
 
-    if (newTeamNameInput) {
-      newTeamNameInput.value = '';
-    }
-
+    if (newTeamNameInput) newTeamNameInput.value = '';
     await loadTeams(currentUserId);
-    toast.success(TRANSLATIONS?.manageTeam?.teamCreated || 'Team created.');
-  } catch (error) {
-    console.error('Create team error:', error);
-    toast.error(TRANSLATIONS?.manageTeam?.createFailed || 'Could not create the team. Please try again.');
+    toast.success(t('manageTeam.teamCreated', 'Team created successfully.'));
+  } catch (err) {
+    console.error('Create team error:', err);
+    toast.error(t('manageTeam.createFailed', 'Could not create the team. Please try again.'));
   }
 });
-//#endregion
-
-//#region Translation Loading
-// Load team management strings (no redeclaration of `teamSelector`)
-function resolveLocaleKey(translations, preferredLanguage) {
-  const keys = Object.keys(translations || {});
-  if (!keys.length) return "en-US";
-
-  const normalize = (locale) => {
-    if (!locale || typeof locale !== "string") return "";
-    const parts = locale.trim().replace(/_/g, "-").split("-").filter(Boolean);
-    if (!parts.length) return "";
-    if (parts[0] === "auto") return "auto";
-    if (parts.length === 1) return parts[0].toLowerCase();
-    return `${parts[0].toLowerCase()}-${parts[1].toUpperCase()}`;
-  };
-
-  const normalizedMap = new Map();
-  keys.forEach((key) => normalizedMap.set(normalize(key), key));
-
-  const findMatch = (candidate) => {
-    const normalized = normalize(candidate);
-    if (!normalized || normalized === "auto") return null;
-    if (normalizedMap.has(normalized)) return normalizedMap.get(normalized);
-    const base = normalized.split("-")[0];
-    if (!base) return null;
-    return keys.find((key) => normalize(key).split("-")[0] === base) || null;
-  };
-
-  const candidates = [];
-  if (preferredLanguage) candidates.push(preferredLanguage);
-  if (navigator.language) candidates.push(navigator.language);
-  if (Array.isArray(navigator.languages)) candidates.push(...navigator.languages);
-  candidates.push("en-US");
-
-  for (let i = 0; i < candidates.length; i += 1) {
-    const match = findMatch(candidates[i]);
-    if (match) return match;
-  }
-
-  return translations["en-US"] ? "en-US" : keys[0];
-}
-
-function loadTeamManagementStrings(language) {
-  fetch("i18n.json")
-    .then((response) => response.json())
-    .then((translations) => {
-      const resolvedLanguage = resolveLocaleKey(translations, language);
-      const strings = translations[resolvedLanguage] || translations["en-US"];
-      TRANSLATIONS = strings;
-
-      // Document-level strings
-      if (strings.manageTeam) {
-        document.title = strings.manageTeam.title || document.title;
-        const headerH1 = document.querySelector('header.brand-banner h1');
-        if (headerH1) headerH1.textContent = strings.manageTeam.title || headerH1.textContent;
-        const headerP = document.querySelector('header.brand-banner p');
-        if (headerP) headerP.textContent = strings.manageTeam.description || headerP.textContent;
-
-        // Create team section
-        const createH4 = document.querySelector('.settings-section:nth-of-type(1) header h4');
-        if (createH4) createH4.textContent = strings.manageTeam.createTitle || createH4.textContent;
-        const createP = document.querySelector('.settings-section:nth-of-type(1) header p');
-        if (createP) createP.textContent = strings.manageTeam.createDesc || createP.textContent;
-        const teamLabel = document.querySelector('label[for="newTeamName"] span');
-        if (teamLabel) teamLabel.textContent = strings.manageTeam.teamNameLabel || teamLabel.textContent;
-        if (newTeamNameInput) newTeamNameInput.placeholder = strings.manageTeam.teamNamePlaceholder || newTeamNameInput.placeholder;
-        if (createTeamButton) createTeamButton.textContent = strings.manageTeam.createTeamButton || createTeamButton.textContent;
-
-        // Select team section
-        const selectH4 = document.querySelector('.settings-section:nth-of-type(2) header h4');
-        if (selectH4) selectH4.textContent = strings.manageTeam.selectTitle || selectH4.textContent;
-        const selectP = document.querySelector('.settings-section:nth-of-type(2) header p');
-        if (selectP) selectP.textContent = strings.manageTeam.selectDesc || selectP.textContent;
-        const activeTeamLabel = document.querySelector('label[for="teamSelector"] span');
-        if (activeTeamLabel) activeTeamLabel.textContent = strings.manageTeam.activeTeamLabel || activeTeamLabel.textContent;
-
-        // Owner controls
-        const ownerH4 = document.querySelector('#ownerControls header h4');
-        if (ownerH4) ownerH4.textContent = strings.manageTeam.ownerControlsTitle || ownerH4.textContent;
-        const ownerP = document.querySelector('#ownerControls header p');
-        if (ownerP) ownerP.textContent = strings.manageTeam.ownerControlsDesc || ownerP.textContent;
-        const renameLabel = document.querySelector('label[for="renameInput"] span');
-        if (renameLabel) renameLabel.textContent = strings.manageTeam.renameLabel || renameLabel.textContent;
-        if (renameInput) renameInput.placeholder = strings.manageTeam.renamePlaceholder || renameInput.placeholder;
-        if (renameButton) renameButton.textContent = strings.manageTeam.renameButton || renameButton.textContent;
-        if (deleteTeamButton) deleteTeamButton.textContent = strings.manageTeam.deleteTeamButton || deleteTeamButton.textContent;
-
-        // Invite section
-        const inviteH4 = document.querySelector('.settings-section:nth-of-type(3) header h4');
-        if (inviteH4) inviteH4.textContent = strings.manageTeam.inviteTitle || inviteH4.textContent;
-        const inviteP = document.querySelector('.settings-section:nth-of-type(3) header p');
-        if (inviteP) inviteP.textContent = strings.manageTeam.inviteDesc || inviteP.textContent;
-        const inviteLabel = document.querySelector('label[for="inviteEmail"] span');
-        if (inviteLabel) inviteLabel.textContent = strings.manageTeam.inviteEmailLabel || inviteLabel.textContent;
-        if (inviteEmail) inviteEmail.placeholder = strings.manageTeam.inviteEmailPlaceholder || inviteEmail.placeholder;
-        const inviteBtn = document.querySelector('form#inviteForm button[type="submit"]');
-        if (inviteBtn) inviteBtn.textContent = strings.manageTeam.inviteButton || inviteBtn.textContent;
-
-        // Members section
-        const membersH4 = document.querySelector('.settings-section:nth-of-type(4) header h4');
-        if (membersH4) membersH4.textContent = strings.manageTeam.membersTitle || membersH4.textContent;
-        const membersP = document.querySelector('.settings-section:nth-of-type(4) header p');
-        if (membersP) membersP.textContent = strings.manageTeam.membersDesc || membersP.textContent;
-
-        // Defaults
-        MEMBER_EMPTY_MESSAGE = strings.manageTeam.membersEmpty || MEMBER_EMPTY_MESSAGE;
-      }
-
-      if (teamSelector) {
-        if (teamSelector) {
-          const choose = window.__I18N_STRINGS?.manageTeam?.chooseTeam || 'Choose a team...';
-          teamSelector.innerHTML = `<option value="">${choose}</option>`;
-        }
-      }
-    })
-    .catch((e) => {
-      console.error('Failed to load i18n.json', e);
-    });
-}
 //#endregion
 
 //#region Bootstrap
-// Load language dynamically
-chrome.storage.local.get(["language", "languagePreference"], (data) => {
-  const language = (data && data.languagePreference) || (data && data.language) || "auto";
-  loadTeamManagementStrings(language);
-});
+async function init() {
+  try {
+    const stored = await Storage.get(["userId"]);
+    currentUserId = stored?.userId || null;
+  } catch (err) {
+    console.error('Unable to read user from storage:', err);
+  }
 
-init();
+  if (!currentUserId) {
+    window.location.href = 'auth.html';
+    return;
+  }
+
+  renderMembers([], null);
+  await loadTeams(currentUserId);
+}
+
+// Load language first, then initialize
+chrome.storage.local.get(["language", "languagePreference"], (data) => {
+  const urlLang = new URLSearchParams(window.location.search).get("lang");
+  // When preference is "auto", use the already-resolved language from storage
+  // instead of re-running browser detection — ensures the same language as the popup
+  const pref = data?.languagePreference;
+  const lang = urlLang || ((pref && pref !== "auto") ? pref : (data?.language || "auto"));
+  I18N.loadAndApplyForLang(lang)
+    .then(() => init())
+    .catch(() => init());
+});
 //#endregion

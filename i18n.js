@@ -9,6 +9,18 @@ const I18N = (function () {
 
   let translationsCachePromise = null;
 
+  function getI18nJsonUrl() {
+    try {
+      const runtime = (globalThis.chrome && chrome.runtime) || (globalThis.browser && browser.runtime);
+      if (runtime && typeof runtime.getURL === 'function') {
+        return runtime.getURL('i18n.json');
+      }
+    } catch (_) {
+      // ignore
+    }
+    return 'i18n.json';
+  }
+
   function normalizeLocale(locale) {
     if (!locale || typeof locale !== 'string') return '';
     const value = locale.trim();
@@ -49,7 +61,7 @@ const I18N = (function () {
 
   function getTranslations() {
     if (!translationsCachePromise) {
-      translationsCachePromise = fetch('i18n.json')
+      translationsCachePromise = fetch(getI18nJsonUrl())
         .then((r) => r.json())
         .catch((e) => {
           translationsCachePromise = null;
@@ -144,11 +156,11 @@ const I18N = (function () {
       if (val !== undefined && val !== null && 'placeholder' in el) el.placeholder = formatString(val);
     });
 
-    // data-i18n-html -> innerHTML
+    // data-i18n-html -> textContent (innerHTML avoided to prevent XSS)
     document.querySelectorAll('[data-i18n-html]').forEach((el) => {
       const key = el.getAttribute('data-i18n-html');
       const val = get(translations, key);
-      if (val !== undefined && val !== null) el.innerHTML = formatString(val);
+      if (val !== undefined && val !== null) el.textContent = formatString(val);
     });
 
     // data-i18n-alt -> image alt
@@ -174,11 +186,15 @@ const I18N = (function () {
         const resolvedLang = resolveLanguageKey(translations, lang);
         const strings = translations[resolvedLang] || translations['en-US'] || {};
         applyTranslations(strings);
+        document.documentElement.lang = resolvedLang.split('-')[0] || 'en';
         window.__I18N_STRINGS = strings;
         window.__I18N_LANG = resolvedLang;
         return strings;
       })
       .catch((e) => {
+        if (e && (e.name === 'AbortError' || e.message === 'The operation was aborted.')) {
+          return {};
+        }
         console.error('i18n load error', e);
         return {};
       });
@@ -230,7 +246,8 @@ const I18N = (function () {
     try {
       if (chrome && chrome.storage && chrome.storage.local) {
         chrome.storage.local.get(['language', 'languagePreference', 'theme'], (data) => {
-          const lang = (data && data.languagePreference) || (data && data.language) || 'auto';
+          const pref = data && data.languagePreference;
+          const lang = (pref && pref !== 'auto') ? pref : ((data && data.language) || 'auto');
           const theme = (data && data.theme) || 'system';
           loadAndApplyForLang(lang);
           // apply theme on init
@@ -266,10 +283,18 @@ const I18N = (function () {
     if (chrome && chrome.storage && chrome.storage.onChanged) {
       chrome.storage.onChanged.addListener((changes, area) => {
         if (area !== 'local') return;
-        if (changes.languagePreference) {
-          loadAndApplyForLang(changes.languagePreference.newValue || 'auto');
-        } else if (changes.language) {
-          loadAndApplyForLang(changes.language.newValue || 'auto');
+        if (changes.languagePreference || changes.language) {
+          const nextPref = changes.languagePreference?.newValue;
+          const nextLang = changes.language?.newValue;
+          if (nextPref && nextPref !== 'auto') {
+            loadAndApplyForLang(nextPref);
+          } else if (nextLang) {
+            loadAndApplyForLang(nextLang);
+          } else if (nextPref === 'auto') {
+            chrome.storage.local.get(['language'], (data) => {
+              loadAndApplyForLang((data && data.language) || 'auto');
+            });
+          }
         }
         if (changes.theme) {
           const newTheme = changes.theme.newValue || 'light';
@@ -301,7 +326,15 @@ const I18N = (function () {
           if (!msg || typeof msg !== 'object') return;
           if (msg.type === 'storage-changed') {
             const { key, value } = msg;
-            if (key === 'language' || key === 'languagePreference') {
+            if (key === 'languagePreference') {
+              if (value && value !== 'auto') {
+                loadAndApplyForLang(value);
+              } else {
+                chrome.storage.local.get(['language'], (data) => {
+                  loadAndApplyForLang((data && data.language) || 'auto');
+                });
+              }
+            } else if (key === 'language') {
               loadAndApplyForLang(value || 'auto');
             }
             if (key === 'theme') {

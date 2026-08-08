@@ -1,37 +1,54 @@
 {
     "manifest_version": 3,
     "name": "PinitY",
-    "version": "1.0",
+    "version": "1.0.1",
     "description": "Save and manage pinned pages.",
+    "browser_specific_settings": {
+        "gecko": {
+            "id": "pinity-extension@pinity.uk",
+            "strict_min_version": "121.0"
+        }
+    },
     "content_security_policy": {
         "extension_pages": "script-src 'self'; object-src 'self'"
     },
     "host_permissions": [
-        "https://your-backend-domain.com/*"
+        "https://pinity.uk/*",
+        "https://*.devtunnels.ms/*"
     ],
     "permissions": [
         "tabs",
         "storage",
         "contextMenus",
         "identity",
-        "storage",
         "activeTab"
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": ["icons/*.png", "icons/*.ico", "i18n.json"],
+            "matches": ["<all_urls>"]
+        }
     ],
     "background": {
         "service_worker": "background.js",
+        "scripts": [
+            "background.js"
+        ],
         "type": "module"
     },
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
             "16": "icons/icon.png",
+            "32": "icons/icon.png",
             "48": "icons/icon.png",
-            "64": "icons/icon.png"
+            "128": "icons/icon.png"
         }
     },
     "icons": {
         "16": "icons/icon.png",
+        "32": "icons/icon.png",
         "48": "icons/icon.png",
-        "64": "icons/icon.png"
+        "128": "icons/icon.png"
     }
 }

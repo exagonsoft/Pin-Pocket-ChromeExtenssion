@@ -65,33 +65,6 @@ function setLanguageDetectedNote(noteEl, selectEl, preference, resolvedLanguage)
 }
 //#endregion
 
-//#region Auth Message Handler
-function handleAuthMessage(event) {
-  if (event.origin !== CONFIG.BACKEND_BASE) return;
-  const data = event.data;
-  if (!data || data.type !== "authSuccess") return;
-
-  const { token, email, userId, plan, planName, team, teamOwner, picture } = data;
-  if (!token || !userId) {
-    console.error("Invalid auth payload:", data);
-    toast.error(t("auth.errors.invalidLoginResponse"));
-    return;
-  }
-
-  (async () => {
-    try {
-      await Storage.set({ userId, email, token, plan, planName, team, teamOwner, picture });
-      await Storage.remove("importedOnce");
-      window.removeEventListener("message", handleAuthMessage);
-      window.location.href = "popup.html";
-    } catch (err) {
-      console.error("Failed to persist auth state:", err);
-      toast.error(t("auth.errors.saveSessionFailed"));
-    }
-  })();
-}
-//#endregion
-
 //#region Form Controls
 function showForm(id) {
   document.querySelectorAll(".form").forEach((formEl) => {
@@ -279,8 +252,6 @@ async function init() {
 }
 
 init();
-
-window.addEventListener("message", handleAuthMessage);
 //#endregion
 
 //#region Login
@@ -310,6 +281,7 @@ document.getElementById("login")?.addEventListener("submit", async (e) => {
       userId: data.user._id,
       email: data.user.email,
       token: data.token,
+      refreshToken: data.refreshToken,
       plan: data.user.plan,
       planName: data.user.planName,
       team: data.user.team,
@@ -326,13 +298,34 @@ document.getElementById("login")?.addEventListener("submit", async (e) => {
 //#endregion
 
 //#region Google Login
-document.getElementById("google-login")?.addEventListener("click", () => {
-  const loginWindow = window.open(
-    `${CONFIG.BACKEND_BASE}/auth/firebase`,
-    "_blank",
-    "width=500,height=650"
-  );
-  if (!loginWindow) toast.error(t("auth.errors.popupBlocked"));
+document.getElementById("google-login")?.addEventListener("click", async () => {
+  const button = document.getElementById("google-login");
+  if (button) button.disabled = true;
+
+  chrome.runtime.sendMessage({ type: "google-auth-start" }, (result) => {
+    if (button) button.disabled = false;
+
+    const runtimeError = chrome.runtime.lastError?.message || "";
+    if (runtimeError) {
+      // Popup may close during auth; in that case background still completes login.
+      if (!runtimeError.toLowerCase().includes("message port closed")) {
+        console.error("Google auth message error:", runtimeError);
+        toast.error(t("auth.errors.googleFailed", "Google sign-in failed."));
+      }
+      return;
+    }
+
+    if (result?.ok) {
+      window.location.href = "popup.html";
+      return;
+    }
+
+    const err = result?.error || "";
+    if (!String(err).toLowerCase().includes("cancel")) {
+      console.error("Google auth failed:", err);
+      toast.error(t("auth.errors.googleFailed", "Google sign-in failed."));
+    }
+  });
 });
 //#endregion
 
@@ -372,6 +365,7 @@ document.getElementById("register")?.addEventListener("submit", async (e) => {
       userId: data.user._id,
       email: data.user.email,
       token: data.token,
+      refreshToken: data.refreshToken,
       plan: data.user.plan,
       planName: data.user.planName,
       picture: data.user.picture

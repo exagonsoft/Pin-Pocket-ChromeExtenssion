@@ -81,33 +81,102 @@
       "savedLinksDesc": "Newest pins appear first.",
       "filterPlaceholder": "🔍 Filter pins by title or URL…",
       "logout": "Log out",
-      "loaderText": "Loading…"
+      "loaderText": "Loading…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "You haven't created a team yet.",
+      "createFirstTeam": "Create your first team →"
     },
     "manageTeam": {
-      "heading": "Manage team",
+      "title": "Manage Team",
+      "heading": "Manage Team",
       "desc": "Invite and manage team members for shared boards.",
       "create": {
         "title": "Create a team",
-        "desc": "Create a new team to share pins and boards.",
+        "desc": "Create a new team to share pins with teammates.",
         "action": "Create"
       },
       "select": {
         "title": "Select active team",
-        "desc": "Choose which team to act on behalf of."
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "Owner",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "Invite members",
-        "desc": "Send invitations to your teammates.",
-        "action": "Invite"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "Choose a team...",
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "Remove",
+        "removeFailed": "Failed to remove member.",
+        "removeSuccess": "Member removed."
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
       "selectTeamLabel": "Active team",
-      "createTeamPlaceholder": "Design squad",
       "inviteMember": "Invite member",
       "noMembers": "No members yet.",
-      "you": "You",
-      "member": "Member"
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "Profile",
@@ -393,7 +462,29 @@
         "saveLanguage": "Could not save language preference. Please try again.",
         "enterEmail": "Please enter your email.",
         "resetFailed": "Reset failed. Please try again.",
-        "passwordMinLength": "Use at least {{min}} characters."
+        "passwordMinLength": "Use at least {{min}} characters.",
+        "googleFailed": "Google sign-in failed. Please try again."
+      }
+    },
+    "reset": {
+      "title": "Reset Password",
+      "heading": "Reset Your Password",
+      "desc": "Enter the token you received by email and your new password.",
+      "action": "Reset Password",
+      "back": "Back to login",
+      "success": "Password updated successfully. Please log in.",
+      "fields": {
+        "token": "Reset Token",
+        "newPassword": "New Password"
+      },
+      "placeholders": {
+        "token": "Paste your reset token",
+        "newPassword": "Enter new password"
+      },
+      "errors": {
+        "enterBoth": "Please enter both token and new password.",
+        "failedPrefix": "Reset failed:",
+        "network": "Network error. Please try again."
       }
     }
   },
@@ -479,33 +570,102 @@
       "savedLinksDesc": "Newest pins appear first.",
       "filterPlaceholder": "🔍 Filter pins by title or URL…",
       "logout": "Log out",
-      "loaderText": "Loading…"
+      "loaderText": "Loading…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "You haven't created a team yet.",
+      "createFirstTeam": "Create your first team →"
     },
     "manageTeam": {
-      "heading": "Manage team",
+      "title": "Manage Team",
+      "heading": "Manage Team",
       "desc": "Invite and manage team members for shared boards.",
       "create": {
         "title": "Create a team",
-        "desc": "Create a new team to share pins and boards.",
+        "desc": "Create a new team to share pins with teammates.",
         "action": "Create"
       },
       "select": {
         "title": "Select active team",
-        "desc": "Choose which team to act on behalf of."
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "Owner",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "Invite members",
-        "desc": "Send invitations to your teammates.",
-        "action": "Invite"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "Choose a team...",
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "Remove",
+        "removeFailed": "Failed to remove member.",
+        "removeSuccess": "Member removed."
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
       "selectTeamLabel": "Active team",
-      "createTeamPlaceholder": "Design squad",
       "inviteMember": "Invite member",
       "noMembers": "No members yet.",
-      "you": "You",
-      "member": "Member"
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "Profile",
@@ -791,7 +951,29 @@
         "saveLanguage": "Could not save language preference. Please try again.",
         "enterEmail": "Please enter your email.",
         "resetFailed": "Reset failed. Please try again.",
-        "passwordMinLength": "Use at least {{min}} characters."
+        "passwordMinLength": "Use at least {{min}} characters.",
+        "googleFailed": "Google sign-in failed. Please try again."
+      }
+    },
+    "reset": {
+      "title": "Reset Password",
+      "heading": "Reset Your Password",
+      "desc": "Enter the token you received by email and your new password.",
+      "action": "Reset Password",
+      "back": "Back to login",
+      "success": "Password updated successfully. Please log in.",
+      "fields": {
+        "token": "Reset Token",
+        "newPassword": "New Password"
+      },
+      "placeholders": {
+        "token": "Paste your reset token",
+        "newPassword": "Enter new password"
+      },
+      "errors": {
+        "enterBoth": "Please enter both token and new password.",
+        "failedPrefix": "Reset failed:",
+        "network": "Network error. Please try again."
       }
     }
   },
@@ -877,33 +1059,102 @@
       "savedLinksDesc": "Los pines más recientes aparecen primero.",
       "filterPlaceholder": "🔍 Filtrar pines por título o URL…",
       "logout": "Cerrar sesión",
-      "loaderText": "Cargando…"
+      "loaderText": "Cargando…",
+      "teamLabel": "Equipo",
+      "personalLabel": "Personal",
+      "pinLimitReached": "Alcanzaste el límite de pines de tu plan. Actualiza para desbloquear más.",
+      "pinLimitFree": "Plan Standard: hasta 50 pines. Actualiza a Pro o Team para pines ilimitados.",
+      "loggedInAs": "Conectado como: {email}",
+      "remove": "Eliminar",
+      "unknownSource": "Fuente desconocida",
+      "teamSelect": {
+        "label": "Ver pines de",
+        "personal": "Mis pines",
+        "placeholder": "Selecciona equipo…"
+      },
+      "invites": {
+        "title": "Invitaciones de equipo",
+        "from": "Invitado a {team} por {inviter}",
+        "accept": "Aceptar",
+        "decline": "Rechazar",
+        "acceptSuccess": "¡Te uniste a {team}!",
+        "declineSuccess": "Invitación rechazada.",
+        "actionFailed": "La acción falló. Inténtalo de nuevo.",
+        "readOnly": "Solo lectura — contacta al propietario del equipo para guardar pines"
+      },
+      "noTeamsYet": "Aún no has creado un equipo.",
+      "createFirstTeam": "Crea tu primer equipo →"
     },
     "manageTeam": {
+      "title": "Gestionar equipo",
       "heading": "Gestionar equipo",
       "desc": "Invita y gestiona miembros del equipo para tableros compartidos.",
       "create": {
         "title": "Crear un equipo",
-        "desc": "Crea un nuevo equipo para compartir pines y tableros.",
+        "desc": "Crea un equipo nuevo para compartir pines con tu equipo.",
         "action": "Crear"
       },
       "select": {
         "title": "Seleccionar equipo activo",
-        "desc": "Elige el equipo con el que actuar."
+        "desc": "Elige qué equipo gestionar.",
+        "placeholder": "Selecciona un equipo…"
       },
-      "owner": "Propietario",
+      "owner": {
+        "title": "Controles del propietario",
+        "desc": "Renombra o elimina este equipo.",
+        "rename": "Renombrar",
+        "delete": "Eliminar equipo"
+      },
       "invite": {
-        "title": "Invitar miembros",
-        "desc": "Envía invitaciones a tus compañeros.",
-        "action": "Invitar"
+        "title": "Invitar a un miembro",
+        "desc": "Envía una invitación a un compañero por correo electrónico.",
+        "action": "Enviar invitación"
       },
-      "chooseTeam": "Elige un equipo...",
+      "pendingInvites": {
+        "title": "Invitaciones pendientes",
+        "desc": "Invitaciones pendientes de aceptación.",
+        "none": "No hay invitaciones pendientes.",
+        "revoke": "Revocar",
+        "revokeSuccess": "Invitación revocada.",
+        "revokeFailed": "No se pudo revocar la invitación.",
+        "loadFailed": "No se pudieron cargar las invitaciones pendientes."
+      },
+      "members": {
+        "title": "Miembros",
+        "desc": "Miembros activos de este equipo.",
+        "remove": "Eliminar",
+        "removeFailed": "Error al eliminar miembro.",
+        "removeSuccess": "Miembro eliminado."
+      },
+      "fields": {
+        "teamName": "Nombre del equipo",
+        "activeTeam": "Equipo activo",
+        "rename": "Nuevo nombre",
+        "email": "Correo electrónico"
+      },
+      "placeholders": {
+        "teamName": "Ej.: Equipo de diseño",
+        "rename": "Nuevo nombre del equipo…",
+        "email": "companero@empresa.com"
+      },
+      "selectTeamFirst": "Selecciona primero un equipo.",
+      "enterValidEmail": "Ingresa un correo electrónico válido.",
+      "enterNewTeamName": "Ingresa un nuevo nombre de equipo.",
+      "enterTeamNameFirst": "Ingresa primero un nombre de equipo.",
+      "deleteConfirm": "¿Seguro que quieres eliminar este equipo y todos sus pines? Esta acción no se puede deshacer.",
+      "teamCreated": "Equipo creado correctamente.",
+      "createFailed": "No se pudo crear el equipo. Inténtalo de nuevo.",
+      "noTeams": "Aún no tienes equipos.",
+      "youLabel": "Tú",
+      "ownerLabel": "Propietario",
+      "memberLabel": "Miembro",
+      "chooseTeam": "Selecciona un equipo…",
       "selectTeamLabel": "Equipo activo",
-      "createTeamPlaceholder": "Equipo de diseño",
       "inviteMember": "Invitar miembro",
       "noMembers": "Aún no hay miembros.",
-      "you": "Tú",
-      "member": "Miembro"
+      "inviteAlreadyPending": "Ya hay una invitación pendiente para este correo.",
+      "inviteSuccess": "Invitación enviada.",
+      "inviteFailed": "No se pudo enviar la invitación."
     },
     "profile": {
       "title": "Perfil",
@@ -925,7 +1176,7 @@
       "displayName": "Apodo",
       "displayNamePlaceholder": "Añade un nombre amigable",
       "profileHandle": "Handle de perfil",
-      "profileHandlePlaceholder": "@Pinity-pro",
+      "profileHandlePlaceholder": "@tuusuario",
       "statusMessage": "Mensaje de estado",
       "statusPlaceholder": "Haz saber a tus compañeros lo que coleccionas",
       "allowInvites": "Permitir invitaciones",
@@ -979,13 +1230,13 @@
         "note": "Elige cada cuánto quieres que se cobre.",
         "ariaLabel": "Opciones de periodo de facturación del checkout"
       },
-      "planStarter": "Starter",
-      "planPro": "Pro",
+      "planStarter": "Plan Standard",
+      "planPro": "Plan Pro",
       "planStarterMeta": "Para flujos personales y colaboración ligera.",
       "planProMeta": "Para usuarios avanzados y equipos pequeños.",
       "plan": {
         "starter": {
-          "name": "Starter",
+          "name": "Standard",
           "price": "Gratis",
           "meta": "Para flujos personales y colaboración ligera.",
           "features": {
@@ -1005,12 +1256,12 @@
           }
         },
         "labels": {
-          "dynamic": "{{name}}",
-          "starter": "Starter",
+          "dynamic": "Actual",
+          "starter": "Standard",
           "free": "Gratis",
           "basic": "Básico",
           "pro": "Pro",
-          "team": "Equipo"
+          "team": "Team"
         },
         "meta": {
           "default": "Los detalles del plan son gestionados por el administrador del espacio de trabajo.",
@@ -1029,8 +1280,8 @@
       },
       "actions": {
         "subscribe": "Suscribirse",
-        "upgrade": "Mejorar",
-        "downgrade": "Bajar plan",
+        "upgrade": "Mejorar plan",
+        "downgrade": "Bajar de plan",
         "cancel": "Cancelar plan",
         "modifyPlan": "Modificar plan"
       },
@@ -1102,7 +1353,7 @@
       },
       "features": {
         "unknown": "Los detalles de funcionalidades aparecerán cuando estén disponibles.",
-        "fallback": "{{feature}}",
+        "fallback": "Funciones incluidas según tu plan",
         "extension": "Acceso desde la extensión",
         "unlimited-pins": "Pines ilimitados",
         "cloud-sync": "Sincronización en la nube",
@@ -1134,7 +1385,7 @@
       },
       "placeholders": {
         "name": "Tu nombre completo",
-        "email": "tu@ejemplo.com",
+        "email": "tu@correo.com",
         "password": "********",
         "confirmPassword": "Repite la contraseña"
       },
@@ -1189,7 +1440,29 @@
         "saveLanguage": "No se pudo guardar la preferencia de idioma. Intenta de nuevo.",
         "enterEmail": "Por favor ingresa tu correo.",
         "resetFailed": "Error al restablecer. Por favor intenta de nuevo.",
-        "passwordMinLength": "Usa al menos {{min}} caracteres."
+        "passwordMinLength": "Usa al menos {{min}} caracteres.",
+        "googleFailed": "El inicio de sesión con Google falló. Por favor, inténtalo de nuevo."
+      }
+    },
+    "reset": {
+      "title": "Restablecer contraseña",
+      "heading": "Restablece tu contraseña",
+      "desc": "Ingresa el token recibido por correo y tu nueva contraseña.",
+      "action": "Restablecer contraseña",
+      "back": "Volver al inicio de sesión",
+      "success": "Contraseña actualizada correctamente. Por favor, inicia sesión.",
+      "fields": {
+        "token": "Token de restablecimiento",
+        "newPassword": "Nueva contraseña"
+      },
+      "placeholders": {
+        "token": "Pega tu token",
+        "newPassword": "Ingresa la nueva contraseña"
+      },
+      "errors": {
+        "enterBoth": "Por favor, ingresa el token y la nueva contraseña.",
+        "failedPrefix": "Error al restablecer:",
+        "network": "Error de red. Por favor, inténtalo de nuevo."
       }
     }
   },
@@ -1275,33 +1548,102 @@
       "savedLinksDesc": "Los pines más recientes aparecen primero.",
       "filterPlaceholder": "🔍 Filtrar pines por título o URL…",
       "logout": "Cerrar sesión",
-      "loaderText": "Cargando…"
+      "loaderText": "Cargando…",
+      "teamLabel": "Equipo",
+      "personalLabel": "Personal",
+      "pinLimitReached": "Alcanzaste el límite de pines de tu plan. Actualiza para desbloquear más.",
+      "pinLimitFree": "Plan Standard: hasta 50 pines. Actualiza a Pro o Team para pines ilimitados.",
+      "loggedInAs": "Conectado como: {email}",
+      "remove": "Eliminar",
+      "unknownSource": "Fuente desconocida",
+      "teamSelect": {
+        "label": "Ver pines de",
+        "personal": "Mis pines",
+        "placeholder": "Selecciona equipo…"
+      },
+      "invites": {
+        "title": "Invitaciones de equipo",
+        "from": "Invitado a {team} por {inviter}",
+        "accept": "Aceptar",
+        "decline": "Rechazar",
+        "acceptSuccess": "¡Te uniste a {team}!",
+        "declineSuccess": "Invitación rechazada.",
+        "actionFailed": "La acción falló. Inténtalo de nuevo.",
+        "readOnly": "Solo lectura — contacta al propietario del equipo para guardar pines"
+      },
+      "noTeamsYet": "Aún no has creado un equipo.",
+      "createFirstTeam": "Crea tu primer equipo →"
     },
     "manageTeam": {
+      "title": "Gestionar equipo",
       "heading": "Gestionar equipo",
       "desc": "Invita y gestiona miembros del equipo para tableros compartidos.",
       "create": {
         "title": "Crear un equipo",
-        "desc": "Crea un nuevo equipo para compartir pines y tableros.",
+        "desc": "Crea un equipo nuevo para compartir pines con tu equipo.",
         "action": "Crear"
       },
       "select": {
         "title": "Seleccionar equipo activo",
-        "desc": "Elige el equipo con el que actuar."
+        "desc": "Elige qué equipo gestionar.",
+        "placeholder": "Selecciona un equipo…"
       },
-      "owner": "Propietario",
+      "owner": {
+        "title": "Controles del propietario",
+        "desc": "Renombra o elimina este equipo.",
+        "rename": "Renombrar",
+        "delete": "Eliminar equipo"
+      },
       "invite": {
-        "title": "Invitar miembros",
-        "desc": "Envía invitaciones a tus compañeros.",
-        "action": "Invitar"
+        "title": "Invitar a un miembro",
+        "desc": "Envía una invitación a un compañero por correo electrónico.",
+        "action": "Enviar invitación"
       },
-      "chooseTeam": "Elige un equipo...",
+      "pendingInvites": {
+        "title": "Invitaciones pendientes",
+        "desc": "Invitaciones pendientes de aceptación.",
+        "none": "No hay invitaciones pendientes.",
+        "revoke": "Revocar",
+        "revokeSuccess": "Invitación revocada.",
+        "revokeFailed": "No se pudo revocar la invitación.",
+        "loadFailed": "No se pudieron cargar las invitaciones pendientes."
+      },
+      "members": {
+        "title": "Miembros",
+        "desc": "Miembros activos de este equipo.",
+        "remove": "Eliminar",
+        "removeFailed": "Error al eliminar miembro.",
+        "removeSuccess": "Miembro eliminado."
+      },
+      "fields": {
+        "teamName": "Nombre del equipo",
+        "activeTeam": "Equipo activo",
+        "rename": "Nuevo nombre",
+        "email": "Correo electrónico"
+      },
+      "placeholders": {
+        "teamName": "Ej.: Equipo de diseño",
+        "rename": "Nuevo nombre del equipo…",
+        "email": "companero@empresa.com"
+      },
+      "selectTeamFirst": "Selecciona primero un equipo.",
+      "enterValidEmail": "Ingresa un correo electrónico válido.",
+      "enterNewTeamName": "Ingresa un nuevo nombre de equipo.",
+      "enterTeamNameFirst": "Ingresa primero un nombre de equipo.",
+      "deleteConfirm": "¿Seguro que quieres eliminar este equipo y todos sus pines? Esta acción no se puede deshacer.",
+      "teamCreated": "Equipo creado correctamente.",
+      "createFailed": "No se pudo crear el equipo. Inténtalo de nuevo.",
+      "noTeams": "Aún no tienes equipos.",
+      "youLabel": "Tú",
+      "ownerLabel": "Propietario",
+      "memberLabel": "Miembro",
+      "chooseTeam": "Selecciona un equipo…",
       "selectTeamLabel": "Equipo activo",
-      "createTeamPlaceholder": "Equipo de diseño",
       "inviteMember": "Invitar miembro",
       "noMembers": "Aún no hay miembros.",
-      "you": "Tú",
-      "member": "Miembro"
+      "inviteAlreadyPending": "Ya hay una invitación pendiente para este correo.",
+      "inviteSuccess": "Invitación enviada.",
+      "inviteFailed": "No se pudo enviar la invitación."
     },
     "profile": {
       "title": "Perfil",
@@ -1323,7 +1665,7 @@
       "displayName": "Apodo",
       "displayNamePlaceholder": "Añade un nombre amigable",
       "profileHandle": "Handle de perfil",
-      "profileHandlePlaceholder": "@Pinity-pro",
+      "profileHandlePlaceholder": "@tuusuario",
       "statusMessage": "Mensaje de estado",
       "statusPlaceholder": "Haz saber a tus compañeros lo que coleccionas",
       "allowInvites": "Permitir invitaciones",
@@ -1377,13 +1719,13 @@
         "note": "Elige cada cuánto quieres que se cobre.",
         "ariaLabel": "Opciones de periodo de facturación del checkout"
       },
-      "planStarter": "Starter",
-      "planPro": "Pro",
+      "planStarter": "Plan Standard",
+      "planPro": "Plan Pro",
       "planStarterMeta": "Para flujos personales y colaboración ligera.",
       "planProMeta": "Para usuarios avanzados y equipos pequeños.",
       "plan": {
         "starter": {
-          "name": "Starter",
+          "name": "Standard",
           "price": "Gratis",
           "meta": "Para flujos personales y colaboración ligera.",
           "features": {
@@ -1403,12 +1745,12 @@
           }
         },
         "labels": {
-          "dynamic": "{{name}}",
-          "starter": "Starter",
+          "dynamic": "Actual",
+          "starter": "Standard",
           "free": "Gratis",
           "basic": "Básico",
           "pro": "Pro",
-          "team": "Equipo"
+          "team": "Team"
         },
         "meta": {
           "default": "Los detalles del plan son gestionados por el administrador del espacio de trabajo.",
@@ -1427,8 +1769,8 @@
       },
       "actions": {
         "subscribe": "Suscribirse",
-        "upgrade": "Mejorar",
-        "downgrade": "Bajar plan",
+        "upgrade": "Mejorar plan",
+        "downgrade": "Bajar de plan",
         "cancel": "Cancelar plan",
         "modifyPlan": "Modificar plan"
       },
@@ -1500,7 +1842,7 @@
       },
       "features": {
         "unknown": "Los detalles de funcionalidades aparecerán cuando estén disponibles.",
-        "fallback": "{{feature}}",
+        "fallback": "Funciones incluidas según tu plan",
         "extension": "Acceso desde la extensión",
         "unlimited-pins": "Pines ilimitados",
         "cloud-sync": "Sincronización en la nube",
@@ -1532,7 +1874,7 @@
       },
       "placeholders": {
         "name": "Tu nombre completo",
-        "email": "tu@ejemplo.com",
+        "email": "tu@correo.com",
         "password": "********",
         "confirmPassword": "Repite la contraseña"
       },
@@ -1587,7 +1929,29 @@
         "saveLanguage": "No se pudo guardar la preferencia de idioma. Intenta de nuevo.",
         "enterEmail": "Por favor ingresa tu correo.",
         "resetFailed": "Error al restablecer. Por favor intenta de nuevo.",
-        "passwordMinLength": "Usa al menos {{min}} caracteres."
+        "passwordMinLength": "Usa al menos {{min}} caracteres.",
+        "googleFailed": "El inicio de sesión con Google falló. Por favor, inténtalo de nuevo."
+      }
+    },
+    "reset": {
+      "title": "Restablecer contraseña",
+      "heading": "Restablece tu contraseña",
+      "desc": "Ingresa el token que recibiste por correo y tu nueva contraseña.",
+      "action": "Restablecer contraseña",
+      "back": "Regresar al inicio de sesión",
+      "success": "Contraseña actualizada correctamente. Por favor, inicia sesión.",
+      "fields": {
+        "token": "Token de restablecimiento",
+        "newPassword": "Nueva contraseña"
+      },
+      "placeholders": {
+        "token": "Pega tu token",
+        "newPassword": "Ingresa la nueva contraseña"
+      },
+      "errors": {
+        "enterBoth": "Por favor, ingresa el token y la nueva contraseña.",
+        "failedPrefix": "Error al restablecer:",
+        "network": "Error de red. Por favor, inténtalo de nuevo."
       }
     }
   },
@@ -1673,33 +2037,102 @@
       "savedLinksDesc": "Les épingles les plus récentes apparaissent en premier.",
       "filterPlaceholder": "🔍 Filtrer les épingles par titre ou URL…",
       "logout": "Se déconnecter",
-      "loaderText": "Chargement…"
+      "loaderText": "Chargement…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "Vous n'avez pas encore créé d'équipe.",
+      "createFirstTeam": "Créez votre première équipe →"
     },
     "manageTeam": {
-      "heading": "Gérer l'équipe",
-      "desc": "Invitez et gérez les membres de l’équipe pour des tableaux partagés.",
+      "title": "Manage Team",
+      "heading": "Manage Team",
+      "desc": "Invite and manage team members for shared boards.",
       "create": {
-        "title": "Créer une équipe",
-        "desc": "Créez une nouvelle équipe pour partager des épingles et des tableaux.",
-        "action": "Créer"
+        "title": "Create a team",
+        "desc": "Create a new team to share pins with teammates.",
+        "action": "Create"
       },
       "select": {
-        "title": "Sélectionnez une équipe active",
-        "desc": "Choisissez pour quelle équipe agir."
+        "title": "Select active team",
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "Propriétaire",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "Inviter des membres",
-        "desc": "Envoyez des invitations à vos coéquipiers.",
-        "action": "Inviter"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "Choisissez une équipe...",
-      "selectTeamLabel": "Équipe active",
-      "createTeamPlaceholder": "Équipe de conception",
-      "inviteMember": "Inviter un membre",
-      "noMembers": "Aucun membre pour l'instant.",
-      "you": "Toi",
-      "member": "Membre"
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "Retirer",
+        "removeFailed": "Échec de la suppression du membre.",
+        "removeSuccess": "Membre retiré."
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
+      "selectTeamLabel": "Active team",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "Profil",
@@ -1985,7 +2418,29 @@
         "saveLanguage": "Impossible d'enregistrer les préférences linguistiques. Veuillez réessayer.",
         "enterEmail": "Veuillez entrer votre email.",
         "resetFailed": "La réinitialisation a échoué. Veuillez réessayer.",
-        "passwordMinLength": "Utilisez au moins {{min}} caractères."
+        "passwordMinLength": "Utilisez au moins {{min}} caractères.",
+        "googleFailed": "La connexion avec Google a échoué. Veuillez réessayer."
+      }
+    },
+    "reset": {
+      "title": "Réinitialiser le mot de passe",
+      "heading": "Réinitialisez votre mot de passe",
+      "desc": "Saisissez le jeton reçu par e-mail et votre nouveau mot de passe.",
+      "action": "Réinitialiser le mot de passe",
+      "back": "Retour à la connexion",
+      "success": "Mot de passe mis à jour avec succès. Veuillez vous connecter.",
+      "fields": {
+        "token": "Jeton de réinitialisation",
+        "newPassword": "Nouveau mot de passe"
+      },
+      "placeholders": {
+        "token": "Collez votre jeton",
+        "newPassword": "Entrez le nouveau mot de passe"
+      },
+      "errors": {
+        "enterBoth": "Veuillez saisir le jeton et le nouveau mot de passe.",
+        "failedPrefix": "Échec de la réinitialisation :",
+        "network": "Erreur réseau. Veuillez réessayer."
       }
     }
   },
@@ -2071,33 +2526,102 @@
       "savedLinksDesc": "Os pins mais recentes aparecem primeiro.",
       "filterPlaceholder": "🔍 Filtre os pins por título ou URL…",
       "logout": "Sair",
-      "loaderText": "Carregando…"
+      "loaderText": "Carregando…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "Você ainda não criou uma equipe.",
+      "createFirstTeam": "Crie sua primeira equipe →"
     },
     "manageTeam": {
-      "heading": "Gerenciar equipe",
-      "desc": "Convide e gerencie membros da equipe para quadros compartilhados.",
+      "title": "Manage Team",
+      "heading": "Manage Team",
+      "desc": "Invite and manage team members for shared boards.",
       "create": {
-        "title": "Crie uma equipe",
-        "desc": "Crie uma nova equipe para compartilhar pins e painéis.",
-        "action": "Criar"
+        "title": "Create a team",
+        "desc": "Create a new team to share pins with teammates.",
+        "action": "Create"
       },
       "select": {
-        "title": "Selecione a equipe ativa",
-        "desc": "Escolha em qual equipe atuar em nome."
+        "title": "Select active team",
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "Proprietário",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "Convidar membros",
-        "desc": "Envie convites para seus colegas de equipe.",
-        "action": "Convidar"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "Escolha um time...",
-      "selectTeamLabel": "Equipe ativa",
-      "createTeamPlaceholder": "Esquadrão de design",
-      "inviteMember": "Convidar membro",
-      "noMembers": "Nenhum membro ainda.",
-      "you": "Você",
-      "member": "Membro"
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "Remover",
+        "removeFailed": "Falha ao remover membro.",
+        "removeSuccess": "Membro removido."
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
+      "selectTeamLabel": "Active team",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "Perfil",
@@ -2383,7 +2907,29 @@
         "saveLanguage": "Não foi possível salvar a preferência de idioma. Por favor, tente novamente.",
         "enterEmail": "Por favor insira seu e-mail.",
         "resetFailed": "Falha na reinicialização. Por favor, tente novamente.",
-        "passwordMinLength": "Use pelo menos {{min}} caracteres."
+        "passwordMinLength": "Use pelo menos {{min}} caracteres.",
+        "googleFailed": "O login com o Google falhou. Por favor, tente novamente."
+      }
+    },
+    "reset": {
+      "title": "Redefinir senha",
+      "heading": "Redefina sua senha",
+      "desc": "Insira o token recebido por e-mail e sua nova senha.",
+      "action": "Redefinir senha",
+      "back": "Voltar ao login",
+      "success": "Senha atualizada com sucesso. Por favor, faça login.",
+      "fields": {
+        "token": "Token de redefinição",
+        "newPassword": "Nova senha"
+      },
+      "placeholders": {
+        "token": "Cole seu token",
+        "newPassword": "Digite a nova senha"
+      },
+      "errors": {
+        "enterBoth": "Por favor, insira o token e a nova senha.",
+        "failedPrefix": "Falha na redefinição:",
+        "network": "Erro de rede. Por favor, tente novamente."
       }
     }
   },
@@ -2469,33 +3015,102 @@
       "savedLinksDesc": "Die neuesten Pins werden zuerst angezeigt.",
       "filterPlaceholder": "🔍Pins nach Titel oder URL filtern…",
       "logout": "Abmelden",
-      "loaderText": "Laden…"
+      "loaderText": "Laden…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "Du hast noch kein Team erstellt.",
+      "createFirstTeam": "Erstelle dein erstes Team →"
     },
     "manageTeam": {
-      "heading": "Team verwalten",
-      "desc": "Laden Sie Teammitglieder zu gemeinsamen Boards ein und verwalten Sie diese.",
+      "title": "Manage Team",
+      "heading": "Manage Team",
+      "desc": "Invite and manage team members for shared boards.",
       "create": {
-        "title": "Bilden Sie ein Team",
-        "desc": "Erstellen Sie ein neues Team, um Pins und Boards zu teilen.",
-        "action": "Erstellen"
+        "title": "Create a team",
+        "desc": "Create a new team to share pins with teammates.",
+        "action": "Create"
       },
       "select": {
-        "title": "Aktives Team auswählen",
-        "desc": "Wählen Sie aus, in welchem ​​Namen Sie handeln möchten."
+        "title": "Select active team",
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "Eigentümer",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "Mitglieder einladen",
-        "desc": "Senden Sie Einladungen an Ihre Teamkollegen.",
-        "action": "Einladen"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "Wählen Sie ein Team...",
-      "selectTeamLabel": "Aktives Team",
-      "createTeamPlaceholder": "Design-Trupp",
-      "inviteMember": "Mitglied einladen",
-      "noMembers": "Noch keine Mitglieder.",
-      "you": "Du",
-      "member": "Mitglied"
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "Entfernen",
+        "removeFailed": "Mitglied konnte nicht entfernt werden.",
+        "removeSuccess": "Mitglied entfernt."
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
+      "selectTeamLabel": "Active team",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "Profil",
@@ -2781,7 +3396,29 @@
         "saveLanguage": "Die Spracheinstellung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
         "enterEmail": "Bitte geben Sie Ihre E-Mail-Adresse ein.",
         "resetFailed": "Zurücksetzen fehlgeschlagen. Bitte versuchen Sie es erneut.",
-        "passwordMinLength": "Verwenden Sie mindestens {{min}} Zeichen."
+        "passwordMinLength": "Verwenden Sie mindestens {{min}} Zeichen.",
+        "googleFailed": "Google-Anmeldung fehlgeschlagen. Bitte erneut versuchen."
+      }
+    },
+    "reset": {
+      "title": "Passwort zurücksetzen",
+      "heading": "Passwort zurücksetzen",
+      "desc": "Gib den per E-Mail erhaltenen Token und dein neues Passwort ein.",
+      "action": "Passwort zurücksetzen",
+      "back": "Zurück zum Login",
+      "success": "Passwort erfolgreich geändert. Bitte melde dich an.",
+      "fields": {
+        "token": "Zurücksetz-Token",
+        "newPassword": "Neues Passwort"
+      },
+      "placeholders": {
+        "token": "Token einfügen",
+        "newPassword": "Neues Passwort eingeben"
+      },
+      "errors": {
+        "enterBoth": "Bitte Token und neues Passwort eingeben.",
+        "failedPrefix": "Zurücksetzen fehlgeschlagen:",
+        "network": "Netzwerkfehler. Bitte erneut versuchen."
       }
     }
   },
@@ -2867,33 +3504,102 @@
       "savedLinksDesc": "最新のピンが最初に表示されます。",
       "filterPlaceholder": "🔍 タイトルまたは URL でピンをフィルタリング…",
       "logout": "ログアウト",
-      "loaderText": "読み込み中…"
+      "loaderText": "読み込み中…",
+      "teamLabel": "Team",
+      "personalLabel": "Personal",
+      "pinLimitReached": "You've reached your plan's pin limit. Upgrade to unlock more.",
+      "pinLimitFree": "Standard plan: up to 50 pins. Upgrade to Pro or Team for unlimited pins.",
+      "loggedInAs": "Logged in as: {email}",
+      "remove": "Remove",
+      "unknownSource": "Unknown source",
+      "teamSelect": {
+        "label": "View pins for",
+        "personal": "My pins",
+        "placeholder": "Select team…"
+      },
+      "invites": {
+        "title": "Team invitations",
+        "from": "Invited to {team} by {inviter}",
+        "accept": "Accept",
+        "decline": "Decline",
+        "acceptSuccess": "You joined {team}!",
+        "declineSuccess": "Invite declined.",
+        "actionFailed": "Action failed. Please try again.",
+        "readOnly": "Read-only — contact the team owner to save pins"
+      },
+      "noTeamsYet": "まだチームを作成していません。",
+      "createFirstTeam": "最初のチームを作成する →"
     },
     "manageTeam": {
-      "heading": "チームの管理",
-      "desc": "共有ボードにチームメンバーを招待して管理します。",
+      "title": "Manage Team",
+      "heading": "Manage Team",
+      "desc": "Invite and manage team members for shared boards.",
       "create": {
-        "title": "チームを作成する",
-        "desc": "新しいチームを作成してピンとボードを共有します。",
-        "action": "作成する"
+        "title": "Create a team",
+        "desc": "Create a new team to share pins with teammates.",
+        "action": "Create"
       },
       "select": {
-        "title": "アクティブなチームを選択してください",
-        "desc": "どのチームを代表して行動するかを選択します。"
+        "title": "Select active team",
+        "desc": "Choose which team to manage.",
+        "placeholder": "Choose a team…"
       },
-      "owner": "所有者",
+      "owner": {
+        "title": "Owner controls",
+        "desc": "Rename or delete this team.",
+        "rename": "Rename",
+        "delete": "Delete team"
+      },
       "invite": {
-        "title": "メンバーを招待する",
-        "desc": "チームメイトに招待状を送信します。",
-        "action": "招待する"
+        "title": "Invite a member",
+        "desc": "Send an invitation to a teammate by email.",
+        "action": "Send invite"
       },
-      "chooseTeam": "チームを選択してください...",
-      "selectTeamLabel": "アクティブなチーム",
-      "createTeamPlaceholder": "デザインチーム",
-      "inviteMember": "メンバーを招待する",
-      "noMembers": "まだメンバーがいません。",
-      "you": "あなた",
-      "member": "メンバー"
+      "pendingInvites": {
+        "title": "Pending invites",
+        "desc": "Invitations awaiting acceptance.",
+        "none": "No pending invites.",
+        "revoke": "Revoke",
+        "revokeSuccess": "Invite revoked.",
+        "revokeFailed": "Failed to revoke invite.",
+        "loadFailed": "Could not load pending invites."
+      },
+      "members": {
+        "title": "Members",
+        "desc": "Active members of this team.",
+        "remove": "削除",
+        "removeFailed": "メンバーの削除に失敗しました。",
+        "removeSuccess": "メンバーを削除しました。"
+      },
+      "fields": {
+        "teamName": "Team name",
+        "activeTeam": "Active team",
+        "rename": "New name",
+        "email": "Email address"
+      },
+      "placeholders": {
+        "teamName": "e.g. Design squad",
+        "rename": "New team name…",
+        "email": "colleague@company.com"
+      },
+      "selectTeamFirst": "Select a team first.",
+      "enterValidEmail": "Please enter a valid email address.",
+      "enterNewTeamName": "Enter a new team name.",
+      "enterTeamNameFirst": "Enter a team name first.",
+      "deleteConfirm": "Are you sure you want to delete this team and all its pins? This cannot be undone.",
+      "teamCreated": "Team created successfully.",
+      "createFailed": "Could not create the team. Please try again.",
+      "noTeams": "You have no teams yet.",
+      "youLabel": "You",
+      "ownerLabel": "Owner",
+      "memberLabel": "Member",
+      "chooseTeam": "Choose a team…",
+      "selectTeamLabel": "Active team",
+      "inviteMember": "Invite member",
+      "noMembers": "No members yet.",
+      "inviteAlreadyPending": "An invite is already pending for this email.",
+      "inviteSuccess": "Invitation sent.",
+      "inviteFailed": "Failed to send invite."
     },
     "profile": {
       "title": "プロフィール",
@@ -3179,7 +3885,29 @@
         "saveLanguage": "言語設定を保存できませんでした。もう一度試してください。",
         "enterEmail": "メールアドレスを入力してください。",
         "resetFailed": "リセットに失敗しました。もう一度試してください。",
-        "passwordMinLength": "少なくとも {{min}} 文字を使用してください。"
+        "passwordMinLength": "少なくとも {{min}} 文字を使用してください。",
+        "googleFailed": "Googleログインに失敗しました。もう一度お試しください。"
+      }
+    },
+    "reset": {
+      "title": "パスワードをリセット",
+      "heading": "パスワードをリセット",
+      "desc": "メールで受け取ったトークンと新しいパスワードを入力してください。",
+      "action": "パスワードをリセット",
+      "back": "ログインに戻る",
+      "success": "パスワードが更新されました。ログインしてください。",
+      "fields": {
+        "token": "リセットトークン",
+        "newPassword": "新しいパスワード"
+      },
+      "placeholders": {
+        "token": "トークンを貼り付け",
+        "newPassword": "新しいパスワードを入力"
+      },
+      "errors": {
+        "enterBoth": "トークンと新しいパスワードを入力してください。",
+        "failedPrefix": "リセット失敗:",
+        "network": "ネットワークエラーです。もう一度お試しください。"
       }
     }
   }

@@ -19,7 +19,7 @@ const languageNote = document.getElementById("language-detected-note");
 //#endregion
 
 //#region Session And Initial Settings
-chrome.storage.sync.get(
+chrome.storage.local.get(
   ["userId", "email", "token", "plan", "picture", "useSync", "useEncryption"],
   (data) => {
     if (!data.userId) {

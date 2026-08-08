@@ -17,9 +17,9 @@
       <p data-i18n="popup.brandDescription"></p>
       <div class="nav-menu">
         <ul class="">
-          <li id="nav-menu-pins" class="nav-menu-item-selected" data-i18n="popup.nav.pins">Pins</li>
-          <li id="nav-menu-profile" class="nav-menu-item" data-i18n="popup.nav.profile">Profile</li>
-          <li id="nav-menu-settings" class="nav-menu-item" data-i18n="popup.nav.settings">Settings</li>
+          <li id="nav-menu-pins" class="nav-menu-item-selected" role="button" tabindex="0" data-i18n="popup.nav.pins">Pins</li>
+          <li id="nav-menu-profile" class="nav-menu-item" role="button" tabindex="0" data-i18n="popup.nav.profile">Profile</li>
+          <li id="nav-menu-settings" class="nav-menu-item" role="button" tabindex="0" data-i18n="popup.nav.settings">Settings</li>
         </ul>
       </div>
     </header>
@@ -31,13 +31,34 @@
           <p id="email" class="muted-text" data-i18n="popup.emailChecking">Checking session...</p>
         </div>
 
+        <!-- Incoming team invitations — hidden until invites are found -->
+        <section id="incoming-invites-section" class="panel hidden" aria-live="polite">
+          <h4 class="panel__title" data-i18n="popup.invites.title">Team invitations</h4>
+          <ul id="incoming-invites-list" class="list"></ul>
+        </section>
+
         <div class="toolbar">
-          <div class="toolbar__row">
+          <div class="toolbar__row" id="pin-actions-row">
             <button id="pin-current" class="button-primary" data-i18n="popup.pinCurrent">Pin current tab</button>
             <button id="reimport-button" class="button-muted" data-i18n="popup.importPinned">Import pinned tabs</button>
           </div>
 
-          <!-- Team management (ONLY for paying owner) -->
+          <!-- Read-only badge shown when viewing a team as member (not owner) -->
+          <div class="toolbar__row hidden" id="readonly-badge-row">
+            <span class="badge badge--warn" data-i18n="popup.invites.readOnly">Read-only — contact the team owner to save pins</span>
+          </div>
+
+          <!-- Team selector (visible for team plan users only) -->
+          <div class="toolbar__row hidden" id="team-selector-row">
+            <label class="field full-width" for="teamSelect">
+              <span class="sr-only" data-i18n="popup.teamSelect.label">View pins for</span>
+              <select id="teamSelect">
+                <option value="" data-i18n="popup.teamSelect.personal">My pins</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Team management link (ONLY for team owners) -->
           <div class="toolbar__row toolbar__row--end hidden" id="manage-team-section">
             <a href="manageTeam.html" target="_blank" class="link-inline" data-i18n="popup.manageTeam">Manage team</a>
           </div>
@@ -74,12 +95,6 @@
       <p id="loader-text" data-i18n="popup.loaderText">Loading…</p>
     </div>
   </div>
-  <div class="pin-tooltip">
-    <div class="pin-tooltip__summary" data-i18n-html="popup.tooltipSummary">...</div>
-    <div class="pin-tooltip__tags" data-i18n-html="popup.tooltipTags"><span>#tag</span></div>
-  </div>
-
-
   <div id="toast-root" class="toast-root"></div>
   <script type="module" src="i18n.js"></script>
   <script type="module" src="popup.js"></script>
