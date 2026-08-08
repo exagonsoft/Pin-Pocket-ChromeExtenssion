@@ -1,0 +1,1 @@
+var e={API_BASE:`https://pinity.uk/api`,BACKEND_BASE:`https://pinity.uk`};export{e as t};

@@ -106,6 +106,7 @@ chrome.runtime.onInstalled.addListener(() => {
     contexts: ["page"],
   });
 });
+//#endregion
 
 // Notify extension pages when storage keys change (useful as alternative to storage.onChanged)
 chrome.storage.onChanged.addListener((changes, area) => {

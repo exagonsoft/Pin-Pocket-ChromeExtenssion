@@ -1,0 +1,1 @@
+import{a as e,s as t}from"./useNotice-of5XdmnA.js";var n=t();function r(){let t=(0,n.useContext)(e);if(!t)throw Error(`usePreferences must be used within PreferencesProvider`);return t}export{r as t};
