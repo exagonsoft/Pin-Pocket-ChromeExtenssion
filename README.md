@@ -40,7 +40,10 @@ The extension icon will appear in your toolbar.
 Edit `constants.js` and update `API_BASE` / `BACKEND_BASE` for your local or tunnel URL:
 
 ```js
-const isDev = !("update_url" in chrome.runtime.getManifest());
+const manifest = chrome.runtime.getManifest();
+const isDevInstall = !("update_url" in manifest);
+const USE_DEV_TUNNEL = false; // set true for local unpacked development
+const isDev = isDevInstall && USE_DEV_TUNNEL;
 
 export const CONFIG = {
   API_BASE: isDev
@@ -51,6 +54,8 @@ export const CONFIG = {
     : "https://pinity.uk",
 };
 ```
+
+For production/release builds keep `USE_DEV_TUNNEL = false` so the extension always uses `https://pinity.uk`.
 
 > **Note:** The dev tunnel URL changes each session. Do not commit active tunnel URLs.
 

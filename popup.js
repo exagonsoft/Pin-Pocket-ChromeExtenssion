@@ -6,7 +6,7 @@ import { showLoader, hideLoader } from "./utils/loader.js";
 import { setUpNav, loadUserData } from "./utils/nav.js";
 
 //#region Plan Constants
-const PLAN_PIN_LIMITS = { standard: 50, pro: Infinity, team: Infinity };
+const PLAN_PIN_LIMITS = { standard: 3, pro: Infinity, team: Infinity };
 
 function getPinLimit(planName) {
   return PLAN_PIN_LIMITS[String(planName || "standard").toLowerCase()] ?? 50;

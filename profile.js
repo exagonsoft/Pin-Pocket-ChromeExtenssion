@@ -427,8 +427,8 @@ function updateSummaryUI() {
     currentPlanBadgeEl.textContent = getCurrentPlanLabel();
     currentPlanBadgeEl.dataset.plan = state.hasSubscription
       ? state.currentPlanSlug ||
-        normalizeSlug(state.currentPlanName) ||
-        "unknown"
+      normalizeSlug(state.currentPlanName) ||
+      "unknown"
       : "unknown";
   }
 
@@ -571,8 +571,8 @@ async function resolveCheckoutPreferences() {
   const locale =
     (typeof stored.language === "string" && stored.language.trim()) ||
     (typeof stored.languagePreference === "string" &&
-    stored.languagePreference.trim() &&
-    stored.languagePreference !== "auto"
+      stored.languagePreference.trim() &&
+      stored.languagePreference !== "auto"
       ? stored.languagePreference
       : "") ||
     navigator.language ||
@@ -624,7 +624,7 @@ function applyBillingState(billing) {
   state.hasSubscription = Boolean(billing.hasSubscription);
   state.subscriptionStatus =
     typeof billing.subscriptionStatus === "string" &&
-    billing.subscriptionStatus.trim()
+      billing.subscriptionStatus.trim()
       ? billing.subscriptionStatus.trim().toLowerCase()
       : "inactive";
 
@@ -732,25 +732,27 @@ function openExternalUrl(url) {
 
 function resolveCheckoutTarget(body) {
   const directUrl = typeof body?.url === "string" ? body.url.trim() : "";
+
   if (!directUrl) return "";
 
   try {
     const parsed = new URL(directUrl);
-
+    console.log("Parsed checkout URL", parsed.toString());
     const isAllowedOrigin =
       parsed.origin === CONFIG.BACKEND_BASE ||
       parsed.origin === CONFIG.APP_BASE;
-
+    console.log("Is allowed origin:", isAllowedOrigin, parsed.origin);
     const isDummyCheckoutPage = /\/billing\/extension-checkout\/?$/.test(
       parsed.pathname,
     );
-
+    console.log("Is dummy checkout page:", isDummyCheckoutPage, parsed.pathname);
     if (!isAllowedOrigin || !isDummyCheckoutPage) {
       return "";
     }
 
     return parsed.toString();
   } catch (_) {
+    console.error("Failed to parse checkout URL:", directUrl);
     return "";
   }
 }
@@ -1086,7 +1088,11 @@ async function createSubscriptionSession(plan) {
 
     const body = await response.json().catch(() => ({}));
     const checkoutTarget = resolveCheckoutTarget(body);
-
+    console.log("Checkout session response", {
+      status: response.status,
+      body,
+      checkoutTarget,
+    });
     if (!response.ok || !checkoutTarget) {
       logBillingApiFailure("checkout", {
         planId: String(plan._id),
@@ -1132,7 +1138,7 @@ async function createSubscriptionSession(plan) {
 
     setSyncStorage({
       selectedBillingPeriod: state.selectedBillingPeriod,
-    }).catch(() => {});
+    }).catch(() => { });
 
     renderPlans();
     renderBillingState();
@@ -1271,6 +1277,7 @@ function wireActions() {
   if (modifyPlanBtn) {
     modifyPlanBtn.addEventListener("click", async (event) => {
       event.preventDefault();
+
       if (modifyPlanBtn.disabled) {
         showToast("warn", "profile.feedback.actionUnavailable");
         return;
@@ -1278,6 +1285,7 @@ function wireActions() {
 
       const selectedPlan =
         getSelectedPlan() || getCurrentPlan() || getDefaultPaidPlan();
+
       if (!selectedPlan) {
         showToast("warn", "profile.feedback.actionUnavailable");
         return;
@@ -1287,11 +1295,15 @@ function wireActions() {
         "profile.confirm.portal.title",
         "profile.confirm.portal.message",
       );
-      if (!ok) return;
+
+      if (!ok) {
+        return;
+      }
 
       const selectedBillingPeriod = normalizeBillingPeriod(
         state.selectedBillingPeriod,
       );
+
       const selectedBillingPriceId = getBillingPriceIdForPlan(
         selectedPlan,
         selectedBillingPeriod,
@@ -1302,39 +1314,30 @@ function wireActions() {
         return;
       }
 
-      const currentPlan = getCurrentPlan();
-      const currentPlanId = currentPlan?._id ? String(currentPlan._id) : "";
-      const selectedPlanId = selectedPlan?._id ? String(selectedPlan._id) : "";
-      const samePlan = Boolean(currentPlanId && selectedPlanId && currentPlanId === selectedPlanId);
-      const currentBillingPeriod = normalizeBillingPeriod(state.billingPeriod);
-      const sameBillingPeriod = selectedBillingPeriod === currentBillingPeriod;
+      const selectedPlanId = selectedPlan?._id
+        ? String(selectedPlan._id)
+        : "";
 
-      // Active subscribers should revise existing PayPal subscription rather than creating a new one.
-      if (canOpenBillingPortal() || canDirectPlanChange()) {
-        if (!samePlan || !sameBillingPeriod) {
-          const currentPrice = getPlanPriceForBillingPeriod(
-            currentPlan,
-            selectedBillingPeriod,
-          );
-          const selectedPrice = getPlanPriceForBillingPeriod(
-            selectedPlan,
-            selectedBillingPeriod,
-          );
-          const action = selectedPrice < currentPrice ? "downgrade" : "upgrade";
-          await openBillingPortal(action, {
-            billingPriceId: selectedBillingPriceId,
-            billingPeriod: selectedBillingPeriod,
-            planId: selectedPlanId,
-          });
-          return;
-        }
-
-        await openBillingPortal("overview");
+      if (!selectedPlanId) {
+        showToast("error", "profile.feedback.planUnavailable");
         return;
       }
 
-      // Fallback: start a new checkout session (e.g. no active billing subscription)
-      await createSubscriptionSession(selectedPlan);
+      // The backend owns the subscription state.
+      //
+      // We don't care whether this is:
+      // - an upgrade
+      // - a downgrade
+      // - a billing-period change
+      // - a new subscription
+      // - an existing subscription
+      //
+      // The backend resolves all of that.
+      await openBillingPortal("change", {
+        billingPriceId: selectedBillingPriceId,
+        billingPeriod: selectedBillingPeriod,
+        planId: selectedPlanId,
+      });
     });
   }
 
@@ -1417,8 +1420,8 @@ async function loadProfile() {
   state.selectedBillingPeriod = normalizeBillingPeriod(
     (typeof stored.selectedBillingPeriod === "string" &&
       stored.selectedBillingPeriod) ||
-      (typeof stored.billingPeriod === "string" && stored.billingPeriod) ||
-      "monthly",
+    (typeof stored.billingPeriod === "string" && stored.billingPeriod) ||
+    "monthly",
   );
   state.selectedPlanId =
     (typeof stored.assignedPlanId === "string" && stored.assignedPlanId) ||
