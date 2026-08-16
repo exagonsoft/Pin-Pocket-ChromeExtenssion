@@ -2,6 +2,7 @@
 import { toast } from "./utils/toast.js";
 import { setUpNav, loadUserData } from "./utils/nav.js";
 import I18N from "./i18n.js";
+import { logError } from "./logger.js";
 //#endregion
 
 //#region DOM References
@@ -207,7 +208,7 @@ function applyLanguage(language) {
   try {
     I18N.loadAndApplyForLang(language);
   } catch (e) {
-    console.error('Failed to apply language via I18N', e);
+    logError("settings.i18n", "Failed to apply language via I18N", e);
   }
 }
 // Rely on the shared `i18n.js` module to load/apply translations

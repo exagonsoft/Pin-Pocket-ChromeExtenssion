@@ -195,7 +195,7 @@ const I18N = (function () {
         if (e && (e.name === 'AbortError' || e.message === 'The operation was aborted.')) {
           return {};
         }
-        console.error('i18n load error', e);
+        console.warn('i18n load error', e);
         return {};
       });
   }

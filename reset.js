@@ -2,6 +2,7 @@
 import { CONFIG } from './constants.js';
 import { toast } from "./utils/toast.js";
 import I18N from "./i18n.js";
+import { logError } from "./logger.js";
 //#endregion
 
 //#region Translation Helper
@@ -45,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const { error } = await response.json();
       toast.error(`${t('reset.errors.failedPrefix', 'Reset failed:')} ${error || response.statusText}`);
     } catch (err) {
-      console.error('Reset error:', err);
+      logError("reset.error", "Reset error", err);
       toast.error(t('reset.errors.network', 'Network error. Please try again.'));
     }
   });

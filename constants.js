@@ -10,10 +10,10 @@ const isDev = isDevInstall && USE_DEV_TUNNEL;
 
 //#region API Configuration
 export const CONFIG = {
-  API_BASE: !isDev
+  API_BASE: isDev
     ? "https://9v95nf8w-3000.brs.devtunnels.ms/api"
     : "https://pinity.uk/api",
-  BACKEND_BASE: !isDev
+  BACKEND_BASE: isDev
     ? "https://9v95nf8w-3000.brs.devtunnels.ms"
     : "https://pinity.uk",
   // Public OAuth client ID for extension-native Google login (no hosted auth page).

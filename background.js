@@ -4,6 +4,7 @@
 import { CONFIG } from "./constants.js";
 import * as Storage from "./utils/storage.js";
 import { authFetch } from "./utils/api.js";
+import { logError } from "./logger.js";
 //#endregion
 
 //#region OAuth Helpers
@@ -183,13 +184,11 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
 
     if (!res.ok) {
       const err = await res.json();
-      console.error("PinitY: Failed to store pin:", err?.error || res.statusText);
+      logError("background.savePin", "Failed to store pin", err?.error || res.statusText);
       return;
     }
-
-    console.log("PinitY: Pin saved successfully.");
   } catch (err) {
-    console.error("PinitY: Error saving pin:", err);
+    logError("background.savePin", "Error saving pin", err);
   }
 });
 //#endregion

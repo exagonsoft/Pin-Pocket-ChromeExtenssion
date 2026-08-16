@@ -3,6 +3,7 @@ import { CONFIG } from "./constants.js";
 import * as Storage from "./utils/storage.js";
 import { toast } from "./utils/toast.js";
 import I18N from "./i18n.js";
+import { logError } from "./logger.js";
 //#endregion
 
 //#region State
@@ -152,7 +153,7 @@ async function initLanguageControls() {
   try {
     await I18N.loadAndApplyForLang(initialLanguage);
   } catch (err) {
-    console.error("Failed to load translations for selected language.", err);
+    logError("auth.i18n", "Failed to load translations for selected language", err);
   }
   setLanguageDetectedNote(detectedNote, languageSelect, languageSelect.value, initialLanguage);
   refreshDynamicMessages();
@@ -168,7 +169,7 @@ async function initLanguageControls() {
     try {
       await Storage.set(payload);
     } catch (err) {
-      console.error("Failed to persist language preference.", err);
+      logError("auth.language", "Failed to persist language preference", err);
       toast.error(t("auth.errors.saveLanguage"));
       return;
     }
@@ -176,7 +177,7 @@ async function initLanguageControls() {
     try {
       await I18N.loadAndApplyForLang(resolvedLanguage);
     } catch (err) {
-      console.error("Failed to reload i18n after language change", err);
+      logError("auth.i18n", "Failed to reload i18n after language change", err);
     }
 
     setLanguageDetectedNote(detectedNote, languageSelect, selection, resolvedLanguage);
@@ -272,7 +273,7 @@ document.getElementById("login")?.addEventListener("submit", async (e) => {
     });
     if (!res.ok) {
       const { error } = await res.json().catch(() => ({}));
-      console.error("Login failed:", error || res.statusText);
+      logError("auth.login", "Login failed", error || res.statusText);
       toast.error(t("auth.errors.loginFailed"));
       return;
     }
@@ -292,7 +293,7 @@ document.getElementById("login")?.addEventListener("submit", async (e) => {
     window.location.href = "popup.html";
   } catch (err) {
     toast.error(t("auth.errors.network"));
-    console.error("Login error:", err);
+    logError("auth.login", "Login error", err);
   }
 });
 //#endregion
@@ -309,7 +310,7 @@ document.getElementById("google-login")?.addEventListener("click", async () => {
     if (runtimeError) {
       // Popup may close during auth; in that case background still completes login.
       if (!runtimeError.toLowerCase().includes("message port closed")) {
-        console.error("Google auth message error:", runtimeError);
+        logError("auth.google", "Google auth message error", runtimeError);
         toast.error(t("auth.errors.googleFailed", "Google sign-in failed."));
       }
       return;
@@ -322,7 +323,7 @@ document.getElementById("google-login")?.addEventListener("click", async () => {
 
     const err = result?.error || "";
     if (!String(err).toLowerCase().includes("cancel")) {
-      console.error("Google auth failed:", err);
+      logError("auth.google", "Google auth failed", err);
       toast.error(t("auth.errors.googleFailed", "Google sign-in failed."));
     }
   });
@@ -356,7 +357,7 @@ document.getElementById("register")?.addEventListener("submit", async (e) => {
     });
     if (!res.ok) {
       const { error } = await res.json().catch(() => ({}));
-      console.error("Registration failed:", error || res.statusText);
+      logError("auth.register", "Registration failed", error || res.statusText);
       toast.error(t("auth.errors.registerFailed"));
       return;
     }
@@ -374,7 +375,7 @@ document.getElementById("register")?.addEventListener("submit", async (e) => {
     window.location.href = "popup.html";
   } catch (err) {
     toast.error(t("auth.errors.network"));
-    console.error("Register error:", err);
+    logError("auth.register", "Register error", err);
   }
 });
 //#endregion
@@ -398,12 +399,12 @@ document.getElementById("forgot")?.addEventListener("submit", async (e) => {
       toast.success(t("auth.forgot.success"));
       showForm("login");
     } else {
-      console.error("Reset failed:", result.error || res.statusText);
+      logError("auth.reset", "Reset failed", result.error || res.statusText);
       toast.error(t("auth.errors.resetFailed"));
     }
   } catch (err) {
     toast.error(t("auth.errors.network"));
-    console.error("Reset error:", err);
+    logError("auth.reset", "Reset error", err);
   }
 });
 //#endregion

@@ -1818,3 +1818,62 @@ body.auth-page {
     grid-template-columns: 1fr;
   }
 }
+
+/* Plan feature list */
+.plan-features {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.plan-feature-item {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.plan-card:has(input:checked) .plan-feature-item {
+  color: var(--text);
+}
+
+.plan-feature-icon::before {
+  content: "✓";
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary, #2563eb);
+  opacity: 0.75;
+}
+
+.plan-feature-text {
+  flex: 1;
+}
+
+/* Button loading state */
+.btn--loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.btn--loading::after {
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 8px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: btn-spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes btn-spin {
+  to { transform: rotate(360deg); }
+}
