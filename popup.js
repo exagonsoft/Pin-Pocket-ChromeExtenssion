@@ -87,6 +87,30 @@ filterInput?.addEventListener("input", () => {
 
 setListMessage("Loading...");
 
+// Fetch live plan from server and re-apply plan UI if the plan changed.
+// Runs after initial render so cached data shows immediately.
+async function syncLivePlanIfChanged(userId) {
+  try {
+    const res = await authFetch(`${CONFIG.API_BASE}/subscription/${userId}`);
+    if (!res.ok) return;
+
+    const serverState = await res.json();
+    const livePlanName = String(serverState?.billing?.currentPlanName || serverState?.billing?.assignedPlanName || "").trim().toLowerCase() || "standard";
+
+    if (livePlanName === currentPlanName.toLowerCase()) return;
+
+    // Plan changed since last storage write — update state and re-render
+    currentPlanName = livePlanName;
+    await Storage.set({ planName: livePlanName });
+
+    // Re-apply plan UI: adds/removes team selector as needed
+    teamSelectorRow?.classList.add("hidden");
+    await applyPlanUI(currentPlanName, userId);
+  } catch (_) {
+    // Non-critical — cached plan is still used
+  }
+}
+
 (async () => {
   const { userId, email, planName, picture, language, languagePreference } = await Storage.get([
     "userId", "email", "planName", "picture", "language", "languagePreference",
@@ -109,12 +133,36 @@ setListMessage("Loading...");
   setUpNav();
   loadUserData(picture);
 
-  // Run team invites check and plan UI in parallel
+  // Run invites, cached plan UI, and live plan sync in parallel.
+  // Cached plan renders immediately; syncLivePlanIfChanged refreshes if needed.
   await Promise.all([
     loadIncomingInvites(),
     applyPlanUI(currentPlanName, userId),
+    syncLivePlanIfChanged(userId),
   ]);
 })();
+
+// React to storage changes made by profile.js (plan change, cancel, subscribe)
+// so the popup updates without needing to close and reopen.
+chrome.storage.onChanged.addListener((changes, area) => {
+  if (area !== "sync") return;
+
+  const planChanged = "planName" in changes;
+  const subChanged = "subscriptionStatus" in changes || "hasSubscription" in changes;
+
+  if (!planChanged && !subChanged) return;
+  if (!currentUserId) return;
+
+  const newPlan = planChanged
+    ? String(changes.planName?.newValue || "standard").trim().toLowerCase()
+    : currentPlanName;
+
+  if (newPlan === currentPlanName && !subChanged) return;
+
+  currentPlanName = newPlan;
+  teamSelectorRow?.classList.add("hidden");
+  applyPlanUI(currentPlanName, currentUserId).catch(() => {});
+});
 
 //#region Incoming Invite Notifications
 async function loadIncomingInvites() {

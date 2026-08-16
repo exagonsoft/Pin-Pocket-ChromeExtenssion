@@ -472,7 +472,7 @@ function updateActionButtons() {
   const selectedPlan = getSelectedPlan();
 
   const hasRealActiveSubscription = Boolean(
-    state.hasSubscription && hasActiveSubscription(),
+    state.hasSubscription && hasActiveSubscription() && state.paypalSubscriptionId,
   );
   const hasPortal = canOpenBillingPortal();
   const selectedBillingPeriod = normalizeBillingPeriod(
@@ -501,7 +501,7 @@ function updateActionButtons() {
   }
 
   const canSubscribe = showSubscribe && selectedHasPriceForPeriod;
-  const canModifyPlan = showModifyPlan && selectedHasPriceForPeriod && canDirectPlanChange();
+  const canModifyPlan = showModifyPlan && selectedHasPriceForPeriod && (hasPortal || canDirectPlanChange());
   const canCancel =
     showCancel && hasRealActiveSubscription && (hasPortal || canDirectCancel());
 
@@ -1222,19 +1222,21 @@ async function cancelSubscriptionDirectly() {
         showToast("warn", "profile.feedback.actionUnavailable");
         return;
       }
-      if (body?.code === "subscription_missing") {
-        showToast("success", "profile.feedback.cancelScheduled");
-        await syncProfileFromServer();
-        return;
-      }
       throw new Error(body.error || "cancel_failed");
     }
-
-    showToast("success", "profile.feedback.cancelScheduled");
-    await syncProfileFromServer();
   } catch (error) {
     logError("profile.cancel", "Unable to schedule cancellation", error);
     showToast("error", "profile.feedback.cancelFailed");
+    return;
+  }
+
+  // Cancel succeeded — refresh state separately so a sync failure doesn't
+  // mistakenly show the cancel-failed error toast.
+  showToast("success", "profile.feedback.cancelScheduled");
+  try {
+    await syncProfileFromServer();
+  } catch (syncError) {
+    logError("profile.cancel.sync", "State sync failed after cancel", syncError);
   }
 }
 //#endregion

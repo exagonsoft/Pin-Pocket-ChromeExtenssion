@@ -51,6 +51,11 @@
   --border: #e2e8f0;
 }
 
+/* Ensure [hidden] always wins over display rules set by component classes */
+[hidden] {
+  display: none !important;
+}
+
 /* Compact mode adjustments */
 :root[data-compact="true"] {
   --radius-lg: 12px;
